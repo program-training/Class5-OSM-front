@@ -1,22 +1,18 @@
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import {
-  emailValidet,
-  nameValidet,
-  passwordValidet,
-} from "../helpers/validation";
+import { emailValidet, passwordValidet } from "../../helpers/validation";
 import { FieldValues, useForm } from "react-hook-form";
-import { Copyright } from "../../layout/Copyright";
-import SignInUpLink from "./SignInUpLink";
+import { Copyright } from "../../../layout/Copyright";
+import SignUpLink from "./SignUpLink";
 import SignInUpButton from "./SignInUpButton";
 import PasswordInput from "./PasswordInput";
 import EmailInput from "./EmailInput";
+import ConfirmPasswordInputIn from "./ConfirmPasswordInput";
 
 export const SignUp = () => {
   const {
@@ -51,32 +47,6 @@ export const SignUp = () => {
           sx={{ mt: 3 }}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="given-name"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-                {...register("firstName", nameValidet)}
-                helperText={errors.firstName?.message?.toString()}
-                error={errors.firstName ? true : false}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                autoFocus
-                id="lastName"
-                label="Last Name"
-                autoComplete="family-name"
-                {...register("lastName", nameValidet)}
-                helperText={errors.lastName?.message?.toString()}
-                error={errors.lastName ? true : false}
-              />
-            </Grid>
             <EmailInput
               register={register}
               errors={errors}
@@ -87,9 +57,10 @@ export const SignUp = () => {
               errors={errors}
               passwordValidet={passwordValidet}
             />
+            <ConfirmPasswordInputIn />
           </Grid>
           <SignInUpButton text="Sign Up" isValid={isValid} />
-          <SignInUpLink text="signIn" />
+          <SignUpLink text="signIn" />
         </Box>
       </Box>
       <Copyright />

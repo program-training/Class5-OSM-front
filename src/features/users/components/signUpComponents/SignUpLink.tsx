@@ -1,9 +1,9 @@
 import { Grid, Link } from "@mui/material";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { SignInUpLinkInterface } from "../interfaces/SignInUpLinkInterface";
+import { SignInUpLinkInterface } from "../../interfaces/SignInUpLinkInterface";
 
-const SignInUpLink: FC<SignInUpLinkInterface> = ({ text }) => {
+const SignUpLink: FC<SignInUpLinkInterface> = ({ text }) => {
   const navigate = useNavigate();
   let linkText = "";
   if (text === "signIn") linkText = "Already have an account? Sign In";
@@ -28,4 +28,4 @@ const SignInUpLink: FC<SignInUpLinkInterface> = ({ text }) => {
   );
 };
 
-export default SignInUpLink;
+export default SignUpLink;

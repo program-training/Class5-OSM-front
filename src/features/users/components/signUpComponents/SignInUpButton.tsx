@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { FC } from "react";
-import { SignInUpButtonInterface } from "../interfaces/SignInUpButtonInterface";
+import { SignInUpButtonInterface } from "../../interfaces/SignInUpButtonInterface";
 import { useNavigate } from "react-router-dom";
 
 const SignInUpButton: FC<SignInUpButtonInterface> = ({ text, isValid }) => {

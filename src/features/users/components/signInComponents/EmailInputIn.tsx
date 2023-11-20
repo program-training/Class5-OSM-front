@@ -1,8 +1,8 @@
 import { Grid, TextField } from "@mui/material";
+import { EmailInputInterface } from "../../interfaces/EmailInputInterface";
 import { FC } from "react";
-import { EmailInputInterface } from "../interfaces/EmailInputInterface";
 
-const EmailInput: FC<EmailInputInterface> = ({
+const EmailInputIn: FC<EmailInputInterface> = ({
   register,
   emailValidet,
   errors,
@@ -11,11 +11,13 @@ const EmailInput: FC<EmailInputInterface> = ({
     <>
       <Grid item xs={12}>
         <TextField
+          margin="normal"
           required
           fullWidth
-          id="email"
+          id="emailIn"
           label="Email Address"
           autoComplete="email"
+          autoFocus
           {...register("email", emailValidet)}
           helperText={errors.email?.message?.toString()}
           error={errors.email ? true : false}
@@ -25,4 +27,4 @@ const EmailInput: FC<EmailInputInterface> = ({
   );
 };
 
-export default EmailInput;
+export default EmailInputIn;
