@@ -10,6 +10,7 @@ const App = () => {
         <RouterDOM />
         <Footer />
       </ThemeProvider> */}
+      console.log("yuj");
       <OrderManagementPage
         orders={sampleOrders}
         setOrders={function (): void {
