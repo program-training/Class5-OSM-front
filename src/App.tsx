@@ -9,6 +9,7 @@ import { CssBaseline } from "@mui/material";
 
 const App = () => {
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
+  console.log("meash");
 
   return (
     <>
