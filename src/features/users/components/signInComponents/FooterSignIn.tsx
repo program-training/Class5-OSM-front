@@ -1,7 +1,8 @@
-import SignUpButton from "../signUpComponents/SignUpButton";
+// import SignUpButton from "../signUpComponents/SignUpButton";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { FC } from "react";
+import SignInButton from "./SignInButton";
 
 export interface FooterSignInInterface {
   isValid: boolean;
@@ -15,7 +16,7 @@ const FooterSignIn: FC<FooterSignInInterface> = ({ isValid }) => {
         control={<Checkbox value="remember" color="primary" />}
         label="Remember me"
       />
-      <SignUpButton text="Sign In" isValid={isValid}></SignUpButton>
+      <SignInButton text="Sign In" isValid={isValid}></SignInButton>
     </>
   );
 };

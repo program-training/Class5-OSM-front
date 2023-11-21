@@ -10,7 +10,7 @@ const SignInButton: FC<SignInUpButtonInterface> = ({ text, isValid }) => {
       <Button
         type="submit"
         onClick={() => {
-          navigate("/");
+          navigate("/orders");
         }}
         fullWidth
         variant="contained"

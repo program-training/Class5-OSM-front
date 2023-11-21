@@ -59,7 +59,7 @@ export const SignIn = () => {
           </Grid>
           <FooterSignIn isValid={isValid} />
           <SignInLink text="signUp" />
-          {/* <SignUp /> */}
+          {/* <SignInButton text="Sign In" isValid={isValid} /> */}
         </Box>
       </Box>
       <Copyright />

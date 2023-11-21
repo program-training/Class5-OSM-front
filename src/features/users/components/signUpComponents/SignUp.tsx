@@ -28,8 +28,6 @@ export const SignUp = () => {
 
   const [email, setEmail] = useState<string>();
 
-  console.log("bla bla");
-
   const handleEmailChange = (email: string) => {
     setEmail(email);
   };
