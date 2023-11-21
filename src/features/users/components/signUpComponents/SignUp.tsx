@@ -19,6 +19,7 @@ export const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    watch,
   } = useForm({ mode: "onChange" });
   const onSubmit = (event: FieldValues) => {
     event.preventDefault();
@@ -57,7 +58,11 @@ export const SignUp = () => {
               errors={errors}
               passwordValidet={passwordValidet}
             />
-            <ConfirmPasswordInputIn />
+            <ConfirmPasswordInputIn
+              register={register}
+              errors={errors}
+              watch={watch}
+            />
           </Grid>
           <SignInUpButton text="Sign Up" isValid={isValid} />
           <SignUpLink text="signIn" />
