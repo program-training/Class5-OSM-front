@@ -1,13 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import usersSlice from "../features/users/usersSlice";
 import themeModeSlice from "../features/themes/themeModeSlice";
-import passwordSlice from "../features/users/components/signUpComponents/passwordSlice";
 
 export const store = configureStore({
   reducer: {
     users: usersSlice,
     themeMode: themeModeSlice,
-    password: passwordSlice,
   },
 });
 

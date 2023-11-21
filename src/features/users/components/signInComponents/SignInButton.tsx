@@ -1,16 +1,16 @@
 import { Button } from "@mui/material";
 import { FC } from "react";
-import { SignInUpButtonInterface } from "../interfaces/SignInUpButtonInterface";
+import { SignInUpButtonInterface } from "../../interfaces/SignInUpButtonInterface";
 import { useNavigate } from "react-router-dom";
 
-const SignInUpButton: FC<SignInUpButtonInterface> = ({ text, isValid }) => {
+const SignInButton: FC<SignInUpButtonInterface> = ({ text, isValid }) => {
   const navigate = useNavigate();
   return (
     <>
       <Button
         type="submit"
         onClick={() => {
-          navigate("/24845t74yrgdch");
+          navigate("/");
         }}
         fullWidth
         variant="contained"
@@ -23,4 +23,4 @@ const SignInUpButton: FC<SignInUpButtonInterface> = ({ text, isValid }) => {
   );
 };
 
-export default SignInUpButton;
+export default SignInButton;

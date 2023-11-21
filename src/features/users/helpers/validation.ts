@@ -6,7 +6,6 @@ export const passwordValidet = {
       "⚠ Password must contain an uppercase letter, a lowercase letter, a digit, a special character, and be 8-20 characters long.",
   },
 };
-
 export const emailValidet = {
   required: "⚠ Required field",
   pattern: {

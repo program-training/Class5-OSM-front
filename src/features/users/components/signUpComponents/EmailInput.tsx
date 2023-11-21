@@ -6,7 +6,13 @@ const EmailInput: FC<EmailInputInterface> = ({
   register,
   emailValidet,
   errors,
+  email,
+  onEmailChange,
 }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onEmailChange!(e.target.value);
+  };
+
   return (
     <>
       <Grid item xs={12}>
@@ -16,7 +22,10 @@ const EmailInput: FC<EmailInputInterface> = ({
           id="email"
           label="Email Address"
           autoComplete="email"
+          value={email}
+          // onChange={handleChange}
           {...register("email", emailValidet)}
+          onChange={handleChange}
           helperText={errors.email?.message?.toString()}
           error={errors.email ? true : false}
         />

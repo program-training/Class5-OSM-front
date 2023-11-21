@@ -8,22 +8,30 @@ import Container from "@mui/material/Container";
 import { emailValidet, passwordValidet } from "../../helpers/validation";
 import { FieldValues, useForm } from "react-hook-form";
 import { Copyright } from "../../../layout/Copyright";
-import SignUpLink from "./SignUpLink";
-import SignInUpButton from "./SignInUpButton";
+// import SignUpLink from "./SignUpLink";
+import SignUpButton from "./SignUpButton";
 import PasswordInput from "./PasswordInput";
 import EmailInput from "./EmailInput";
 import ConfirmPasswordInputIn from "./ConfirmPasswordInput";
+import { useState } from "react";
 
 export const SignUp = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
     watch,
+    formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
   const onSubmit = (event: FieldValues) => {
     event.preventDefault();
   };
+
+  const [email, setEmail] = useState<string>();
+
+  const handleEmailChange = (email: string) => {
+    setEmail(email);
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -52,6 +60,7 @@ export const SignUp = () => {
               register={register}
               errors={errors}
               emailValidet={emailValidet}
+              onEmailChange={handleEmailChange}
             />
             <PasswordInput
               register={register}
@@ -64,8 +73,8 @@ export const SignUp = () => {
               watch={watch}
             />
           </Grid>
-          <SignInUpButton text="Sign Up" isValid={isValid} />
-          <SignUpLink text="signIn" />
+          <SignUpButton text="Sign Up" isValid={isValid} />
+          {/* <SignUpLink text="signIn" /> */}
         </Box>
       </Box>
       <Copyright />
