@@ -12,11 +12,18 @@ import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../store/hooks";
 import GetAllOrders from "../utils/GetAllOrders";
 
-const OrdersTable = () => {
+interface OrdersTableProps {
+  handleCancelOrder: (orderId: string) => void;
+  handleReceiveOrder: (orderId: string) => void;
+}
+
+const OrdersTable: React.FC<OrdersTableProps> = ({
+  handleCancelOrder,
+  handleReceiveOrder,
+}) => {
   GetAllOrders();
   const navigate = useNavigate();
   const orders = useAppSelector((state) => state.orders.orders);
-  console.log(orders);
 
   if (orders && !orders.length) return <p>no orders!!!!</p>;
 
@@ -102,7 +109,7 @@ const OrdersTable = () => {
                       })
                     }
                   >
-                    {order.price}
+                    {order.Price}
                   </TableCell>
                   <TableCell
                     onClick={() =>
@@ -118,7 +125,7 @@ const OrdersTable = () => {
                       <Button
                         variant="outlined"
                         color="secondary"
-                        // onClick={() => handleCancelOrder(order._id)}
+                        onClick={() => handleCancelOrder(order._id)}
                       >
                         Cancel
                       </Button>
@@ -128,7 +135,7 @@ const OrdersTable = () => {
                         <Button
                           variant="outlined"
                           color="primary"
-                          // onClick={() => handleReceiveOrder(order._id)}
+                          onClick={() => handleReceiveOrder(order._id)}
                         >
                           Receive
                         </Button>

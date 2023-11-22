@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import SignInPage from "../users/pages/SignInPage";
 import SignUpPage from "../users/pages/SignUpPage";
-import HomePage from "../home/pages/HomePage";
+import HomePage from "../pages/HomePage";
 import NotFoundPage from "../layout/NotFoundPage/NotFoundPage";
 import OrderManagementPage from "../orders/pages/OrderManagementPage";
 import OrderDetailsPage from "../orders/pages/OrderDetailsPage";
@@ -14,7 +14,16 @@ const RouterDom = () => {
       <Route path="/signUp" element={<SignUpPage />} />
       <Route path="*" element={<NotFoundPage />} />
       <Route path="/orderDetails" element={<OrderDetailsPage />} />
-      <Route path="orders" element={<OrderManagementPage />} />
+      <Route
+        path="orders"
+        element={
+          <OrderManagementPage
+            setOrders={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
+        }
+      />
     </Routes>
   );
 };

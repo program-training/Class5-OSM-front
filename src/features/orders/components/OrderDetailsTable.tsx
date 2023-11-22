@@ -34,7 +34,7 @@ const OrderDetailsTable = () => {
     0
   );
   const totalQuantity = cartItems.reduce(
-    (acc: unknown, product: { quantity: unknown }) => acc + product.quantity,
+    (acc: number, product: { quantity: number }) => acc + product.quantity,
     0
   );
 
