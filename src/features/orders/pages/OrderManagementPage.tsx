@@ -4,8 +4,8 @@ import SearchField from "../components/SearchField";
 import FilterDialog from "../components/FilterDialog";
 import OrdersTable from "../components/OrdersTable";
 import "../css/OrderManagementPage.css";
-import Order from "../types/Order";
 import { useAppSelector } from "../../../store/hooks";
+import Order from "../interfaces/order";
 
 interface OrdersPageProps {
   setOrders: React.Dispatch<React.SetStateAction<Order[]>>;

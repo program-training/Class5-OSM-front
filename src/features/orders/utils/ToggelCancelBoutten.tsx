@@ -1,6 +1,6 @@
 import { Box, Button, Switch } from "@mui/material";
 import { FC, useState } from "react";
-import Order from "../types/Order";
+import Order from "../interfaces/order";
 
 type ToggleCancelButtonProps = { orders: Order[] };
 

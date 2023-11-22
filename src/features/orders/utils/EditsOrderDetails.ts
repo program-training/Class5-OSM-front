@@ -1,7 +1,7 @@
 import { FC } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Order from "../interfaces/getAllOrders";
+import Order from "../interfaces/order";
 
 export interface EditsOrderDetailsProps {
   order: Order;
