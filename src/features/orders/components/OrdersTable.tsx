@@ -115,6 +115,3 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
 };
 
 export default OrdersTable;
-function setOrdersAction(orders: void): any {
-  throw new Error("Function not implemented.");
-}
