@@ -34,7 +34,7 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
   };
 
   const handleReceiveOrder = (orderId: string) => {
-    updateOrderStatus(orderId, "accepted");
+    updateOrderStatus(orderId, "received");
   };
 
   const handleOpenFilterDialog = () => {

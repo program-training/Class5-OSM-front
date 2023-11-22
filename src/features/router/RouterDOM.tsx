@@ -16,13 +16,7 @@ const RouterDom = () => {
       <Route path="/orderDetails" element={<OrderDetailsPage />} />
       <Route
         path="orders"
-        element={
-          <OrderManagementPage
-            setOrders={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
-        }
+        element={<OrderManagementPage setOrders={function (): void {}} />}
       />
     </Routes>
   );
