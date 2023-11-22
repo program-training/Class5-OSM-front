@@ -11,10 +11,10 @@ Global Styles body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.search-field {
+/* .search-field {
   margin-bottom: 20px;
-  width: 100%;
-}
+  width: 100%; */
+/* } */
 
 .TableContainer {
   margin-top: 20px;

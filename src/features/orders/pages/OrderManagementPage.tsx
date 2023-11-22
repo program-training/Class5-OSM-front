@@ -1,7 +1,7 @@
+// OrderManagementPage.tsx
 import React, { useState } from "react";
-// import Button from "@mui/material/Button";
-import SearchField from "../components/SearchField";
-// import FilterDialog from "../components/FilterDialog";
+import Button from "@mui/material/Button";
+import FilterDialog from "../components/FilterDialog";
 import OrdersTable from "../components/OrdersTable";
 import "../css/OrderManagementPage.css";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
@@ -12,14 +12,13 @@ import { setOrders } from "../ordersSlice";
 //   setOrders: React.Dispatch<React.SetStateAction<Order[]>>;
 // }
 
-const OrderManagementPage = () => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  // const [openFilterDialog, setOpenFilterDialog] = useState(false);
-  // const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  // const [filterStatus, setFilterStatus] = useState<string | null>(null);
-  // const [filterCustomer] = useState<boolean>(false);
-  // const [dateRangeStart, setDateRangeStart] = useState<string>("");
-  // const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
+const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
+  const [openFilterDialog, setOpenFilterDialog] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [filterStatus, setFilterStatus] = useState<string | null>(null);
+  const [filterCustomer] = useState<boolean>(false);
+  const [dateRangeStart, setDateRangeStart] = useState<string>("");
+  const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
   const orders = useAppSelector((state) => state.orders.orders);
   const dispatch = useAppDispatch();
 
@@ -60,33 +59,55 @@ const OrderManagementPage = () => {
   //   setOpenFilterDialog(false);
   // };
 
-  // const handleApplyFilters = () => {
-  //   if (orders) {
-  //     const filteredOrders = orders.filter(() => {
-  //       // Filter logic...
-  //     });
+  const handleApplyFilters = () => {
+    if (orders) {
+      const filteredOrders = orders.filter((order) => {
+        if (filterStatus && order.status !== filterStatus) {
+          return false;
+        }
+
+        if (filterCustomer && !order.shippingDetails?.userId) {
+          return false;
+        }
+
+        if (
+          dateRangeStart &&
+          order.orderTime &&
+          new Date(order.orderTime) < new Date(dateRangeStart)
+        ) {
+          return false;
+        }
+
+        if (
+          dateRangeEnd &&
+          order.orderTime &&
+          new Date(order.orderTime) > new Date(dateRangeEnd)
+        ) {
+          return false;
+        }
+
+        // Add more filters as needed
+
+        return true; // Include order in the filtered list
+      });
 
   //     setOrders(filteredOrders);
   //     handleCloseFilterDialog();
   //   }
   // };
 
-  // const handleFilterSelectionChange = (filter: string) => {
-  //   setSelectedFilters((prevFilters) => {
-  //     if (prevFilters.includes(filter)) {
-  //       return prevFilters.filter((f) => f !== filter);
-  //     } else {
-  //       return [...prevFilters, filter];
-  //     }
-  //   });
-  // };
+  const updateOrderStatus = (orderId: string, newStatus: string) => {
+    if (orders) {
+      const updatedOrders = orders.map((order) =>
+        order._id === orderId ? { ...order, status: newStatus } : order
+      );
+      setOrders(updatedOrders);
+    }
+  };
 
   return (
     <div className="page-container">
-      {/* Search field */}
-      <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-
-      {/* <Button
+      <Button
         variant="outlined"
         onClick={handleOpenFilterDialog}
         className="filter-button"
@@ -102,14 +123,13 @@ const OrderManagementPage = () => {
         setSelectedFilters={setSelectedFilters}
         filterStatus={filterStatus}
         setFilterStatus={setFilterStatus}
-        filterCustomer={filterCustomer}
         dateRangeStart={dateRangeStart}
         setDateRangeStart={setDateRangeStart}
         dateRangeEnd={dateRangeEnd}
         setDateRangeEnd={setDateRangeEnd}
         handleApplyFilters={handleApplyFilters}
-        // handleFilterSelectionChange={handleFilterSelectionChange}
-      /> */}
+        filterCustomer={false}
+      />
 
       {/* Orders table */}
       <OrdersTable handleCancel={handleCancel} handleReceive={handleReceive} />
