@@ -7,7 +7,7 @@ export interface EditsOrderDetailsProps {
   order: Order;
 }
 
-const baseURL = "https://jsonplaceholder.typicode.com/posts";
+const baseURL = "http://localhost:3333/api/orders";
 
 const EditsOrderDetails: FC<Order> = (order) => {
   const navigate = useNavigate();
