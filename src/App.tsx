@@ -6,10 +6,11 @@ import { ThemeProvider } from "@mui/material/styles";
 import { useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
 import { CssBaseline } from "@mui/material";
-// import GetAllOrders from "./features/orders/utils/GetAllOrders";
+import GetAllOrders from "./features/orders/utils/GetAllOrders";
 
 const App = () => {
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
+  GetAllOrders();
 
   return (
     <>

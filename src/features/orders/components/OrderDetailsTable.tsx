@@ -20,9 +20,10 @@ import Product from "../interfaces/product";
 const OrderDetailsTable = () => {
   const { state } = useLocation();
   const cartItems = state.cartItems;
+  const userId = state.userId;
 
   // Sample  customer numbers
-  const customerNumber = "6545676";
+  const customerNumber = userId;
 
   // State for search input
   const [searchTerm, setSearchTerm] = useState("");

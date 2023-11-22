@@ -4,14 +4,15 @@ import SearchField from "../components/SearchField";
 // import FilterDialog from "../components/FilterDialog";
 import OrdersTable from "../components/OrdersTable";
 import "../css/OrderManagementPage.css";
-import { useAppSelector } from "../../../store/hooks";
-import Order from "../interfaces/order";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+// import Order from "../interfaces/order";
+import { setOrders } from "../ordersSlice";
 
-interface OrdersPageProps {
-  setOrders: React.Dispatch<React.SetStateAction<Order[]>>;
-}
+// interface OrdersPageProps {
+//   setOrders: React.Dispatch<React.SetStateAction<Order[]>>;
+// }
 
-const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
+const OrderManagementPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   // const [openFilterDialog, setOpenFilterDialog] = useState(false);
   // const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -20,21 +21,35 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
   // const [dateRangeStart, setDateRangeStart] = useState<string>("");
   // const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
   const orders = useAppSelector((state) => state.orders.orders);
+  const dispatch = useAppDispatch();
 
-  const updateOrderStatus = (orderId: string, newStatus: string) => {
-    if (orders) {
-      const updatedOrders = orders.map((order) =>
-        order._id === orderId ? { ...order, status: newStatus } : order
-      );
-      setOrders(updatedOrders);
+  const handleCancel = (orderId: string) => {
+    const updatedOrders = orders?.map((order) => {
+      if (order._id === orderId && order.status === "pending") {
+        return {
+          ...order,
+          status: "cancelled",
+        };
+      }
+      return order;
+    });
+    if (updatedOrders) {
+      dispatch(setOrders(updatedOrders));
     }
   };
-  const handleCancelOrder = (orderId: string) => {
-    updateOrderStatus(orderId, "cancelled");
-  };
-
-  const handleReceiveOrder = (orderId: string) => {
-    updateOrderStatus(orderId, "received");
+  const handleReceive = (orderId: string) => {
+    const updatedOrders = orders?.map((order) => {
+      if (order._id === orderId && order.status === "pending") {
+        return {
+          ...order,
+          status: "received",
+        };
+      }
+      return order;
+    });
+    if (updatedOrders) {
+      dispatch(setOrders(updatedOrders));
+    }
   };
 
   // const handleOpenFilterDialog = () => {
@@ -97,10 +112,7 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
       /> */}
 
       {/* Orders table */}
-      <OrdersTable
-        handleCancelOrder={handleCancelOrder}
-        handleReceiveOrder={handleReceiveOrder}
-      />
+      <OrdersTable handleCancel={handleCancel} handleReceive={handleReceive} />
     </div>
   );
 };
