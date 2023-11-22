@@ -21,9 +21,8 @@ const OrderDetailsTable = () => {
   const { state } = useLocation();
   const cartItems = state.cartItems;
 
-  // Sample order and customer numbers
-  const orderNumber = "כאן יהיה מס' ההזמנה";
-  const customerNumber = "כאן יהיה מס' הלקוח";
+  // Sample  customer numbers
+  const customerNumber = "6545676";
 
   // State for search input
   const [searchTerm, setSearchTerm] = useState("");
@@ -55,12 +54,15 @@ const OrderDetailsTable = () => {
           marginBottom: "20px",
         }}
       >
-        <Typography variant="h6" gutterBottom>
-          Order Number: {orderNumber}
+        <Typography variant="h4" gutterBottom>
+          Order Details
         </Typography>
         <Typography variant="h6" gutterBottom>
           Customer Number: {customerNumber}
         </Typography>
+        {/* <Typography>
+          <hr />
+        </Typography> */}
       </div>
 
       {/* Search Bar with Magnifying Glass Icon */}
@@ -90,7 +92,9 @@ const OrderDetailsTable = () => {
           <TableHead>
             {/* Add style to the TableRow */}
             <TableRow style={{ backgroundColor: "lightblue" }}>
-              <TableCell style={{ minWidth: 212 }}>Product ID</TableCell>
+              <TableCell style={{ minWidth: 212, maxWidth: 212 }}>
+                Product ID
+              </TableCell>
               <TableCell style={{ minWidth: 150 }}>Name</TableCell>
               <TableCell style={{ minWidth: 400 }}>Description</TableCell>
               <TableCell style={{ minWidth: 100 }}>Quantity</TableCell>

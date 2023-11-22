@@ -13,7 +13,7 @@ const GetAllOrders = () => {
       .get("http://localhost:3333/api/orders")
       .then((res) => {
         dispatch(setOrders(res.data));
-        console.log("Success", "Successfully added to the orders");
+        console.log("Success");
         console.log(res.data);
       })
       .catch((error) => {

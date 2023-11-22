@@ -8,7 +8,6 @@ import {
   Paper,
   Button,
 } from "@mui/material";
-import "../css/OrdersTable.css";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../store/hooks";
 import GetAllOrders from "../utils/GetAllOrders";
@@ -49,7 +48,7 @@ const OrdersTable = () => {
                       })
                     }
                   >
-                    {order.orderTime.toString()}
+                    {order.orderTime?.toString()}
                   </TableCell>
                   <TableCell
                     onClick={() =>
@@ -58,7 +57,7 @@ const OrdersTable = () => {
                       })
                     }
                   >
-                    {order._id}
+                    {order?._id}
                   </TableCell>
                   <TableCell
                     onClick={() =>
@@ -67,7 +66,7 @@ const OrdersTable = () => {
                       })
                     }
                   >
-                    {order.shippingDetails.userId}
+                    {order.shippingDetails?.userId}
                   </TableCell>
                   <TableCell
                     onClick={() =>
@@ -76,7 +75,7 @@ const OrdersTable = () => {
                       })
                     }
                   >
-                    {order.shippingDetails.address}
+                    {order.shippingDetails?.address}
                   </TableCell>
                   <TableCell
                     onClick={() =>
@@ -85,7 +84,7 @@ const OrdersTable = () => {
                       })
                     }
                   >
-                    {order.shippingDetails.contactNumber}
+                    {order.shippingDetails?.contactNumber}
                   </TableCell>
                   <TableCell
                     onClick={() =>
@@ -94,7 +93,7 @@ const OrdersTable = () => {
                       })
                     }
                   >
-                    {order.shippingDetails.orderType}
+                    {order.shippingDetails?.orderType}
                   </TableCell>
                   <TableCell
                     onClick={() =>
@@ -103,7 +102,7 @@ const OrdersTable = () => {
                       })
                     }
                   >
-                    {order.Price}
+                    {order.price}
                   </TableCell>
                   <TableCell
                     onClick={() =>
@@ -124,7 +123,7 @@ const OrdersTable = () => {
                         Cancel
                       </Button>
                     )}
-                    {order.shippingDetails.orderType === "pickup" &&
+                    {order.shippingDetails?.orderType === "pickup" &&
                       order.status === "pending" && (
                         <Button
                           variant="outlined"
