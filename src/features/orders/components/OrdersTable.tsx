@@ -12,9 +12,9 @@ import {
 } from "@mui/material";
 import SearchField from "./SearchField"; // Adjust the path based on your project structure
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import GetAllOrders from "../utils/GetAllOrders";
-import { useEffect } from "react";
+import { useAppSelector } from "../../../store/hooks";
+// import GetAllOrders from "../utils/GetAllOrders";
+// import { useEffect } from "react";
 
 interface OrdersTableProps {
   handleCancel: (orderId: string) => void;
@@ -80,79 +80,22 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
             </TableHead>
             <TableBody>
               {filteredOrders.map((order) => (
-                <TableRow key={order._id}>
-                  <TableCell
-                    onClick={() =>
-                      navigate("/orderDetails", {
-                        state: { cartItems: order.cartItems },
-                      })
-                    }
-                  >
-                    {order.orderTime?.toString()}
-                  </TableCell>
-                  <TableCell
-                    onClick={() =>
-                      navigate("/orderDetails", {
-                        state: { cartItems: order.cartItems },
-                      })
-                    }
-                  >
-                    {order?._id}
-                  </TableCell>
-                  <TableCell
-                    onClick={() =>
-                      navigate("/orderDetails", {
-                        state: { cartItems: order.cartItems },
-                      })
-                    }
-                  >
-                    {order.shippingDetails?.userId}
-                  </TableCell>
-                  <TableCell
-                    onClick={() =>
-                      navigate("/orderDetails", {
-                        state: { cartItems: order.cartItems },
-                      })
-                    }
-                  >
-                    {order.shippingDetails?.address}
-                  </TableCell>
-                  <TableCell
-                    onClick={() =>
-                      navigate("/orderDetails", {
-                        state: { cartItems: order.cartItems },
-                      })
-                    }
-                  >
-                    {order.shippingDetails?.contactNumber}
-                  </TableCell>
-                  <TableCell
-                    onClick={() =>
-                      navigate("/orderDetails", {
-                        state: { cartItems: order.cartItems },
-                      })
-                    }
-                  >
-                    {order.shippingDetails?.orderType}
-                  </TableCell>
-                  <TableCell
-                    onClick={() =>
-                      navigate("/orderDetails", {
-                        state: { cartItems: order.cartItems },
-                      })
-                    }
-                  >
-                    {order.Price}
-                  </TableCell>
-                  <TableCell
-                    onClick={() =>
-                      navigate("/orderDetails", {
-                        state: { cartItems: order.cartItems },
-                      })
-                    }
-                  >
-                    {order.status}
-                  </TableCell>
+                <TableRow
+                  key={order._id}
+                  onClick={() =>
+                    navigate("/orderDetails", {
+                      state: { cartItems: order.cartItems, userId: order._id },
+                    })
+                  }
+                >
+                  <TableCell>{order.orderTime?.toString()}</TableCell>
+                  <TableCell>{order?._id}</TableCell>
+                  <TableCell>{order.shippingDetails?.userId}</TableCell>
+                  <TableCell>{order.shippingDetails?.address}</TableCell>
+                  <TableCell>{order.shippingDetails?.contactNumber}</TableCell>
+                  <TableCell>{order.shippingDetails?.orderType}</TableCell>
+                  <TableCell>{order.price}</TableCell>
+                  <TableCell>{order.status}</TableCell>
                   <TableCell>
                     {order.status === "pending" && (
                       <Button

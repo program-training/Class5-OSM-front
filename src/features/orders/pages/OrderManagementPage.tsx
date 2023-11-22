@@ -11,8 +11,9 @@ import { setOrders } from "../ordersSlice";
 // interface OrdersPageProps {
 //   setOrders: React.Dispatch<React.SetStateAction<Order[]>>;
 // }
-
-const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
+// { setOrders }
+// : React.FC<OrdersPageProps>
+const OrderManagementPage = () => {
   const [openFilterDialog, setOpenFilterDialog] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [filterStatus, setFilterStatus] = useState<string | null>(null);
@@ -51,59 +52,50 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
     }
   };
 
-  // const handleOpenFilterDialog = () => {
-  //   setOpenFilterDialog(true);
-  // };
+  const handleOpenFilterDialog = () => {
+    setOpenFilterDialog(true);
+  };
 
   // const handleCloseFilterDialog = () => {
   //   setOpenFilterDialog(false);
   // };
 
-  const handleApplyFilters = () => {
-    if (orders) {
-      const filteredOrders = orders.filter((order) => {
-        if (filterStatus && order.status !== filterStatus) {
-          return false;
-        }
+  // const handleApplyFilters = () => {
+  //   if (orders) {
+  //     const filteredOrders = orders.filter((order) => {
+  //       if (filterStatus && order.status !== filterStatus) {
+  //         return false;
+  //       }
 
-        if (filterCustomer && !order.shippingDetails?.userId) {
-          return false;
-        }
+  //       if (filterCustomer && !order.shippingDetails?.userId) {
+  //         return false;
+  //       }
 
-        if (
-          dateRangeStart &&
-          order.orderTime &&
-          new Date(order.orderTime) < new Date(dateRangeStart)
-        ) {
-          return false;
-        }
+  //       if (
+  //         dateRangeStart &&
+  //         order.orderTime &&
+  //         new Date(order.orderTime) < new Date(dateRangeStart)
+  //       ) {
+  //         return false;
+  //       }
 
-        if (
-          dateRangeEnd &&
-          order.orderTime &&
-          new Date(order.orderTime) > new Date(dateRangeEnd)
-        ) {
-          return false;
-        }
+  //       if (
+  //         dateRangeEnd &&
+  //         order.orderTime &&
+  //         new Date(order.orderTime) > new Date(dateRangeEnd)
+  //       ) {
+  //         return false;
+  //       }
 
-        // Add more filters as needed
+  //       // Add more filters as needed
 
-        return true; // Include order in the filtered list
-      });
+  //       return true; // Include order in the filtered list
+  //     });
 
   //     setOrders(filteredOrders);
-  //     handleCloseFilterDialog();
+  //     // handleCloseFilterDialog();
   //   }
   // };
-
-  const updateOrderStatus = (orderId: string, newStatus: string) => {
-    if (orders) {
-      const updatedOrders = orders.map((order) =>
-        order._id === orderId ? { ...order, status: newStatus } : order
-      );
-      setOrders(updatedOrders);
-    }
-  };
 
   return (
     <div className="page-container">
@@ -113,7 +105,7 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
         className="filter-button"
       >
         Filter
-      </Button> */}
+      </Button>
 
       {/* Filter options */}
       {/* <FilterDialog
