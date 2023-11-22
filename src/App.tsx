@@ -1,7 +1,7 @@
 import "./App.css";
 import Header from "./features/layout/Header/Header";
 import RouterDOM from "./features/router/RouterDOM";
-import Footer from "./features/layout/Footer";
+// import Footer from "./features/layout/Footer";
 import { ThemeProvider } from "@mui/material/styles";
 import { useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
@@ -17,7 +17,7 @@ const App = () => {
         <CssBaseline />
         <Header />
         <RouterDOM />
-        <Footer />
+        {/* <Footer /> */}
       </ThemeProvider>
     </>
   );
