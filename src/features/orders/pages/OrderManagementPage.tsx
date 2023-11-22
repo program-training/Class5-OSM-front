@@ -23,19 +23,18 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({
   const [dateRangeStart, setDateRangeStart] = useState<string>("");
   const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
 
-  const handleCancelOrder = (orderId: string) => {
-    updateOrderStatus(orderId, "Order Canceled");
-  };
-
-  const handleReceiveOrder = (orderId: string) => {
-    updateOrderStatus(orderId, "Picked up by the customer");
-  };
-
   const updateOrderStatus = (orderId: string, newStatus: string) => {
     const updatedOrders = orders.map((order) =>
       order._id === orderId ? { ...order, status: newStatus } : order
     );
     setOrders(updatedOrders);
+  };
+  const handleCancelOrder = (orderId: string) => {
+    updateOrderStatus(orderId, "cancelled");
+  };
+
+  const handleReceiveOrder = (orderId: string) => {
+    updateOrderStatus(orderId, "accepted");
   };
 
   const handleOpenFilterDialog = () => {
@@ -93,7 +92,7 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({
         dateRangeEnd={dateRangeEnd}
         setDateRangeEnd={setDateRangeEnd}
         handleApplyFilters={handleApplyFilters}
-        handleFilterSelectionChange={handleFilterSelectionChange}
+        // handleFilterSelectionChange={handleFilterSelectionChange}
       />
 
       {/* Orders table */}

@@ -88,7 +88,9 @@ const FilterDialog: React.FC<FilterDialogProps> = ({
               >
                 <MenuItem value="">All</MenuItem>
                 <MenuItem value="pending">Pending</MenuItem>
-                <MenuItem value="self-pickup">Self Pickup</MenuItem>
+                <MenuItem value="pickup">Pickup</MenuItem>
+                <MenuItem value="sent">Sent</MenuItem>
+                <MenuItem value="received">Received</MenuItem>
               </Select>
             </FormControl>
           )}

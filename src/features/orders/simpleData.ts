@@ -162,7 +162,7 @@ export const simpleOrders: Order[] = [
       },
     ],
     orderTime: new Date("2023-11-01T14:00:00.000Z"),
-    status: "canalled",
+    status: "cancelled",
     price: 419.98,
     shippingDetails: {
       address: "Self Pickup Location - Store A",
@@ -218,7 +218,7 @@ export const simpleOrders: Order[] = [
       },
     ],
     orderTime: new Date("2023-11-03T16:45:00.000Z"),
-    status: "accepted",
+    status: "received",
     price: 579.98,
     shippingDetails: {
       address: "789 Pine Avenue",
