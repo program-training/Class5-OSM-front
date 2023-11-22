@@ -27,25 +27,27 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
 
   if (orders && !orders.length) return <p>no orders!!!!</p>;
 
-  if (orders && orders.length)
-    return (
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Order Time</TableCell>
-              <TableCell>Order ID</TableCell>
-              <TableCell>User ID</TableCell>
-              <TableCell>Address</TableCell>
-              <TableCell>Contact Number</TableCell>
-              <TableCell>Order Type</TableCell>
-              <TableCell>Price</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {orders.map((order) => {
+  // if (orders && orders.length)
+  return (
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Order Time</TableCell>
+            <TableCell>Order ID</TableCell>
+            <TableCell>User ID</TableCell>
+            <TableCell>Address</TableCell>
+            <TableCell>Contact Number</TableCell>
+            <TableCell>Order Type</TableCell>
+            <TableCell>Price</TableCell>
+            <TableCell>Status</TableCell>
+            <TableCell>Action</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {orders &&
+            orders.length &&
+            orders.map((order) => {
               return (
                 <TableRow key={order._id}>
                   <TableCell
@@ -109,7 +111,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                       })
                     }
                   >
-                    {order.Price}
+                    {order.price}
                   </TableCell>
                   <TableCell
                     onClick={() =>
@@ -144,10 +146,10 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                 </TableRow>
               );
             })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 };
 
 export default OrdersTable;

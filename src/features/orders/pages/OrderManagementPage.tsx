@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import SearchField from "../components/SearchField";
-import FilterDialog from "../components/FilterDialog";
+// import FilterDialog from "../components/FilterDialog";
 import OrdersTable from "../components/OrdersTable";
 import "../css/OrderManagementPage.css";
 import { useAppSelector } from "../../../store/hooks";
@@ -13,12 +13,12 @@ interface OrdersPageProps {
 
 const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [openFilterDialog, setOpenFilterDialog] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const [filterStatus, setFilterStatus] = useState<string | null>(null);
-  const [filterCustomer] = useState<boolean>(false);
-  const [dateRangeStart, setDateRangeStart] = useState<string>("");
-  const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
+  // const [openFilterDialog, setOpenFilterDialog] = useState(false);
+  // const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  // const [filterStatus, setFilterStatus] = useState<string | null>(null);
+  // const [filterCustomer] = useState<boolean>(false);
+  // const [dateRangeStart, setDateRangeStart] = useState<string>("");
+  // const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
   const orders = useAppSelector((state) => state.orders.orders);
 
   const updateOrderStatus = (orderId: string, newStatus: string) => {
@@ -37,24 +37,24 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
     updateOrderStatus(orderId, "received");
   };
 
-  const handleOpenFilterDialog = () => {
-    setOpenFilterDialog(true);
-  };
+  // const handleOpenFilterDialog = () => {
+  //   setOpenFilterDialog(true);
+  // };
 
-  const handleCloseFilterDialog = () => {
-    setOpenFilterDialog(false);
-  };
+  // const handleCloseFilterDialog = () => {
+  //   setOpenFilterDialog(false);
+  // };
 
-  const handleApplyFilters = () => {
-    if (orders) {
-      const filteredOrders = orders.filter(() => {
-        // Filter logic...
-      });
+  // const handleApplyFilters = () => {
+  //   if (orders) {
+  //     const filteredOrders = orders.filter(() => {
+  //       // Filter logic...
+  //     });
 
-      setOrders(filteredOrders);
-      handleCloseFilterDialog();
-    }
-  };
+  //     setOrders(filteredOrders);
+  //     handleCloseFilterDialog();
+  //   }
+  // };
 
   // const handleFilterSelectionChange = (filter: string) => {
   //   setSelectedFilters((prevFilters) => {
@@ -71,17 +71,16 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
       {/* Search field */}
       <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-      {/* Filter button */}
-      <Button
+      {/* <Button
         variant="outlined"
         onClick={handleOpenFilterDialog}
         className="filter-button"
       >
         Filter
-      </Button>
+      </Button> */}
 
       {/* Filter options */}
-      <FilterDialog
+      {/* <FilterDialog
         open={openFilterDialog}
         onClose={handleCloseFilterDialog}
         selectedFilters={selectedFilters}
@@ -95,7 +94,7 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
         setDateRangeEnd={setDateRangeEnd}
         handleApplyFilters={handleApplyFilters}
         // handleFilterSelectionChange={handleFilterSelectionChange}
-      />
+      /> */}
 
       {/* Orders table */}
       <OrdersTable

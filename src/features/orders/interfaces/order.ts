@@ -4,7 +4,7 @@ interface Order {
   cartItems: Product[];
   orderTime: Date;
   status: string;
-  Price: number;
+  price: number;
   shippingDetails: {
     address: string;
     userId: number;
