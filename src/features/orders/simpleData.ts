@@ -311,4 +311,88 @@ export const simpleOrders: Order[] = [
       orderType: "pickup",
     },
   },
+  {
+    _id: "651bc52a47a8559be535635j",
+    cartItems: [
+      {
+        _id: "651d2efb4ab466ae93ba4f2s",
+        name: "Laptop",
+        description: "Powerful laptop for work and gaming",
+        price: 899.99,
+        quantity: 1,
+      },
+      {
+        _id: "651d2efb4ab466ae93ba4f2t",
+        name: "Wireless Mouse",
+        description: "Sleek wireless mouse for precise control",
+        price: 29.99,
+        quantity: 1,
+      },
+    ],
+    orderTime: new Date("2023-11-05T18:15:00.000Z"),
+    status: "processing",
+    price: 929.98,
+    shippingDetails: {
+      address: "123 Oak Lane",
+      userId: 11,
+      contactNumber: "555-777-8888",
+      orderType: "standard",
+    },
+  },
+  {
+    _id: "651bc52a47a8559be535635k",
+    cartItems: [
+      {
+        _id: "651d2efb4ab466ae93ba4f2u",
+        name: "Bluetooth Speaker",
+        description: "High-quality portable Bluetooth speaker",
+        price: 79.99,
+        quantity: 1,
+      },
+      {
+        _id: "651d2efb4ab466ae93ba4f2v",
+        name: "Carrying Case",
+        description: "Protective case for your electronics",
+        price: 14.99,
+        quantity: 1,
+      },
+    ],
+    orderTime: new Date("2023-11-06T10:45:00.000Z"),
+    status: "shipped",
+    price: 94.98,
+    shippingDetails: {
+      address: "876 Cedar Street",
+      userId: 12,
+      contactNumber: "555-333-4444",
+      orderType: "express",
+    },
+  },
+  {
+    _id: "651bc52a47a8559be535635l",
+    cartItems: [
+      {
+        _id: "651d2efb4ab466ae93ba4f2w",
+        name: "VR Headset",
+        description: "Immersive virtual reality headset",
+        price: 299.99,
+        quantity: 1,
+      },
+      {
+        _id: "651d2efb4ab466ae93ba4f2x",
+        name: "Gaming Mouse",
+        description: "Precision gaming mouse for competitive play",
+        price: 49.99,
+        quantity: 1,
+      },
+    ],
+    orderTime: new Date("2023-11-07T15:30:00.000Z"),
+    status: "completed",
+    price: 349.98,
+    shippingDetails: {
+      address: "321 Pineapple Avenue",
+      userId: 13,
+      contactNumber: "555-666-9999",
+      orderType: "standard",
+    },
+  },
 ];
