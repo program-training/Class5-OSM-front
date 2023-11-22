@@ -46,12 +46,14 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
   };
 
   const handleApplyFilters = () => {
-    const filteredOrders = orders.filter(() => {
-      // Filter logic...
-    });
+    if (orders) {
+      const filteredOrders = orders.filter(() => {
+        // Filter logic...
+      });
 
-    setOrders(filteredOrders);
-    handleCloseFilterDialog();
+      setOrders(filteredOrders);
+      handleCloseFilterDialog();
+    }
   };
 
   // const handleFilterSelectionChange = (filter: string) => {
