@@ -54,15 +54,15 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({
     handleCloseFilterDialog();
   };
 
-  const handleFilterSelectionChange = (filter: string) => {
-    setSelectedFilters((prevFilters) => {
-      if (prevFilters.includes(filter)) {
-        return prevFilters.filter((f) => f !== filter);
-      } else {
-        return [...prevFilters, filter];
-      }
-    });
-  };
+  // const handleFilterSelectionChange = (filter: string) => {
+  //   setSelectedFilters((prevFilters) => {
+  //     if (prevFilters.includes(filter)) {
+  //       return prevFilters.filter((f) => f !== filter);
+  //     } else {
+  //       return [...prevFilters, filter];
+  //     }
+  //   });
+  // };
 
   return (
     <div className="page-container">

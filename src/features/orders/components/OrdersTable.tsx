@@ -52,7 +52,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                   })
                 }
               >
-                {order.orderTime.toISOString()}
+                {order.orderTime.toISOString().slice(0, -14)}
               </TableCell>
               <TableCell
                 onClick={() =>

@@ -24,10 +24,10 @@ const FilterDialog: React.FC<FilterDialogProps> = ({
   setSelectedFilters,
   filterStatus,
   setFilterStatus,
-  filterCustomer,
+  // filterCustomer,
   dateRangeStart,
   setDateRangeStart,
-  dateRangeEnd,
+  // dateRangeEnd,
   setDateRangeEnd,
   handleApplyFilters,
 }) => {
