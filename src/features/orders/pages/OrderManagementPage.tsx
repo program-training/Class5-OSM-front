@@ -1,6 +1,6 @@
+// OrderManagementPage.tsx
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import SearchField from "../components/SearchField";
 import FilterDialog from "../components/FilterDialog";
 import OrdersTable from "../components/OrdersTable";
 import "../css/OrderManagementPage.css";
@@ -12,7 +12,6 @@ interface OrdersPageProps {
 }
 
 const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
   const [openFilterDialog, setOpenFilterDialog] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [filterStatus, setFilterStatus] = useState<string | null>(null);
@@ -21,14 +20,6 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
   const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
   const orders = useAppSelector((state) => state.orders.orders);
 
-  const updateOrderStatus = (orderId: string, newStatus: string) => {
-    if (orders) {
-      const updatedOrders = orders.map((order) =>
-        order._id === orderId ? { ...order, status: newStatus } : order
-      );
-      setOrders(updatedOrders);
-    }
-  };
   const handleCancelOrder = (orderId: string) => {
     updateOrderStatus(orderId, "cancelled");
   };
@@ -47,8 +38,34 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
 
   const handleApplyFilters = () => {
     if (orders) {
-      const filteredOrders = orders.filter(() => {
-        // Filter logic...
+      const filteredOrders = orders.filter((order) => {
+        if (filterStatus && order.status !== filterStatus) {
+          return false;
+        }
+
+        if (filterCustomer && !order.shippingDetails?.userId) {
+          return false;
+        }
+
+        if (
+          dateRangeStart &&
+          order.orderTime &&
+          new Date(order.orderTime) < new Date(dateRangeStart)
+        ) {
+          return false;
+        }
+
+        if (
+          dateRangeEnd &&
+          order.orderTime &&
+          new Date(order.orderTime) > new Date(dateRangeEnd)
+        ) {
+          return false;
+        }
+
+        // Add more filters as needed
+
+        return true; // Include order in the filtered list
       });
 
       setOrders(filteredOrders);
@@ -56,22 +73,17 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
     }
   };
 
-  // const handleFilterSelectionChange = (filter: string) => {
-  //   setSelectedFilters((prevFilters) => {
-  //     if (prevFilters.includes(filter)) {
-  //       return prevFilters.filter((f) => f !== filter);
-  //     } else {
-  //       return [...prevFilters, filter];
-  //     }
-  //   });
-  // };
+  const updateOrderStatus = (orderId: string, newStatus: string) => {
+    if (orders) {
+      const updatedOrders = orders.map((order) =>
+        order._id === orderId ? { ...order, status: newStatus } : order
+      );
+      setOrders(updatedOrders);
+    }
+  };
 
   return (
     <div className="page-container">
-      {/* Search field */}
-      <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-
-      {/* Filter button */}
       <Button
         variant="outlined"
         onClick={handleOpenFilterDialog}
@@ -88,13 +100,12 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
         setSelectedFilters={setSelectedFilters}
         filterStatus={filterStatus}
         setFilterStatus={setFilterStatus}
-        filterCustomer={filterCustomer}
         dateRangeStart={dateRangeStart}
         setDateRangeStart={setDateRangeStart}
         dateRangeEnd={dateRangeEnd}
         setDateRangeEnd={setDateRangeEnd}
         handleApplyFilters={handleApplyFilters}
-        // handleFilterSelectionChange={handleFilterSelectionChange}
+        filterCustomer={false}
       />
 
       {/* Orders table */}
