@@ -20,6 +20,7 @@ import Product from "../interfaces/product";
 import { useAppSelector } from "../../../store/hooks";
 
 const OrderDetailsTable = () => {
+  const themeMode = useAppSelector((state) => state.themeMode.themeMode);
   const price = useAppSelector((state) => state.orders.price);
   const { state } = useLocation();
   const cartItems = state.cartItems;
@@ -43,7 +44,6 @@ const OrderDetailsTable = () => {
 
   return (
     <Box style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      {/* Order and Customer Numbers */}
       <Box
         style={{
           display: "flex",
@@ -56,17 +56,13 @@ const OrderDetailsTable = () => {
           Order Details
         </Typography>
         <Typography variant="h6" gutterBottom>
-          Customer Number: {customerNumber}
+          Order ID: {customerNumber}
         </Typography>
-        {/* <Typography>
-          <hr />
-        </Typography> */}
       </Box>
 
-      {/* Search Bar with Magnifying Glass Icon */}
       <Box style={{ marginLeft: "10px", marginBottom: "20px" }}>
         <TextField
-          label="Search"
+          label="Search By Name"
           variant="outlined"
           size="small"
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -80,16 +76,12 @@ const OrderDetailsTable = () => {
         />
       </Box>
 
-      {/* Table */}
       <TableContainer
         component={Paper}
         style={{ height: "100%", width: "100%" }}
       >
-        {/* <TableContainer component={Paper} style={{ flex: 1, width: "100%" }}> */}
-        <Table sx={{ backgroundColor: "#7eb3bd" }}>
+        <Table>
           <TableHead>
-            {/* Add style to the TableRow */}
-
             <TableRow sx={{ backgroundColor: "#6daab5" }}>
               <TableCell style={{ minWidth: 150, fontSize: "20px" }}>
                 Name
@@ -107,14 +99,24 @@ const OrderDetailsTable = () => {
           </TableHead>
           <TableBody>
             {filteredCartItems.map((product: Product, i: number) => (
-              <TableRow key={i}>
+              <TableRow
+                key={i}
+                sx={{
+                  backgroundColor: themeMode
+                    ? i % 2 === 0
+                      ? "#f5f5f5"
+                      : "#e6e6ff"
+                    : i % 2 === 0
+                    ? "#3a3a3b"
+                    : "#262729",
+                }}
+              >
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.description}</TableCell>
                 <TableCell>{product.quantity}</TableCell>
                 <TableCell>{product.price}</TableCell>
               </TableRow>
             ))}
-            {/* Total Amount and Total Quantity Row */}
             <TableRow>
               <TableCell colSpan={2}></TableCell>
               <TableCell>
@@ -140,7 +142,6 @@ const OrderDetailsTable = () => {
         </Table>
       </TableContainer>
 
-      {/* Return Button */}
       <Box
         style={{
           display: "flex",
@@ -150,7 +151,7 @@ const OrderDetailsTable = () => {
         }}
       >
         <Box style={{ marginRight: "20px" }}></Box>
-        {/* Return Button */}
+
         <Box>
           <Link to="/orders">
             <Button variant="contained" sx={{ margin: "20px" }}>

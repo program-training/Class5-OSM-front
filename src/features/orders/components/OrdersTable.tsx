@@ -65,27 +65,52 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                 },
               }}
             >
-              <TableRow sx={{ backgroundColor: "#8fced9" }}>
-                <TableCell>Order Time</TableCell>
-                <TableCell>Order ID</TableCell>
-                <TableCell>User ID</TableCell>
-                <TableCell>Address</TableCell>
-                <TableCell>Contact Number</TableCell>
-                <TableCell>Order Type</TableCell>
-                <TableCell>Price</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Action</TableCell>
+              <TableRow sx={{ backgroundColor: "#6daab5", fontSize: "500px" }}>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Order Time
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Order ID
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  User ID
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Address
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Contact Number
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Order Type
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Price
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Status
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Action
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredOrders.map((order) => (
+              {filteredOrders.map((order, i) => (
                 <TableRow
                   sx={{
-                    transition: "background-color 0.3s",
                     cursor: "pointer",
                     "&:hover": {
+                      transition: "0.3s",
                       backgroundColor: themeMode ? "#61b0fa" : "#4f4f4f",
                     },
+                    backgroundColor: themeMode
+                      ? i % 2 === 0
+                        ? "#f5f5f5"
+                        : "#e6e6ff"
+                      : i % 2 === 0
+                      ? "#3a3a3b"
+                      : "#262729",
                   }}
                   key={order._id}
                   onClick={() =>
@@ -101,7 +126,23 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                   <TableCell>{order.shippingDetails?.contactNumber}</TableCell>
                   <TableCell>{order.shippingDetails?.orderType}</TableCell>
                   <TableCell>{order.price}</TableCell>
-                  <TableCell>{order.status}</TableCell>
+                  <TableCell
+                    sx={{
+                      color:
+                        order.status === "pending"
+                          ? "orange"
+                          : order.status === "sent"
+                          ? "#2688eb"
+                          : order.status === "canceled"
+                          ? "red"
+                          : order.status === "received"
+                          ? "#5af542"
+                          : "inherit",
+                    }}
+                  >
+                    {order.status}
+                  </TableCell>
+
                   <TableCell>
                     {order.status === "pending" && (
                       <Button
