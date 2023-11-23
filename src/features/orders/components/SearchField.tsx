@@ -15,6 +15,9 @@ const SearchField: React.FC<SearchFieldProps> = ({
   return (
     <TextField
       label="Search by Order ID or User ID"
+      sx={{
+        margin: "10px",
+      }}
       variant="outlined"
       size="small"
       value={searchTerm}

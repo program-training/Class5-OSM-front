@@ -98,7 +98,7 @@ const OrderManagementPage = () => {
   // };
 
   return (
-    <div className="page-container">
+    <Box className="page-container" sx={{ margin: "70px" }}>
       <Button
         variant="outlined"
         onClick={handleOpenFilterDialog}
@@ -124,8 +124,11 @@ const OrderManagementPage = () => {
       />
 
       {/* Orders table */}
-      <OrdersTable handleCancel={handleCancel} handleReceive={handleReceive} />
-    </div>
+      <OrdersTable
+        handleCancelOrder={handleCancelOrder}
+        handleReceiveOrder={handleReceiveOrder}
+      />
+    </Box>
   );
 };
 
