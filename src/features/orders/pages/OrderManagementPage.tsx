@@ -6,6 +6,7 @@ import OrdersTable from "../components/OrdersTable";
 import "../css/OrderManagementPage.css";
 import { useAppSelector } from "../../../store/hooks";
 import Order from "../interfaces/order";
+import { Box } from "@mui/material";
 
 interface OrdersPageProps {
   setOrders: React.Dispatch<React.SetStateAction<Order[]>>;
@@ -83,7 +84,7 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
   };
 
   return (
-    <div className="page-container">
+    <Box className="page-container" sx={{ margin: "70px" }}>
       <Button
         variant="outlined"
         onClick={handleOpenFilterDialog}
@@ -113,7 +114,7 @@ const OrderManagementPage: React.FC<OrdersPageProps> = ({ setOrders }) => {
         handleCancelOrder={handleCancelOrder}
         handleReceiveOrder={handleReceiveOrder}
       />
-    </div>
+    </Box>
   );
 };
 
