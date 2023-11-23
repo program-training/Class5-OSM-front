@@ -9,6 +9,7 @@ import {
   TableRow,
   Paper,
   Button,
+  Box,
 } from "@mui/material";
 import SearchField from "./SearchField"; // Adjust the path based on your project structure
 import { useNavigate } from "react-router-dom";
@@ -59,7 +60,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
 
   if (orders && orders.length)
     return (
-      <div>
+      <Box>
         {/* Search Bar */}
         <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         {/* Orders Table */}
@@ -128,7 +129,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
+      </Box>
     );
 };
 

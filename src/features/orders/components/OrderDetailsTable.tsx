@@ -151,7 +151,9 @@ const OrderDetailsTable = () => {
         {/* Return Button */}
         <div>
           <Link to="/orders">
-            <Button variant="contained">Go Back</Button>
+            <Button variant="contained" sx={{ margin: "20px" }}>
+              Go Back
+            </Button>
           </Link>
         </div>
       </div>

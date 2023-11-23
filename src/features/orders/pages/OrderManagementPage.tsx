@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 // import Order from "../interfaces/order";
 import { setOrders } from "../ordersSlice";
 import Box from "@mui/material/Box";
+import { CssBaseline } from "@mui/material";
 
 // interface OrdersPageProps {
 //   setOrders: React.Dispatch<React.SetStateAction<Order[]>>;
@@ -23,7 +24,7 @@ const OrderManagementPage = () => {
   // const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
   const orders = useAppSelector((state) => state.orders.orders);
   const dispatch = useAppDispatch();
-
+  const themeMode = useAppSelector((store) => store.themeMode.themeMode);
   const handleCancel = (orderId: string) => {
     const updatedOrders = orders?.map((order) => {
       if (order._id === orderId && order.status === "pending") {
@@ -99,7 +100,11 @@ const OrderManagementPage = () => {
   // };
 
   return (
-    <Box className="page-container" sx={{ margin: "70px" }}>
+    <Box
+      className="page-container"
+      sx={{ margin: "70px", backgroundColor: themeMode ? "white" : "black" }}
+    >
+      <CssBaseline />
       <Button
         variant="outlined"
         // onClick={handleOpenFilterDialog}
