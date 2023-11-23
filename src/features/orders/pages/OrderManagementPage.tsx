@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { cancelOrder, receivedOrder } from "../ordersSlice";
 import Box from "@mui/material/Box";
 import { CssBaseline } from "@mui/material";
-import GetAllOrders from "../utils/GetAllOrders";
 
 const OrderManagementPage = () => {
   const orders = useAppSelector((state) => state.orders.orders);
