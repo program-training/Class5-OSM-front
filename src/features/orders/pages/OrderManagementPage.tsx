@@ -7,6 +7,7 @@ import "../css/OrderManagementPage.css";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 // import Order from "../interfaces/order";
 import { setOrders } from "../ordersSlice";
+import Box from "@mui/material/Box";
 
 // interface OrdersPageProps {
 //   setOrders: React.Dispatch<React.SetStateAction<Order[]>>;
@@ -124,10 +125,7 @@ const OrderManagementPage = () => {
       />
 
       {/* Orders table */}
-      <OrdersTable
-        handleCancelOrder={handleCancelOrder}
-        handleReceiveOrder={handleReceiveOrder}
-      />
+      <OrdersTable handleCancel={handleCancel} handleReceive={handleReceive} />
     </Box>
   );
 };
