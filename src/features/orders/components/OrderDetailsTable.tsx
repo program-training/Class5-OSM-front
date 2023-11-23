@@ -17,8 +17,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Product from "../interfaces/product";
+import { useAppSelector } from "../../../store/hooks";
 
 const OrderDetailsTable = () => {
+  const price = useAppSelector((state) => state.orders.price);
   const { state } = useLocation();
   const cartItems = state.cartItems;
   const userId = state.userId;
@@ -29,12 +31,6 @@ const OrderDetailsTable = () => {
   // State for search input
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Calculate total price and total quantity
-  const totalPrice = cartItems.reduce(
-    (acc: number, product: { price: number; quantity: number }) =>
-      acc + product.price * product.quantity,
-    0
-  );
   const totalQuantity = cartItems.reduce(
     (acc: number, product: { quantity: number }) => acc + product.quantity,
     0
@@ -90,23 +86,28 @@ const OrderDetailsTable = () => {
         style={{ height: "100%", width: "100%" }}
       >
         {/* <TableContainer component={Paper} style={{ flex: 1, width: "100%" }}> */}
-        <Table>
+        <Table sx={{ backgroundColor: "#7eb3bd" }}>
           <TableHead>
             {/* Add style to the TableRow */}
-            <TableRow style={{ backgroundColor: "lightblue" }}>
-              <TableCell style={{ minWidth: 212, maxWidth: 212 }}>
-                Product ID
+
+            <TableRow sx={{ backgroundColor: "#6daab5" }}>
+              <TableCell style={{ minWidth: 150, fontSize: "20px" }}>
+                Name
               </TableCell>
-              <TableCell style={{ minWidth: 150 }}>Name</TableCell>
-              <TableCell style={{ minWidth: 400 }}>Description</TableCell>
-              <TableCell style={{ minWidth: 100 }}>Quantity</TableCell>
-              <TableCell style={{ minWidth: 100 }}>Price</TableCell>
+              <TableCell style={{ minWidth: 400, fontSize: "20px" }}>
+                Description
+              </TableCell>
+              <TableCell style={{ minWidth: 100, fontSize: "20px" }}>
+                Quantity
+              </TableCell>
+              <TableCell style={{ minWidth: 100, fontSize: "20px" }}>
+                Price
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredCartItems.map((product: Product) => (
               <TableRow key={product.id}>
-                <TableCell>{product.id}</TableCell>
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.description}</TableCell>
                 <TableCell>{product.quantity}</TableCell>
@@ -115,7 +116,7 @@ const OrderDetailsTable = () => {
             ))}
             {/* Total Amount and Total Quantity Row */}
             <TableRow>
-              <TableCell colSpan={3}></TableCell>
+              <TableCell colSpan={2}></TableCell>
               <TableCell>
                 <Typography
                   variant="subtitle1"
@@ -131,7 +132,7 @@ const OrderDetailsTable = () => {
                   gutterBottom
                   style={{ alignSelf: "flex-start" }}
                 >
-                  Total Price: ${totalPrice.toFixed(2)}
+                  Total Price: ${price}
                 </Typography>
               </TableCell>
             </TableRow>

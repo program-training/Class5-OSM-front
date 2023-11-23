@@ -6,7 +6,6 @@ import Box from "@mui/material/Box";
 import { CssBaseline } from "@mui/material";
 
 const OrderManagementPage = () => {
-  // const orders = useAppSelector((state) => state.orders.orders);
   const dispatch = useAppDispatch();
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
 

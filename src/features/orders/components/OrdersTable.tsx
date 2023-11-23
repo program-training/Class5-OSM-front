@@ -1,5 +1,4 @@
-// OrdersTable.tsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -11,12 +10,10 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import SearchField from "./SearchField"; // Adjust the path based on your project structure
+import SearchField from "./SearchField";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../../store/hooks";
-// import GetAllOrders from "../utils/GetAllOrders";
-// import GetAllOrders from "../utils/GetAllOrders";
-// import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { setPrice } from "../ordersSlice";
 
 interface OrdersTableProps {
   handleCancel: (orderId: string) => void;
@@ -29,8 +26,14 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
 }) => {
   const navigate = useNavigate();
   const orders = useAppSelector((state) => state.orders.orders);
-  const themeMode = useAppSelector((state) => state.themeMode.themeMode);
 
+  const themeMode = useAppSelector((state) => state.themeMode.themeMode);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    orders.forEach((order) => {
+      dispatch(setPrice(order.price));
+    });
+  }, [dispatch, orders]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredOrders = orders
@@ -50,9 +53,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
   if (orders && orders.length)
     return (
       <Box>
-        {/* Search Bar */}
         <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        {/* Orders Table */}
         <TableContainer component={Paper}>
           <Table>
             <TableHead
@@ -62,7 +63,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                 },
               }}
             >
-              <TableRow style={{ backgroundColor: "#16bdc9" }}>
+              <TableRow sx={{ backgroundColor: "#8fced9" }}>
                 <TableCell>Order Time</TableCell>
                 <TableCell>Order ID</TableCell>
                 <TableCell>User ID</TableCell>
@@ -81,7 +82,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                     transition: "background-color 0.3s",
                     cursor: "pointer",
                     "&:hover": {
-                      backgroundColor: themeMode ? "#61b0fa" : "gray",
+                      backgroundColor: themeMode ? "#61b0fa" : "#4f4f4f",
                     },
                   }}
                   key={order._id}
@@ -103,6 +104,13 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                     {order.status === "pending" && (
                       <Button
                         variant="outlined"
+                        sx={{
+                          margin: "5px",
+                          ":hover": {
+                            backgroundColor: "#ff2e2e",
+                            color: "aliceblue",
+                          },
+                        }}
                         color="secondary"
                         onClick={(event) => {
                           event.stopPropagation();
@@ -115,6 +123,13 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                     {order.shippingDetails?.orderType === "pickup" &&
                       order.status === "pending" && (
                         <Button
+                          sx={{
+                            margin: "5px",
+                            ":hover": {
+                              backgroundColor: "#66ff7f",
+                              color: "aliceblue",
+                            },
+                          }}
                           variant="outlined"
                           color="primary"
                           onClick={(event) => {

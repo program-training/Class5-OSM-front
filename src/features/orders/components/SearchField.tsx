@@ -74,8 +74,8 @@ const SearchField: FC<SearchFieldProps> = ({ searchTerm, setSearchTerm }) => {
           startAdornment: <SearchIcon color="action" />,
         }}
       />
-      <IconButton>
-        <TuneIcon onClick={handleOpenFilterDialog} className="filter-button" />
+      <IconButton onClick={handleOpenFilterDialog} className="filter-button">
+        <TuneIcon />
       </IconButton>
       <FilterDialog
         open={openFilterDialog}
