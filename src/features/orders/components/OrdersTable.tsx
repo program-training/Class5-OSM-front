@@ -162,7 +162,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                       >
                         cancel
                         <DeleteForeverOutlinedIcon
-                          sx={{ marginLeft: "12px" }}
+                          sx={{ marginLeft: "13px" }}
                         />
                       </Button>
                     )}
