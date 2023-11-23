@@ -7,11 +7,11 @@ const EmailInput: FC<EmailInputInterface> = ({
   emailValidet,
   errors,
   email,
-  onEmailChange,
+  // onEmailChange,
 }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onEmailChange!(e.target.value);
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   onEmailChange!(e.target.value);
+  // };
 
   return (
     <>
@@ -23,9 +23,7 @@ const EmailInput: FC<EmailInputInterface> = ({
           label="Email Address"
           autoComplete="email"
           value={email}
-          // onChange={handleChange}
           {...register("email", emailValidet)}
-          onChange={handleChange}
           helperText={errors.email?.message?.toString()}
           error={errors.email ? true : false}
         />
