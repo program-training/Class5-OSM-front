@@ -15,6 +15,7 @@ import SearchField from "./SearchField"; // Adjust the path based on your projec
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../store/hooks";
 // import GetAllOrders from "../utils/GetAllOrders";
+// import GetAllOrders from "../utils/GetAllOrders";
 // import { useEffect } from "react";
 
 interface OrdersTableProps {
@@ -26,24 +27,11 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
   handleCancel,
   handleReceive,
 }) => {
-  // useEffect(() => {
-  //   const fetchOrders = async () => {
-  //     try {
-  //       await GetAllOrders();
-  //     } catch (error) {
-  //       console.error("Error fetching orders:", error);
-  //     }
-  //   };
-
-  //   fetchOrders();
-  // }, []);
-
   const navigate = useNavigate();
   const orders = useAppSelector((state) => state.orders.orders);
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Add a check to ensure 'orders' is not null
   const filteredOrders = orders
     ? orders.filter((order) => {
         const searchValue = searchTerm.toLowerCase();

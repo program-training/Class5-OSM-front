@@ -1,14 +1,15 @@
 // OrderManagementPage.tsx
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import Button from "@mui/material/Button";
 // import FilterDialog from "../components/FilterDialog";
 import OrdersTable from "../components/OrdersTable";
 import "../css/OrderManagementPage.css";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 // import Order from "../interfaces/order";
-import { setOrders } from "../ordersSlice";
+import { cancelOrder, receivedOrder } from "../ordersSlice";
 import Box from "@mui/material/Box";
 import { CssBaseline } from "@mui/material";
+import GetAllOrders from "../utils/GetAllOrders";
 
 // interface OrdersPageProps {
 //   setOrders: React.Dispatch<React.SetStateAction<Order[]>>;
@@ -16,42 +17,22 @@ import { CssBaseline } from "@mui/material";
 // { setOrders }
 // : React.FC<OrdersPageProps>
 const OrderManagementPage = () => {
+  GetAllOrders();
   // const [openFilterDialog, setOpenFilterDialog] = useState(false);
   // const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   // const [filterStatus, setFilterStatus] = useState<string | null>(null);
   // const [filterCustomer] = useState<boolean>(false);
   // const [dateRangeStart, setDateRangeStart] = useState<string>("");
   // const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
-  const orders = useAppSelector((state) => state.orders.orders);
+  // const orders = useAppSelector((state) => state.orders.orders);
   const dispatch = useAppDispatch();
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
+
   const handleCancel = (orderId: string) => {
-    const updatedOrders = orders?.map((order) => {
-      if (order._id === orderId && order.status === "pending") {
-        return {
-          ...order,
-          status: "cancelled",
-        };
-      }
-      return order;
-    });
-    if (updatedOrders) {
-      dispatch(setOrders(updatedOrders));
-    }
+    dispatch(cancelOrder(orderId));
   };
   const handleReceive = (orderId: string) => {
-    const updatedOrders = orders?.map((order) => {
-      if (order._id === orderId && order.status === "pending") {
-        return {
-          ...order,
-          status: "received",
-        };
-      }
-      return order;
-    });
-    if (updatedOrders) {
-      dispatch(setOrders(updatedOrders));
-    }
+    dispatch(receivedOrder(orderId));
   };
 
   // const handleOpenFilterDialog = () => {
