@@ -29,6 +29,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
 }) => {
   const navigate = useNavigate();
   const orders = useAppSelector((state) => state.orders.orders);
+  const themeMode = useAppSelector((state) => state.themeMode.themeMode);
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -54,8 +55,14 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
         {/* Orders Table */}
         <TableContainer component={Paper}>
           <Table>
-            <TableHead>
-              <TableRow style={{ backgroundColor: "lightblue" }}>
+            <TableHead
+              sx={{
+                "&:hover": {
+                  transform: "scale(1.004)",
+                },
+              }}
+            >
+              <TableRow style={{ backgroundColor: "#16bdc9" }}>
                 <TableCell>Order Time</TableCell>
                 <TableCell>Order ID</TableCell>
                 <TableCell>User ID</TableCell>
@@ -70,6 +77,13 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
             <TableBody>
               {filteredOrders.map((order) => (
                 <TableRow
+                  sx={{
+                    transition: "background-color 0.3s",
+                    cursor: "pointer",
+                    "&:hover": {
+                      backgroundColor: themeMode ? "#61b0fa" : "gray",
+                    },
+                  }}
                   key={order._id}
                   onClick={() =>
                     navigate("/orderDetails", {
