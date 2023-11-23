@@ -11,6 +11,7 @@ import {
   Button,
   InputAdornment,
   Typography,
+  Box,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
@@ -45,9 +46,9 @@ const OrderDetailsTable = () => {
   );
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+    <Box style={{ display: "flex", flexDirection: "column", height: "100%" }}>
       {/* Order and Customer Numbers */}
-      <div
+      <Box
         style={{
           display: "flex",
           flexDirection: "column",
@@ -64,10 +65,10 @@ const OrderDetailsTable = () => {
         {/* <Typography>
           <hr />
         </Typography> */}
-      </div>
+      </Box>
 
       {/* Search Bar with Magnifying Glass Icon */}
-      <div style={{ marginLeft: "10px", marginBottom: "20px" }}>
+      <Box style={{ marginLeft: "10px", marginBottom: "20px" }}>
         <TextField
           label="Search"
           variant="outlined"
@@ -81,7 +82,7 @@ const OrderDetailsTable = () => {
             ),
           }}
         />
-      </div>
+      </Box>
 
       {/* Table */}
       <TableContainer
@@ -139,7 +140,7 @@ const OrderDetailsTable = () => {
       </TableContainer>
 
       {/* Return Button */}
-      <div
+      <Box
         style={{
           display: "flex",
           justifyContent: "flex-end",
@@ -147,17 +148,17 @@ const OrderDetailsTable = () => {
           marginBottom: "20px",
         }}
       >
-        <div style={{ marginRight: "20px" }}></div>
+        <Box style={{ marginRight: "20px" }}></Box>
         {/* Return Button */}
-        <div>
+        <Box>
           <Link to="/orders">
             <Button variant="contained" sx={{ margin: "20px" }}>
               Go Back
             </Button>
           </Link>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
