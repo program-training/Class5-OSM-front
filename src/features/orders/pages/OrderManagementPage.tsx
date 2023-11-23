@@ -1,7 +1,7 @@
 // OrderManagementPage.tsx
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import FilterDialog from "../components/FilterDialog";
+// import FilterDialog from "../components/FilterDialog";
 import OrdersTable from "../components/OrdersTable";
 import "../css/OrderManagementPage.css";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
@@ -15,12 +15,12 @@ import Box from "@mui/material/Box";
 // { setOrders }
 // : React.FC<OrdersPageProps>
 const OrderManagementPage = () => {
-  const [openFilterDialog, setOpenFilterDialog] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const [filterStatus, setFilterStatus] = useState<string | null>(null);
-  const [filterCustomer] = useState<boolean>(false);
-  const [dateRangeStart, setDateRangeStart] = useState<string>("");
-  const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
+  // const [openFilterDialog, setOpenFilterDialog] = useState(false);
+  // const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  // const [filterStatus, setFilterStatus] = useState<string | null>(null);
+  // const [filterCustomer] = useState<boolean>(false);
+  // const [dateRangeStart, setDateRangeStart] = useState<string>("");
+  // const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
   const orders = useAppSelector((state) => state.orders.orders);
   const dispatch = useAppDispatch();
 
@@ -53,9 +53,9 @@ const OrderManagementPage = () => {
     }
   };
 
-  const handleOpenFilterDialog = () => {
-    setOpenFilterDialog(true);
-  };
+  // const handleOpenFilterDialog = () => {
+  //   setOpenFilterDialog(true);
+  // };
 
   // const handleCloseFilterDialog = () => {
   //   setOpenFilterDialog(false);
@@ -102,7 +102,7 @@ const OrderManagementPage = () => {
     <Box className="page-container" sx={{ margin: "70px" }}>
       <Button
         variant="outlined"
-        onClick={handleOpenFilterDialog}
+        // onClick={handleOpenFilterDialog}
         className="filter-button"
       >
         Filter
