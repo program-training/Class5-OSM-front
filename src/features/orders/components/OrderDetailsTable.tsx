@@ -106,8 +106,8 @@ const OrderDetailsTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredCartItems.map((product: Product) => (
-              <TableRow key={product.id}>
+            {filteredCartItems.map((product: Product, i: number) => (
+              <TableRow key={i}>
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.description}</TableCell>
                 <TableCell>{product.quantity}</TableCell>
