@@ -13,7 +13,7 @@ import SignUpButton from "./SignUpButton";
 import PasswordInput from "./PasswordInput";
 import EmailInput from "./EmailInput";
 import ConfirmPasswordInputIn from "./ConfirmPasswordInput";
-import { useState } from "react";
+// import { useState } from "react";
 
 export const SignUp = () => {
   const {
@@ -26,11 +26,11 @@ export const SignUp = () => {
     event.preventDefault();
   };
 
-  const [email, setEmail] = useState<string>();
+  // const [email, setEmail] = useState<string>();
 
-  const handleEmailChange = (email: string) => {
-    setEmail(email);
-  };
+  // const handleEmailChange = (email: string) => {
+  //   setEmail(email);
+  // };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -60,7 +60,7 @@ export const SignUp = () => {
               register={register}
               errors={errors}
               emailValidet={emailValidet}
-              onEmailChange={handleEmailChange}
+              // onEmailChange={handleEmailChange}
             />
             <PasswordInput
               register={register}

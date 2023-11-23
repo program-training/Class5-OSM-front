@@ -1,13 +1,13 @@
 import { FC } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Order from "../interfaces/getAllOrders";
+import Order from "../interfaces/order";
 
 export interface EditsOrderDetailsProps {
   order: Order;
 }
 
-const baseURL = "https://jsonplaceholder.typicode.com/posts";
+const baseURL = "http://localhost:3333/api/orders";
 
 const EditsOrderDetails: FC<Order> = (order) => {
   const navigate = useNavigate();

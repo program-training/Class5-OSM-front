@@ -1,6 +1,7 @@
+// SearchField.tsx
 import React from "react";
 import TextField from "@mui/material/TextField";
-import "../css/SearchField.css";
+import SearchIcon from "@mui/icons-material/Search";
 
 interface SearchFieldProps {
   searchTerm: string;
@@ -13,11 +14,17 @@ const SearchField: React.FC<SearchFieldProps> = ({
 }) => {
   return (
     <TextField
-      label="Search by product name or customer ID"
+      label="Search by Order ID or User ID"
+      sx={{
+        margin: "10px",
+      }}
       variant="outlined"
+      size="small"
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
-      className="search-field"
+      InputProps={{
+        startAdornment: <SearchIcon color="action" />,
+      }}
     />
   );
 };
