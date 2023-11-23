@@ -14,7 +14,6 @@ import {
   FormControlLabel,
   TextField,
 } from "@mui/material";
-import "../css/FilterDialog.css";
 import FilterDialogProps from "../interfaces/filter";
 
 const FilterDialog: React.FC<FilterDialogProps> = ({
