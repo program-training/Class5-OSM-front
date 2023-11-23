@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-=======
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -12,10 +10,12 @@ import {
   Button,
   Box,
 } from "@mui/material";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import SearchField from "./SearchField";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setPrice } from "../ordersSlice";
+import { ShoppingCartCheckoutOutlined } from "@mui/icons-material";
 
 interface OrdersTableProps {
   handleCancel: (orderId: string) => void;
@@ -31,6 +31,11 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
 
   const themeMode = useAppSelector((state) => state.themeMode.themeMode);
   const dispatch = useAppDispatch();
+  useEffect(() => {
+    orders.forEach((order) => {
+      dispatch(setPrice(order.price));
+    });
+  }, [dispatch, orders]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredOrders = orders
@@ -83,12 +88,11 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                     },
                   }}
                   key={order._id}
-                  onClick={() => {
-                    dispatch(setPrice(order.price));
+                  onClick={() =>
                     navigate("/orderDetails", {
                       state: { cartItems: order.cartItems, userId: order._id },
-                    });
-                  }}
+                    })
+                  }
                 >
                   <TableCell>{order.orderTime?.toString()}</TableCell>
                   <TableCell>{order?._id}</TableCell>
@@ -115,7 +119,10 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                           handleCancel(order._id);
                         }}
                       >
-                        Cancel
+                        cancel
+                        <DeleteForeverOutlinedIcon
+                          sx={{ marginLeft: "12px" }}
+                        />
                       </Button>
                     )}
                     {order.shippingDetails?.orderType === "pickup" &&
@@ -136,6 +143,9 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                           }}
                         >
                           Receive
+                          <ShoppingCartCheckoutOutlined
+                            sx={{ marginLeft: "8px" }}
+                          />
                         </Button>
                       )}
                   </TableCell>
@@ -149,4 +159,3 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
 };
 
 export default OrdersTable;
->>>>>>> a209117e475402588dcc01afd40cff85183a3875
