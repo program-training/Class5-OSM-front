@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -31,11 +31,6 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
 
   const themeMode = useAppSelector((state) => state.themeMode.themeMode);
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    orders.forEach((order) => {
-      dispatch(setPrice(order.price));
-    });
-  }, [dispatch, orders]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredOrders = orders
@@ -113,11 +108,12 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                       : "#262729",
                   }}
                   key={order._id}
-                  onClick={() =>
+                  onClick={() => {
+                    dispatch(setPrice(order.price));
                     navigate("/orderDetails", {
                       state: { cartItems: order.cartItems, userId: order._id },
-                    })
-                  }
+                    });
+                  }}
                 >
                   <TableCell>{order.orderTime?.toString()}</TableCell>
                   <TableCell>{order?._id}</TableCell>
