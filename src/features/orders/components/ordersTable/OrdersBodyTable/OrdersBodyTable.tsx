@@ -1,19 +1,14 @@
 import React from "react";
-import { TableCell, TableRow, Button, TableBody } from "@mui/material";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import EditIcon from "@mui/icons-material/Edit";
+import { TableCell, TableRow, TableBody } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
 import { setPrice } from "../../../ordersSlice";
-import { ShoppingCartCheckoutOutlined } from "@mui/icons-material";
 import OrdersTableProps from "../../../interfaces/ordersTableProps";
+import OrdersButtonTable from "./OrdersButtonTable";
+import OrdersCancelReceive from "./OrdersCancelReceive";
 
-const OrdersBodyTable: React.FC<OrdersTableProps> = ({
-  handleCancel,
-  handleReceive,
-  currentOrders,
-}) => {
+const OrdersBodyTable: React.FC<OrdersTableProps> = ({ currentOrders }) => {
   const navigate = useNavigate();
   const themeMode = useAppSelector((state) => state.themeMode.themeMode);
   const dispatch = useAppDispatch();
@@ -81,59 +76,10 @@ const OrdersBodyTable: React.FC<OrdersTableProps> = ({
               {order.status}
             </TableCell>
             <TableCell sx={{ textAlign: "center" }}>
-              {order.status === "pending" && (
-                <Button
-                  variant="outlined"
-                  sx={{
-                    margin: "2px",
-                    ":hover": {
-                      backgroundColor: "#FF2E2E",
-                      color: "aliceblue",
-                    },
-                  }}
-                  color="secondary"
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    handleCancel(order._id);
-                  }}
-                >
-                  cancel
-                  <DeleteForeverOutlinedIcon sx={{ marginLeft: "12px" }} />
-                </Button>
-              )}
-              {order.shippingDetails?.orderType === "pickup" &&
-                order.status === "pending" && (
-                  <Button
-                    sx={{
-                      margin: "5px",
-                      ":hover": {
-                        backgroundColor: "#66FF7F",
-                        color: "aliceblue",
-                      },
-                    }}
-                    variant="outlined"
-                    color="primary"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      handleReceive(order._id);
-                    }}
-                  >
-                    Receive
-                    <ShoppingCartCheckoutOutlined sx={{ marginLeft: "8px" }} />
-                  </Button>
-                )}
+              <OrdersCancelReceive order={order} />
             </TableCell>
             <TableCell sx={{ margin: 2, padding: 0, textAlign: "center" }}>
-              {order.status === "pending" && (
-                <Button
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    navigate("/EditOrderPage");
-                  }}
-                >
-                  <EditIcon />
-                </Button>
-              )}
+              <OrdersButtonTable order={order} />
             </TableCell>
           </TableRow>
         ))}

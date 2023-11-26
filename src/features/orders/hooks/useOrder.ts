@@ -1,16 +1,9 @@
 import Order from "../interfaces/order";
-import { cancelOrder, receivedOrder, updateOrderStatus } from "../ordersSlice";
+import { updateOrderStatus } from "../ordersSlice";
 import { useAppDispatch } from "../../../store/hooks";
 
 const useOrder = (orders: Order[]) => {
   const dispatch = useAppDispatch();
-
-  const handleCancel = (orderId: string) => {
-    dispatch(cancelOrder(orderId));
-  };
-  const handleReceive = (orderId: string) => {
-    dispatch(receivedOrder(orderId));
-  };
 
   const changeStatus = () => {
     const pendingOrders = orders.filter((order) => order.status === "pending");
@@ -26,6 +19,6 @@ const useOrder = (orders: Order[]) => {
     });
   };
 
-  return { changeStatus, handleCancel, handleReceive };
+  return { changeStatus };
 };
 export default useOrder;

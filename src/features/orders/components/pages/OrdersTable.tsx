@@ -10,7 +10,7 @@ import {
 import SearchField from "../ordersTable/SearchField";
 import { useAppSelector } from "../../../../store/hooks";
 import OrdersTableHead from "../ordersTable/OrdersTableHead";
-import OrdersBodyTable from "../ordersTable/OrdersBodyTable/OrdersBodyTable";
+import OrdersBodyTable from "../ordersTable/ordersBodyTable/OrdersBodyTable";
 import useOrder from "../../hooks/useOrder";
 import { filteredOrdersUtils } from "../../utils/orderUtils";
 
@@ -19,7 +19,7 @@ const OrdersTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const { changeStatus, handleCancel, handleReceive } = useOrder(orders);
+  const { changeStatus } = useOrder(orders);
   const { handleChangePage, handleChangeRowsPerPage, data } =
     filteredOrdersUtils(
       orders,
@@ -42,11 +42,7 @@ const OrdersTable = () => {
         <TableContainer component={Paper}>
           <Table>
             <OrdersTableHead />
-            <OrdersBodyTable
-              currentOrders={data}
-              handleCancel={handleCancel}
-              handleReceive={handleReceive}
-            />
+            <OrdersBodyTable currentOrders={data} />
           </Table>
         </TableContainer>
         <TablePagination
