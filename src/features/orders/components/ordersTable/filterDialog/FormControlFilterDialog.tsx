@@ -20,7 +20,7 @@ const FormControlFilterDialog: FC<FormControlFilterDialogProps> = ({
           onChange={(e) => setFilterStatus(e.target.value as string | null)}
           label="Status"
         >
-          <MenuItem value="all">All</MenuItem>
+          <MenuItem value="">All</MenuItem>
           <MenuItem value="pending">Pending</MenuItem>
           <MenuItem value="canceled">Canceled</MenuItem>
           <MenuItem value="sent">Sent</MenuItem>
