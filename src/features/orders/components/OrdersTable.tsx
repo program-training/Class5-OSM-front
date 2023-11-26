@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setPrice } from "../ordersSlice";
 import { ShoppingCartCheckoutOutlined } from "@mui/icons-material";
+// import ProductCarousel from "./ProductCarousel";
 
 interface OrdersTableProps {
   handleCancel: (orderId: string) => void;
@@ -28,10 +29,11 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
 }) => {
   const navigate = useNavigate();
   const orders = useAppSelector((state) => state.orders.orders);
-
   const themeMode = useAppSelector((state) => state.themeMode.themeMode);
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const ordersPerPage = 10;
 
   const filteredOrders = orders
     ? orders.filter((order) => {
@@ -45,21 +47,44 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
       })
     : [];
 
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = filteredOrders.slice(
+    indexOfFirstOrder,
+    indexOfLastOrder
+  );
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(filteredOrders.length / ordersPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+  const renderPageNumbers = pageNumbers.map((number) => (
+    <li
+      key={number}
+      onClick={() => setCurrentPage(number)}
+      style={{
+        display: "inline",
+        padding: "10px",
+        cursor: "pointer",
+        backgroundColor: currentPage === number ? "lightblue" : "inherit",
+      }}
+    >
+      {number}
+    </li>
+  ));
+
   if (orders && !orders.length) return <p>No orders found!</p>;
 
   if (orders && orders.length)
+    // ... המשך קוד הטבלה כפי שהוא כרגע
+
     return (
       <Box>
         <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <TableContainer component={Paper}>
           <Table>
-            <TableHead
-              sx={{
-                "&:hover": {
-                  transform: "scale(1.004)",
-                },
-              }}
-            >
+            <TableHead>
               <TableRow sx={{ backgroundColor: "#6daab5", fontSize: "500px" }}>
                 <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
                   Order Time
@@ -91,7 +116,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredOrders.map((order, i) => (
+              {currentOrders.map((order, i) => (
                 <TableRow
                   sx={{
                     cursor: "pointer",
@@ -191,6 +216,8 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
             </TableBody>
           </Table>
         </TableContainer>
+
+        <ul style={{ listStyle: "none" }}>{renderPageNumbers}</ul>
       </Box>
     );
 };

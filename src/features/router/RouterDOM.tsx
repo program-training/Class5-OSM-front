@@ -5,6 +5,7 @@ import HomePage from "../pages/HomePage";
 import NotFoundPage from "../layout/NotFoundPage/NotFoundPage";
 import OrderManagementPage from "../orders/pages/OrderManagementPage";
 import OrderDetailsPage from "../orders/pages/OrderDetailsPage";
+// import ProductCarousel from "../orders/components/ProductCarousel";
 const RouterDom = () => {
   return (
     <Routes>
@@ -14,6 +15,7 @@ const RouterDom = () => {
       <Route path="/signUp" element={<SignUpPage />} />
       <Route path="*" element={<NotFoundPage />} />
       <Route path="/orderDetails" element={<OrderDetailsPage />} />
+      {/* <Route path="/ProductCarousel" element={<ProductCarousel />} /> */}
       <Route path="orders" element={<OrderManagementPage />} />
     </Routes>
   );

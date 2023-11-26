@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, IconButton } from "@mui/material";
 import FilterDialog from "./FilterDialog";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setOrders } from "../ordersSlice";
 import TuneIcon from "@mui/icons-material/Tune";
 
@@ -17,9 +17,10 @@ const SearchField: FC<SearchFieldProps> = ({ searchTerm, setSearchTerm }) => {
   const [openFilterDialog, setOpenFilterDialog] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [filterStatus, setFilterStatus] = useState<string | null>(null);
-  const [filterCustomer] = useState<boolean>(false);
+  // const [filterCustomer] = useState<boolean>(false);
   const [dateRangeStart, setDateRangeStart] = useState<string>("");
   const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
+  const dispatch = useAppDispatch();
 
   const handleOpenFilterDialog = () => {
     setOpenFilterDialog(true);
@@ -32,9 +33,6 @@ const SearchField: FC<SearchFieldProps> = ({ searchTerm, setSearchTerm }) => {
     if (orders) {
       const filteredOrders = orders.filter((order) => {
         if (filterStatus && order.status !== filterStatus) {
-          return false;
-        }
-        if (filterCustomer && !order.shippingDetails?.userId) {
           return false;
         }
         if (
@@ -54,7 +52,7 @@ const SearchField: FC<SearchFieldProps> = ({ searchTerm, setSearchTerm }) => {
         return true;
       });
 
-      setOrders(filteredOrders);
+      dispatch(setOrders(filteredOrders));
       handleCloseFilterDialog();
     }
   };
