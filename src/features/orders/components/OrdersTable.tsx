@@ -27,7 +27,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
   handleReceive,
 }) => {
   const navigate = useNavigate();
-  const orders = useAppSelector((state) => state.orders.orders);
+  const orders = useAppSelector((state) => state.orders.filteredOrders);
   const themeMode = useAppSelector((state) => state.themeMode.themeMode);
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState("");

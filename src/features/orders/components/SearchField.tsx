@@ -4,7 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Box, IconButton } from "@mui/material";
 import FilterDialog from "./FilterDialog";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { setOrders } from "../ordersSlice";
+import { setFilteredOrders } from "../ordersSlice";
 import TuneIcon from "@mui/icons-material/Tune";
 
 interface SearchFieldProps {
@@ -52,7 +52,7 @@ const SearchField: FC<SearchFieldProps> = ({ searchTerm, setSearchTerm }) => {
         return true;
       });
 
-      dispatch(setOrders(filteredOrders));
+      dispatch(setFilteredOrders(filteredOrders));
       handleCloseFilterDialog();
     }
   };

@@ -6,11 +6,13 @@ import Order from "./interfaces/order";
 
 interface InitialState {
   orders: Order[];
+  filteredOrders: Order[];
   price: number;
 }
 
 const initialState: InitialState = {
   orders: [],
+  filteredOrders: [],
   price: 0,
 };
 
