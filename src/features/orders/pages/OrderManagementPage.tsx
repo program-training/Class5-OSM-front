@@ -2,8 +2,8 @@ import OrdersTable from "../components/OrdersTable";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 // import Order from "../interfaces/order";
 import { cancelOrder, receivedOrder } from "../ordersSlice";
-import Box from "@mui/material/Box";
-import { CssBaseline } from "@mui/material";
+// import Box from "@mui/material/Box";
+import { Container, CssBaseline } from "@mui/material";
 
 const OrderManagementPage = () => {
   const dispatch = useAppDispatch();
@@ -17,19 +17,20 @@ const OrderManagementPage = () => {
   };
 
   return (
-    <Box
+    <Container
       className="page-container"
       sx={{
-        margin: "70px",
+        marginTop: "80px",
         backgroundColor: themeMode ? "white" : "black",
-        padding: "20px",
+        // padding: "20px",
         borderRadius: 8,
         boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+        textAlign: "center",
       }}
     >
       <CssBaseline />
       <OrdersTable handleCancel={handleCancel} handleReceive={handleReceive} />
-    </Box>
+    </Container>
   );
 };
 
