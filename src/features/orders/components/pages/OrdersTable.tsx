@@ -1,96 +1,39 @@
 import { useState, useEffect } from "react";
 import {
   Table,
-  TableBody,
   TableContainer,
-  TableHead,
   Paper,
   Container,
   Box,
   TablePagination,
 } from "@mui/material";
 import SearchField from "../ordersTable/SearchField";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import {
-  cancelOrder,
-  receivedOrder,
-  updateOrderStatus,
-} from "../../ordersSlice";
+import { useAppSelector } from "../../../../store/hooks";
 import OrdersTableHead from "../ordersTable/OrdersTableHead";
-import OrdersBodyTable from "../ordersTable/OrdersBodyTable";
-import * as React from "react";
-import Typography from "@mui/material/Typography";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
+import OrdersBodyTable from "../ordersTable/OrdersBodyTable/OrdersBodyTable";
+import useOrder from "../../hooks/useOrder";
+import { filteredOrdersUtils } from "../../utils/orderUtils";
 
 const OrdersTable = () => {
-  const handleCancel = (orderId: string) => {
-    dispatch(cancelOrder(orderId));
-  };
-  const handleReceive = (orderId: string) => {
-    dispatch(receivedOrder(orderId));
-  };
   const orders = useAppSelector((state) => state.orders.filteredOrders);
-  const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState("");
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const { changeStatus, handleCancel, handleReceive } = useOrder(orders);
+  const { handleChangePage, handleChangeRowsPerPage, data } =
+    filteredOrdersUtils(
+      orders,
+      searchTerm,
+      page,
+      setPage,
+      rowsPerPage,
+      setRowsPerPage
+    );
 
   useEffect(() => {
-    const timeoutCallback = () => {
-      const pendingOrders = orders.filter(
-        (order) => order.status === "pending"
-      );
-      pendingOrders.forEach((order) => {
-        dispatch(updateOrderStatus({ orderId: order._id, newStatus: "sent" }));
-      });
-
-      const sentOrders = orders.filter((order) => order.status === "sent");
-      sentOrders.forEach((order) => {
-        dispatch(
-          updateOrderStatus({ orderId: order._id, newStatus: "received" })
-        );
-      });
-    };
-
-    const timeoutId = setTimeout(timeoutCallback, 10000);
-
+    const timeoutId = setTimeout(changeStatus, 10000);
     return () => clearTimeout(timeoutId);
   }, [orders]);
-
-  const filteredOrders = orders
-    ? orders.filter((order) => {
-        const searchValue = searchTerm.toLowerCase();
-        return (
-          String(order._id).toLowerCase().includes(searchValue) ||
-          String(order.shippingDetails?.userId)
-            .toLowerCase()
-            .includes(searchValue)
-        );
-      })
-    : [];
-
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const data =
-    rowsPerPage > 0
-      ? filteredOrders.slice(
-          page * rowsPerPage,
-          page * rowsPerPage + rowsPerPage
-        )
-      : filteredOrders;
 
   return (
     <Container>
@@ -98,16 +41,12 @@ const OrdersTable = () => {
         <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <TableContainer component={Paper}>
           <Table>
-            <TableHead>
-              <OrdersTableHead />
-            </TableHead>
-            <TableBody>
-              <OrdersBodyTable
-                currentOrders={data}
-                handleCancel={handleCancel}
-                handleReceive={handleReceive}
-              />
-            </TableBody>
+            <OrdersTableHead />
+            <OrdersBodyTable
+              currentOrders={data}
+              handleCancel={handleCancel}
+              handleReceive={handleReceive}
+            />
           </Table>
         </TableContainer>
         <TablePagination
