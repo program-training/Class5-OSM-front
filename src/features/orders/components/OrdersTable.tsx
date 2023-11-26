@@ -36,7 +36,6 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
 
   useEffect(() => {
     const timeoutCallback = () => {
-      // עדכון הסטטוס
       const pendingOrders = orders.filter(
         (order) => order.status === "pending"
       );
@@ -44,7 +43,6 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
         dispatch(updateOrderStatus({ orderId: order._id, newStatus: "sent" }));
       });
 
-      // עדכון הסטטוס
       const sentOrders = orders.filter((order) => order.status === "sent");
       sentOrders.forEach((order) => {
         dispatch(
