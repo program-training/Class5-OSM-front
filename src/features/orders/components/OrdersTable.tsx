@@ -8,9 +8,11 @@ import {
   TableRow,
   Paper,
   Button,
+  Container,
   Box,
 } from "@mui/material";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import EditIcon from "@mui/icons-material/Edit";
 import SearchField from "./SearchField";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
@@ -81,7 +83,8 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
   }
 
   const renderPageNumbers = pageNumbers.map((number) => (
-    <li
+    <Box
+      component={"li"}
       key={number}
       onClick={() => setCurrentPage(number)}
       style={{
@@ -92,148 +95,13 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
       }}
     >
       {number}
-    </li>
+    </Box>
   ));
 
   if (orders && !orders.length) return <p>No orders found!</p>;
 
   if (orders && orders.length)
     return (
-      <Box>
-        <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow sx={{ backgroundColor: "#6daab5", fontSize: "500px" }}>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Order Time
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Order ID
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  User ID
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Address
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Contact Number
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Order Type
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Price
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Status
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Action
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {currentOrders.map((order, i) => (
-                <TableRow
-                  sx={{
-                    cursor: "pointer",
-                    "&:hover": {
-                      transition: "0.3s",
-                      backgroundColor: themeMode ? "#61b0fa" : "#4f4f4f",
-                    },
-                    backgroundColor: themeMode
-                      ? i % 2 === 0
-                        ? "#f5f5f5"
-                        : "#e6e6ff"
-                      : i % 2 === 0
-                      ? "#3a3a3b"
-                      : "#262729",
-                  }}
-                  key={order._id}
-                  onClick={() => {
-                    dispatch(setPrice(order.price));
-                    navigate("/orderDetails", {
-                      state: { cartItems: order.cartItems, userId: order._id },
-                    });
-                  }}
-                >
-                  <TableCell>{order.orderTime?.toString()}</TableCell>
-                  <TableCell>{order._id}</TableCell>
-                  <TableCell>{order.shippingDetails?.userId}</TableCell>
-                  <TableCell>{order.shippingDetails?.address}</TableCell>
-                  <TableCell>{order.shippingDetails?.contactNumber}</TableCell>
-                  <TableCell>{order.shippingDetails?.orderType}</TableCell>
-                  <TableCell>{order.price}</TableCell>
-                  <TableCell
-                    sx={{
-                      color:
-                        order.status === "pending"
-                          ? "orange"
-                          : order.status === "sent"
-                          ? "#2688eb"
-                          : order.status === "canceled"
-                          ? "red"
-                          : order.status === "received"
-                          ? "#5af542"
-                          : "inherit",
-                    }}
-                  >
-                    {order.status}
-                  </TableCell>
-                  <TableCell>
-                    {order.status === "pending" && (
-                      <Button
-                        variant="outlined"
-                        sx={{
-                          margin: "5px",
-                          ":hover": {
-                            backgroundColor: "#ff2e2e",
-                            color: "aliceblue",
-                          },
-                        }}
-                        color="secondary"
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          handleCancel(order._id);
-                        }}
-                      >
-                        cancel
-                        <DeleteForeverOutlinedIcon
-                          sx={{ marginLeft: "13px" }}
-                        />
-                      </Button>
-                    )}
-                    {order.shippingDetails?.orderType === "pickup" &&
-                      order.status === "pending" && (
-                        <Button
-                          sx={{
-                            margin: "5px",
-                            ":hover": {
-                              backgroundColor: "#66ff7f",
-                              color: "aliceblue",
-                            },
-                          }}
-                          variant="outlined"
-                          color="primary"
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            handleReceive(order._id);
-                          }}
-                        >
-                          Receive
-                          <ShoppingCartCheckoutOutlined
-                            sx={{ marginLeft: "8px" }}
-                          />
-                        </Button>
-                      )}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
       <Container>
         <Box sx={{ textAlign: "center" }}>
           <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
@@ -242,7 +110,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
               <TableHead>
                 <TableRow
                   sx={{
-                    backgroundColor: "#6daab5",
+                    backgroundColor: "#6DAAB5",
                     fontSize: "500px",
                     textAlign: "center",
                   }}
@@ -283,14 +151,14 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                       cursor: "pointer",
                       "&:hover": {
                         transition: "0.3s",
-                        backgroundColor: themeMode ? "#61b0fa" : "#4f4f4f",
+                        backgroundColor: themeMode ? "#61B0FA" : "#4F4F4F",
                       },
                       backgroundColor: themeMode
                         ? i % 2 === 0
-                          ? "#f5f5f5"
-                          : "#e6e6ff"
+                          ? "#F5F5F5"
+                          : "#E6E6FF"
                         : i % 2 === 0
-                        ? "#3a3a3b"
+                        ? "#3A3A3B"
                         : "#262729",
                     }}
                     key={order._id}
@@ -329,17 +197,16 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                           order.status === "pending"
                             ? "orange"
                             : order.status === "sent"
-                            ? "#2688eb"
+                            ? "#2688EB"
                             : order.status === "canceled"
                             ? "red"
                             : order.status === "received"
-                            ? "#5af542"
+                            ? "#5AF542"
                             : "inherit",
                       }}
                     >
                       {order.status}
                     </TableCell>
-
                     <TableCell sx={{ textAlign: "center" }}>
                       {order.status === "pending" && (
                         <Button
@@ -347,7 +214,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                           sx={{
                             margin: "2px",
                             ":hover": {
-                              backgroundColor: "#ff2e2e",
+                              backgroundColor: "#FF2E2E",
                               color: "aliceblue",
                             },
                           }}
@@ -369,7 +236,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                             sx={{
                               margin: "5px",
                               ":hover": {
-                                backgroundColor: "#66ff7f",
+                                backgroundColor: "#66FF7F",
                                 color: "aliceblue",
                               },
                             }}
@@ -399,9 +266,11 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
               </TableBody>
             </Table>
           </TableContainer>
-
-        <ul style={{ listStyle: "none" }}>{renderPageNumbers}</ul>
-      </Box>
+          <Box component={"ul"} sx={{ listStyle: "none", padding: 2 }}>
+            {renderPageNumbers}
+          </Box>
+        </Box>
+      </Container>
     );
 };
 
