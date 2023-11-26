@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -14,9 +14,8 @@ import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined
 import SearchField from "./SearchField";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { setPrice } from "../ordersSlice";
+import { setPrice, updateOrderStatus } from "../ordersSlice";
 import { ShoppingCartCheckoutOutlined } from "@mui/icons-material";
-// import ProductCarousel from "./ProductCarousel";
 
 interface OrdersTableProps {
   handleCancel: (orderId: string) => void;
@@ -34,6 +33,30 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 10;
+
+  useEffect(() => {
+    const timeoutCallback = () => {
+      // עדכון הסטטוס
+      const pendingOrders = orders.filter(
+        (order) => order.status === "pending"
+      );
+      pendingOrders.forEach((order) => {
+        dispatch(updateOrderStatus({ orderId: order._id, newStatus: "sent" }));
+      });
+
+      // עדכון הסטטוס
+      const sentOrders = orders.filter((order) => order.status === "sent");
+      sentOrders.forEach((order) => {
+        dispatch(
+          updateOrderStatus({ orderId: order._id, newStatus: "received" })
+        );
+      });
+    };
+
+    const timeoutId = setTimeout(timeoutCallback, 10000);
+
+    return () => clearTimeout(timeoutId);
+  }, [orders]);
 
   const filteredOrders = orders
     ? orders.filter((order) => {
@@ -77,8 +100,6 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
   if (orders && !orders.length) return <p>No orders found!</p>;
 
   if (orders && orders.length)
-    // ... המשך קוד הטבלה כפי שהוא כרגע
-
     return (
       <Box>
         <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
@@ -141,7 +162,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                   }}
                 >
                   <TableCell>{order.orderTime?.toString()}</TableCell>
-                  <TableCell>{order?._id}</TableCell>
+                  <TableCell>{order._id}</TableCell>
                   <TableCell>{order.shippingDetails?.userId}</TableCell>
                   <TableCell>{order.shippingDetails?.address}</TableCell>
                   <TableCell>{order.shippingDetails?.contactNumber}</TableCell>
@@ -163,7 +184,6 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                   >
                     {order.status}
                   </TableCell>
-
                   <TableCell>
                     {order.status === "pending" && (
                       <Button
