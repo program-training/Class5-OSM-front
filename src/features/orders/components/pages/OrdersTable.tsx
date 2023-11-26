@@ -17,6 +17,7 @@ import {
 } from "../../ordersSlice";
 import OrdersTableHead from "../ordersTable/OrdersTableHead";
 import OrdersBodyTable from "../ordersTable/OrdersBodyTable";
+import TablePaginationDemo from "../../helpers/a";
 
 const OrdersTable = () => {
   const handleCancel = (orderId: string) => {
@@ -111,6 +112,7 @@ const OrdersTable = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        {/* <TablePaginationDemo /> */}
         <Box component={"ul"} sx={{ listStyle: "none", padding: 2 }}>
           {renderPageNumbers}
         </Box>
