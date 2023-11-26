@@ -26,6 +26,7 @@ const OrderDetailsTable = () => {
   const { state } = useLocation();
   const cartItems = state.cartItems;
   const userId = state.userId;
+
   const customerNumber = userId;
   const [searchTerm, setSearchTerm] = useState("");
 
