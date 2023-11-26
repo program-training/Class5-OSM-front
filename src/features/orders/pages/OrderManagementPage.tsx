@@ -1,18 +1,10 @@
 import OrdersTable from "../components/pages/OrdersTable";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { cancelOrder, receivedOrder } from "../ordersSlice";
+import { useAppSelector } from "../../../store/hooks";
+// import { cancelOrder, receivedOrder } from "../ordersSlice";
 import { Container } from "@mui/material";
 
 const OrderManagementPage = () => {
-  const dispatch = useAppDispatch();
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
-
-  const handleCancel = (orderId: string) => {
-    dispatch(cancelOrder(orderId));
-  };
-  const handleReceive = (orderId: string) => {
-    dispatch(receivedOrder(orderId));
-  };
 
   return (
     <Container
@@ -25,7 +17,7 @@ const OrderManagementPage = () => {
         textAlign: "center",
       }}
     >
-      <OrdersTable handleCancel={handleCancel} handleReceive={handleReceive} />
+      <OrdersTable />
     </Container>
   );
 };

@@ -17,7 +17,6 @@ const SearchField: FC<SearchFieldProps> = ({ searchTerm, setSearchTerm }) => {
   const [openFilterDialog, setOpenFilterDialog] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [filterStatus, setFilterStatus] = useState<string | null>(null);
-  // const [filterCustomer] = useState<boolean>(false);
   const [dateRangeStart, setDateRangeStart] = useState<string>("");
   const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
   const dispatch = useAppDispatch();
