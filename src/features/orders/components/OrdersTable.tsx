@@ -28,7 +28,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
   handleReceive,
 }) => {
   const navigate = useNavigate();
-  const orders = useAppSelector((state) => state.orders.orders);
+  const orders = useAppSelector((state) => state.orders.filteredOrders);
   const themeMode = useAppSelector((state) => state.themeMode.themeMode);
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState("");
@@ -74,49 +74,47 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
     </li>
   ));
 
-  if (orders && !orders.length) return <p>No orders found!</p>;
+  // ... המשך קוד הטבלה כפי שהוא כרגע
 
-  if (orders && orders.length)
-    // ... המשך קוד הטבלה כפי שהוא כרגע
-
-    return (
-      <Box>
-        <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow sx={{ backgroundColor: "#6daab5", fontSize: "500px" }}>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Order Time
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Order ID
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  User ID
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Address
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Contact Number
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Order Type
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Price
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Status
-                </TableCell>
-                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
-                  Action
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {currentOrders.map((order, i) => (
+  return (
+    <Box>
+      <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow sx={{ backgroundColor: "#6daab5", fontSize: "500px" }}>
+              <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                Order Time
+              </TableCell>
+              <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                Order ID
+              </TableCell>
+              <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                User ID
+              </TableCell>
+              <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                Address
+              </TableCell>
+              <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                Contact Number
+              </TableCell>
+              <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                Order Type
+              </TableCell>
+              <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                Price
+              </TableCell>
+              <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                Status
+              </TableCell>
+              <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                Action
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {currentOrders &&
+              currentOrders.map((order, i) => (
                 <TableRow
                   sx={{
                     cursor: "pointer",
@@ -213,13 +211,13 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                   </TableCell>
                 </TableRow>
               ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-        <ul style={{ listStyle: "none" }}>{renderPageNumbers}</ul>
-      </Box>
-    );
+      <ul style={{ listStyle: "none" }}>{renderPageNumbers}</ul>
+    </Box>
+  );
 };
 
 export default OrdersTable;

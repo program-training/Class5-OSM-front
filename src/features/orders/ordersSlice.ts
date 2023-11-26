@@ -4,14 +4,14 @@ import Order from "./interfaces/order";
 
 interface InitialState {
   orders: Order[];
+  filteredOrders: Order[];
   price: number;
-
 }
 
 const initialState: InitialState = {
   orders: [],
+  filteredOrders: [],
   price: 0,
- 
 };
 
 export const ordersSlice = createSlice({
@@ -35,9 +35,17 @@ export const ordersSlice = createSlice({
       if (order) order.status = "received";
       state.orders = [...state.orders];
     },
+    setFilteredOrders: (state, action: PayloadAction<Order[]>) => {
+      state.filteredOrders = action.payload;
+    },
   },
 });
 
-export const { setOrders, cancelOrder, receivedOrder, setPrice } =
-  ordersSlice.actions;
+export const {
+  setOrders,
+  cancelOrder,
+  receivedOrder,
+  setPrice,
+  setFilteredOrders,
+} = ordersSlice.actions;
 export default ordersSlice.reducer;
