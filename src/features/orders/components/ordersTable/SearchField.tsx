@@ -2,7 +2,7 @@ import { Dispatch, useState, FC } from "react";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, IconButton } from "@mui/material";
-import FilterDialog from "./FilterDialog";
+import FilterDialog from "./filterDialog/FilterDialog";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { setFilteredOrders } from "../../ordersSlice";
 import TuneIcon from "@mui/icons-material/Tune";
