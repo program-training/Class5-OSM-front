@@ -98,54 +98,52 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
     </Box>
   ));
 
-  if (orders && !orders.length) return <p>No orders found!</p>;
-
-  if (orders && orders.length)
-    return (
-      <Container>
-        <Box sx={{ textAlign: "center" }}>
-          <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow
-                  sx={{
-                    backgroundColor: "#6DAAB5",
-                    fontSize: "500px",
-                    textAlign: "center",
-                  }}
-                >
-                  <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                    Order Time
-                  </TableCell>
-                  <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                    User ID
-                  </TableCell>
-                  <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                    Address
-                  </TableCell>
-                  <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                    Contact Number
-                  </TableCell>
-                  <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                    Order Type
-                  </TableCell>
-                  <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                    Price
-                  </TableCell>
-                  <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                    Status
-                  </TableCell>
-                  <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                    Action
-                  </TableCell>
-                  <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                    Edit order
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {currentOrders.map((order, i) => (
+  return (
+    <Container>
+      <Box sx={{ textAlign: "center" }}>
+        <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow
+                sx={{
+                  backgroundColor: "#6DAAB5",
+                  fontSize: "500px",
+                  textAlign: "center",
+                }}
+              >
+                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
+                  Order Time
+                </TableCell>
+                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
+                  User ID
+                </TableCell>
+                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
+                  Address
+                </TableCell>
+                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
+                  Contact Number
+                </TableCell>
+                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
+                  Order Type
+                </TableCell>
+                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
+                  Price
+                </TableCell>
+                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
+                  Status
+                </TableCell>
+                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
+                  Action
+                </TableCell>
+                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
+                  Edit order
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {currentOrders &&
+                currentOrders.map((order, i) => (
                   <TableRow
                     sx={{
                       cursor: "pointer",
@@ -263,15 +261,15 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                     </TableCell>
                   </TableRow>
                 ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <Box component={"ul"} sx={{ listStyle: "none", padding: 2 }}>
-            {renderPageNumbers}
-          </Box>
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Box component={"ul"} sx={{ listStyle: "none", padding: 2 }}>
+          {renderPageNumbers}
         </Box>
-      </Container>
-    );
+      </Box>
+    </Container>
+  );
 };
 
 export default OrdersTable;
