@@ -10,7 +10,7 @@ const GetAllOrders = () => {
 
   useEffect(() => {
     axios
-      .get("https://project-team1-oms-back.onrender.com/api/orders")
+      .get("http://localhost:3000/api/orders")
       .then((res) => {
         dispatch(setOrders(res.data));
         console.log("Success");
@@ -24,3 +24,4 @@ const GetAllOrders = () => {
 };
 
 export default GetAllOrders;
+// https://project-team1-oms-back.onrender.com/api/orders

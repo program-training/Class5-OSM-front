@@ -1,4 +1,3 @@
-// OrdersTable.tsx
 import React, { useState } from "react";
 import {
   Table,
@@ -11,12 +10,13 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import SearchField from "./SearchField"; // Adjust the path based on your project structure
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import SearchField from "./SearchField";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../../store/hooks";
-// import GetAllOrders from "../utils/GetAllOrders";
-// import GetAllOrders from "../utils/GetAllOrders";
-// import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { setPrice } from "../ordersSlice";
+import { ShoppingCartCheckoutOutlined } from "@mui/icons-material";
+// import ProductCarousel from "./ProductCarousel";
 
 interface OrdersTableProps {
   handleCancel: (orderId: string) => void;
@@ -30,8 +30,10 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
   const navigate = useNavigate();
   const orders = useAppSelector((state) => state.orders.orders);
   const themeMode = useAppSelector((state) => state.themeMode.themeMode);
-
+  const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const ordersPerPage = 10;
 
   const filteredOrders = orders
     ? orders.filter((order) => {
@@ -45,51 +47,98 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
       })
     : [];
 
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = filteredOrders.slice(
+    indexOfFirstOrder,
+    indexOfLastOrder
+  );
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(filteredOrders.length / ordersPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+  const renderPageNumbers = pageNumbers.map((number) => (
+    <li
+      key={number}
+      onClick={() => setCurrentPage(number)}
+      style={{
+        display: "inline",
+        padding: "10px",
+        cursor: "pointer",
+        backgroundColor: currentPage === number ? "lightblue" : "inherit",
+      }}
+    >
+      {number}
+    </li>
+  ));
+
   if (orders && !orders.length) return <p>No orders found!</p>;
 
   if (orders && orders.length)
+    // ... המשך קוד הטבלה כפי שהוא כרגע
+
     return (
       <Box>
-        {/* Search Bar */}
         <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        {/* Orders Table */}
         <TableContainer component={Paper}>
           <Table>
-            <TableHead
-              sx={{
-                "&:hover": {
-                  transform: "scale(1.004)",
-                },
-              }}
-            >
-              <TableRow style={{ backgroundColor: "#16bdc9" }}>
-                <TableCell>Order Time</TableCell>
-                <TableCell>Order ID</TableCell>
-                <TableCell>User ID</TableCell>
-                <TableCell>Address</TableCell>
-                <TableCell>Contact Number</TableCell>
-                <TableCell>Order Type</TableCell>
-                <TableCell>Price</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Action</TableCell>
+            <TableHead>
+              <TableRow sx={{ backgroundColor: "#6daab5", fontSize: "500px" }}>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Order Time
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Order ID
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  User ID
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Address
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Contact Number
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Order Type
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Price
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Status
+                </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Action
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredOrders.map((order) => (
+              {currentOrders.map((order, i) => (
                 <TableRow
                   sx={{
-                    transition: "background-color 0.3s",
                     cursor: "pointer",
                     "&:hover": {
-                      backgroundColor: themeMode ? "#61b0fa" : "gray",
+                      transition: "0.3s",
+                      backgroundColor: themeMode ? "#61b0fa" : "#4f4f4f",
                     },
+                    backgroundColor: themeMode
+                      ? i % 2 === 0
+                        ? "#f5f5f5"
+                        : "#e6e6ff"
+                      : i % 2 === 0
+                      ? "#3a3a3b"
+                      : "#262729",
                   }}
                   key={order._id}
-                  onClick={() =>
+                  onClick={() => {
+                    dispatch(setPrice(order.price));
                     navigate("/orderDetails", {
                       state: { cartItems: order.cartItems, userId: order._id },
-                    })
-                  }
+                    });
+                  }}
                 >
                   <TableCell>{order.orderTime?.toString()}</TableCell>
                   <TableCell>{order?._id}</TableCell>
@@ -98,23 +147,56 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                   <TableCell>{order.shippingDetails?.contactNumber}</TableCell>
                   <TableCell>{order.shippingDetails?.orderType}</TableCell>
                   <TableCell>{order.price}</TableCell>
-                  <TableCell>{order.status}</TableCell>
+                  <TableCell
+                    sx={{
+                      color:
+                        order.status === "pending"
+                          ? "orange"
+                          : order.status === "sent"
+                          ? "#2688eb"
+                          : order.status === "canceled"
+                          ? "red"
+                          : order.status === "received"
+                          ? "#5af542"
+                          : "inherit",
+                    }}
+                  >
+                    {order.status}
+                  </TableCell>
+
                   <TableCell>
                     {order.status === "pending" && (
                       <Button
                         variant="outlined"
+                        sx={{
+                          margin: "5px",
+                          ":hover": {
+                            backgroundColor: "#ff2e2e",
+                            color: "aliceblue",
+                          },
+                        }}
                         color="secondary"
                         onClick={(event) => {
                           event.stopPropagation();
                           handleCancel(order._id);
                         }}
                       >
-                        Cancel
+                        cancel
+                        <DeleteForeverOutlinedIcon
+                          sx={{ marginLeft: "13px" }}
+                        />
                       </Button>
                     )}
                     {order.shippingDetails?.orderType === "pickup" &&
                       order.status === "pending" && (
                         <Button
+                          sx={{
+                            margin: "5px",
+                            ":hover": {
+                              backgroundColor: "#66ff7f",
+                              color: "aliceblue",
+                            },
+                          }}
                           variant="outlined"
                           color="primary"
                           onClick={(event) => {
@@ -123,6 +205,9 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                           }}
                         >
                           Receive
+                          <ShoppingCartCheckoutOutlined
+                            sx={{ marginLeft: "8px" }}
+                          />
                         </Button>
                       )}
                   </TableCell>
@@ -131,6 +216,8 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
             </TableBody>
           </Table>
         </TableContainer>
+
+        <ul style={{ listStyle: "none" }}>{renderPageNumbers}</ul>
       </Box>
     );
 };

@@ -24,7 +24,7 @@ const FilterDialog: React.FC<FilterDialogProps> = ({
   filterStatus,
   setFilterStatus,
   // filterCustomer,
-  dateRangeStart,
+  // dateRangeStart,
   setDateRangeStart,
   // dateRangeEnd,
   setDateRangeEnd,
@@ -55,15 +55,7 @@ const FilterDialog: React.FC<FilterDialogProps> = ({
               }
               label="Status"
             />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={selectedFilters.includes("customer")}
-                  onChange={() => handleFilterSelectionChange("customer")}
-                />
-              }
-              label="Customer"
-            />
+
             <FormControlLabel
               control={
                 <Checkbox
@@ -80,6 +72,7 @@ const FilterDialog: React.FC<FilterDialogProps> = ({
             <FormControl className="filter-form-control">
               <InputLabel>Status</InputLabel>
               <Select
+                sx={{ width: "100px" }}
                 value={filterStatus || ""}
                 onChange={(e) =>
                   setFilterStatus(e.target.value as string | null)
@@ -87,26 +80,13 @@ const FilterDialog: React.FC<FilterDialogProps> = ({
               >
                 <MenuItem value="">All</MenuItem>
                 <MenuItem value="pending">Pending</MenuItem>
-                <MenuItem value="pickup">Pickup</MenuItem>
+                <MenuItem value="canceled">Canceled</MenuItem>
                 <MenuItem value="sent">Sent</MenuItem>
                 <MenuItem value="received">Received</MenuItem>
               </Select>
             </FormControl>
           )}
 
-          {/* Customer filter */}
-          {selectedFilters.includes("customer") && (
-            <FormControl className="filter-form-control">
-              <InputLabel>Customer ID</InputLabel>
-              <TextField
-                variant="outlined"
-                value={dateRangeStart}
-                onChange={(e) => setDateRangeStart(e.target.value)}
-              />
-            </FormControl>
-          )}
-
-          {/* Date Range filter */}
           {selectedFilters.includes("dateRange") && (
             <>
               <TextField

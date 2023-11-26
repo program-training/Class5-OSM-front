@@ -1,3 +1,4 @@
+// import { Box } from "@mui/material";
 // import { useState } from "react";
 // import Slider from "react-slick";
 
@@ -23,19 +24,19 @@
 //     const endIndex = Math.min(startIndex + productsPerPage, totalProducts);
 
 //     for (let i = startIndex; i < endIndex; i++) {
-//       products.push(<div key={i}>Product {i + 1}</div>); // כאן יהיה הקוד לתצוגת מוצרים האמיתיים
+//       products.push(<Box key={i}>Product {i + 1}</Box>); // כאן יהיה הקוד לתצוגת מוצרים האמיתיים
 //     }
 
 //     return products;
 //   };
 
 //   return (
-//     <div>
+//     <Box>
 //       <Slider {...settings}>{renderProducts()}</Slider>
-//       <div>
+//       <Box>
 //         Page {currentPage + 1} of {totalPages}
-//       </div>
-//     </div>
+//       </Box>
+//     </Box>
 //   );
 // };
 
