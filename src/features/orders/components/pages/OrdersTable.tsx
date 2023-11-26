@@ -7,6 +7,7 @@ import {
   Paper,
   Container,
   Box,
+  TablePagination,
 } from "@mui/material";
 import SearchField from "../ordersTable/SearchField";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
@@ -17,7 +18,7 @@ import {
 } from "../../ordersSlice";
 import OrdersTableHead from "../ordersTable/OrdersTableHead";
 import OrdersBodyTable from "../ordersTable/OrdersBodyTable";
-import TablePaginationDemo from "../../helpers/a";
+import React from "react";
 
 const OrdersTable = () => {
   const handleCancel = (orderId: string) => {
@@ -29,8 +30,8 @@ const OrdersTable = () => {
   const orders = useAppSelector((state) => state.orders.filteredOrders);
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const ordersPerPage = 10;
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
     const timeoutCallback = () => {
@@ -66,33 +67,27 @@ const OrdersTable = () => {
       })
     : [];
 
-  const indexOfLastOrder = currentPage * ordersPerPage;
-  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
-  const currentOrders = filteredOrders.slice(
-    indexOfFirstOrder,
-    indexOfLastOrder
-  );
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
+    setPage(newPage);
+  };
 
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(filteredOrders.length / ordersPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
-  const renderPageNumbers = pageNumbers.map((number) => (
-    <Box
-      component={"li"}
-      key={number}
-      onClick={() => setCurrentPage(number)}
-      style={{
-        display: "inline",
-        padding: "10px",
-        cursor: "pointer",
-        backgroundColor: currentPage === number ? "lightblue" : "inherit",
-      }}
-    >
-      {number}
-    </Box>
-  ));
+  const data =
+    rowsPerPage > 0
+      ? filteredOrders.slice(
+          page * rowsPerPage,
+          page * rowsPerPage + rowsPerPage
+        )
+      : filteredOrders;
 
   return (
     <Container>
@@ -105,17 +100,21 @@ const OrdersTable = () => {
             </TableHead>
             <TableBody>
               <OrdersBodyTable
-                currentOrders={currentOrders}
+                currentOrders={data}
                 handleCancel={handleCancel}
                 handleReceive={handleReceive}
               />
             </TableBody>
           </Table>
         </TableContainer>
-        {/* <TablePaginationDemo /> */}
-        <Box component={"ul"} sx={{ listStyle: "none", padding: 2 }}>
-          {renderPageNumbers}
-        </Box>
+        <TablePagination
+          component="div"
+          count={orders.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Box>
     </Container>
   );

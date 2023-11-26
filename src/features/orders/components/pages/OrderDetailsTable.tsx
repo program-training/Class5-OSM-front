@@ -26,11 +26,7 @@ const OrderDetailsTable = () => {
   const { state } = useLocation();
   const cartItems = state.cartItems;
   const userId = state.userId;
-
-  // Sample  customer numbers
   const customerNumber = userId;
-
-  // State for search input
   const [searchTerm, setSearchTerm] = useState("");
 
   const totalQuantity = cartItems.reduce(
@@ -38,7 +34,6 @@ const OrderDetailsTable = () => {
     0
   );
 
-  // Filter cartItems based on search input
   const filteredCartItems = cartItems.filter((product: { name: string }) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
