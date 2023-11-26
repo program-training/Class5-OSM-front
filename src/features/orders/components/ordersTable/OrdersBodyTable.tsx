@@ -125,7 +125,12 @@ const OrdersBodyTable: React.FC<OrdersTableProps> = ({
             </TableCell>
             <TableCell sx={{ margin: 2, padding: 0, textAlign: "center" }}>
               {order.status === "pending" && (
-                <Button>
+                <Button
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    navigate("/EditOrderPage");
+                  }}
+                >
                   <EditIcon />
                 </Button>
               )}
