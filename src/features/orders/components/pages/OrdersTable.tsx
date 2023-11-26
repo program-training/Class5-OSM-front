@@ -13,13 +13,13 @@ import {
 } from "@mui/material";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import EditIcon from "@mui/icons-material/Edit";
-import SearchField from "./SearchField";
+import SearchField from "../ordersTable/SearchField";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { setPrice, updateOrderStatus } from "../ordersSlice";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { setPrice, updateOrderStatus } from "../../ordersSlice";
 import { ShoppingCartCheckoutOutlined } from "@mui/icons-material";
-import OrdersTableProps from "../interfaces/ordersTableProps";
-import OrdersTableHead from "./OrdersTableHead";
+import OrdersTableProps from "../../interfaces/ordersTableProps";
+import OrdersTableHead from "../ordersTable/OrdersTableHead";
 
 const OrdersTable: React.FC<OrdersTableProps> = ({
   handleCancel,
