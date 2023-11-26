@@ -1,13 +1,13 @@
 import React from "react";
-import { TableCell, TableRow, Button } from "@mui/material";
+import { TableCell, TableRow, Button, TableBody } from "@mui/material";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { setPrice } from "../../ordersSlice";
+import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
+import { setPrice } from "../../../ordersSlice";
 import { ShoppingCartCheckoutOutlined } from "@mui/icons-material";
-import OrdersTableProps from "../../interfaces/ordersTableProps";
+import OrdersTableProps from "../../../interfaces/ordersTableProps";
 
 const OrdersBodyTable: React.FC<OrdersTableProps> = ({
   handleCancel,
@@ -18,7 +18,7 @@ const OrdersBodyTable: React.FC<OrdersTableProps> = ({
   const themeMode = useAppSelector((state) => state.themeMode.themeMode);
   const dispatch = useAppDispatch();
   return (
-    <>
+    <TableBody>
       {currentOrders &&
         currentOrders.map((order, i) => (
           <TableRow
@@ -137,7 +137,7 @@ const OrdersBodyTable: React.FC<OrdersTableProps> = ({
             </TableCell>
           </TableRow>
         ))}
-    </>
+    </TableBody>
   );
 };
 

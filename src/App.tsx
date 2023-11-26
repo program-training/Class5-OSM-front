@@ -5,7 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
 import { CssBaseline } from "@mui/material";
-import GetAllOrders from "./features/orders/utils/GetAllOrders";
+import GetAllOrders from "./features/orders/services/GetAllOrders";
 import "./App.css";
 import { setFilteredOrders } from "./features/orders/ordersSlice";
 
