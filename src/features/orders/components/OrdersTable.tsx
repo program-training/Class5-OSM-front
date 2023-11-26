@@ -18,11 +18,8 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setPrice, updateOrderStatus } from "../ordersSlice";
 import { ShoppingCartCheckoutOutlined } from "@mui/icons-material";
-
-interface OrdersTableProps {
-  handleCancel: (orderId: string) => void;
-  handleReceive: (orderId: string) => void;
-}
+import OrdersTableProps from "../interfaces/ordersTableProps";
+import OrdersTableHead from "./OrdersTableHead";
 
 const OrdersTable: React.FC<OrdersTableProps> = ({
   handleCancel,
@@ -105,41 +102,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
-              <TableRow
-                sx={{
-                  backgroundColor: "#6DAAB5",
-                  fontSize: "500px",
-                  textAlign: "center",
-                }}
-              >
-                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                  Order Time
-                </TableCell>
-                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                  User ID
-                </TableCell>
-                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                  Address
-                </TableCell>
-                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                  Contact Number
-                </TableCell>
-                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                  Order Type
-                </TableCell>
-                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                  Price
-                </TableCell>
-                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                  Status
-                </TableCell>
-                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                  Action
-                </TableCell>
-                <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-                  Edit order
-                </TableCell>
-              </TableRow>
+              <OrdersTableHead />
             </TableHead>
             <TableBody>
               {currentOrders &&
@@ -255,9 +218,11 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                     <TableCell
                       sx={{ margin: 2, padding: 0, textAlign: "center" }}
                     >
-                      <Button>
-                        <EditIcon />
-                      </Button>
+                      {order.status === "pending" && (
+                        <Button>
+                          <EditIcon />
+                        </Button>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}

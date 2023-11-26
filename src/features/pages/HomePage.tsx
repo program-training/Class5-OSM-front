@@ -1,9 +1,6 @@
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
-// import { useAppSelector } from "../../../store/hooks";
-// import { useNavigate } from "react-router-dom";
+
 const HomePage = () => {
-  // const navigate = useNavigate();
-  // const themeMode = useAppSelector((store) => store.themeMode.themeMode);
   return (
     <>
       <Container>
@@ -11,8 +8,9 @@ const HomePage = () => {
         <Typography
           variant="h3"
           sx={{
-            marginTop: "60px",
+            marginTop: "250px",
             marginBottom: "10px",
+            textAlign: "center",
           }}
         >
           TEAM 1 OMS
