@@ -1,4 +1,4 @@
-import OrdersTable from "../components/OrdersTable";
+import OrdersTable from "../components/pages/OrdersTable";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { cancelOrder, receivedOrder } from "../ordersSlice";
 import { Container } from "@mui/material";

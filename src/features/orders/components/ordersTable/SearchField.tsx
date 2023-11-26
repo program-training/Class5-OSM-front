@@ -3,8 +3,8 @@ import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, IconButton } from "@mui/material";
 import FilterDialog from "./FilterDialog";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { setFilteredOrders } from "../ordersSlice";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { setFilteredOrders } from "../../ordersSlice";
 import TuneIcon from "@mui/icons-material/Tune";
 
 interface SearchFieldProps {

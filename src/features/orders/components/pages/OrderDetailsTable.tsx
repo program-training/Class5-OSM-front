@@ -17,8 +17,8 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import Product from "../interfaces/product";
-import { useAppSelector } from "../../../store/hooks";
+import Product from "../../interfaces/product";
+import { useAppSelector } from "../../../../store/hooks";
 
 const OrderDetailsTable = () => {
   const themeMode = useAppSelector((state) => state.themeMode.themeMode);
