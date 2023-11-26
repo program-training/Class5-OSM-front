@@ -48,6 +48,9 @@ export const ordersSlice = createSlice({
         state.orders = [...state.orders];
       }
     },
+    setFilteredOrders: (state, action: PayloadAction<Order[]>) => {
+      state.filteredOrders = action.payload;
+    },
   },
 });
 
@@ -57,5 +60,6 @@ export const {
   receivedOrder,
   setPrice,
   updateOrderStatus,
+  setFilteredOrders,
 } = ordersSlice.actions;
 export default ordersSlice.reducer;
