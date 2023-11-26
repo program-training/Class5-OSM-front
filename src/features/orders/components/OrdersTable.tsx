@@ -10,6 +10,7 @@ import {
   Button,
   Box,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import SearchField from "./SearchField";
 import { useNavigate } from "react-router-dom";
@@ -113,6 +114,9 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                 <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
                   Action
                 </TableCell>
+                <TableCell sx={{ minWidth: 100, fontSize: "20px" }}>
+                  Edit order
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -210,6 +214,11 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                           />
                         </Button>
                       )}
+                  </TableCell>
+                  <TableCell sx={{ margin: 2 }}>
+                    <Button>
+                      <EditIcon />
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
