@@ -13,6 +13,7 @@ import {
   FormGroup,
   FormControlLabel,
   TextField,
+  Box,
 } from "@mui/material";
 import FilterDialogProps from "../../interfaces/filter";
 
@@ -41,7 +42,7 @@ const FilterDialog: React.FC<FilterDialogProps> = ({
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Filter Orders</DialogTitle>
       <DialogContent>
-        <div className="filter-container">
+        <Box className="filter-container">
           <FormGroup>
             <FormControlLabel
               control={
@@ -108,7 +109,7 @@ const FilterDialog: React.FC<FilterDialogProps> = ({
               />
             </>
           )}
-        </div>
+        </Box>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
