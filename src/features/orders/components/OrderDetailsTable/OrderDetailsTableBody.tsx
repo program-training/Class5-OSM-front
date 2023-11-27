@@ -12,8 +12,6 @@ const OrderDetailsTableBody: FC<OrderDetailsTableBodyProps> = ({
   const themeMode = useAppSelector((state) => state.themeMode.themeMode);
   const price = useAppSelector((state) => state.orders.order.price);
   const cartItems = useAppSelector((state) => state.orders.order.cartItems);
-  // const { state } = useLocation();
-  // const cartItems = state.cartItems;
   const totalQuantity = cartItems.reduce(
     (acc: number, product: { quantity: number }) => acc + product.quantity,
     0
