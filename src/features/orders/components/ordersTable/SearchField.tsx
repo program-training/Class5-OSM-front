@@ -1,4 +1,4 @@
-import { Dispatch, useState, FC } from "react";
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, IconButton } from "@mui/material";
@@ -6,19 +6,16 @@ import FilterDialog from "./filterDialog/FilterDialog";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { setFilteredOrders } from "../../ordersSlice";
 import TuneIcon from "@mui/icons-material/Tune";
+import useTerm from "../../hooks/useTerm";
 
-interface SearchFieldProps {
-  searchTerm: string;
-  setSearchTerm: Dispatch<React.SetStateAction<string>>;
-}
-
-const SearchField: FC<SearchFieldProps> = ({ searchTerm, setSearchTerm }) => {
+const SearchField = () => {
   const orders = useAppSelector((state) => state.orders.orders);
   const [openFilterDialog, setOpenFilterDialog] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [filterStatus, setFilterStatus] = useState<string | null>(null);
   const [dateRangeStart, setDateRangeStart] = useState<string>("");
   const [dateRangeEnd, setDateRangeEnd] = useState<string>("");
+  const { searchTerm, setSearchTerm } = useTerm();
   const dispatch = useAppDispatch();
 
   const handleOpenFilterDialog = () => {
