@@ -63,7 +63,7 @@ const OrdersBodyTable: React.FC<OrdersTableProps> = ({ currentOrders }) => {
                     ? "orange"
                     : order.status === "sent"
                     ? "#2688EB"
-                    : order.status === "canceled"
+                    : order.status === "cancelled"
                     ? "red"
                     : order.status === "received"
                     ? "#5AF542"

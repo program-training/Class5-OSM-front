@@ -1,6 +1,4 @@
-import { FC } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import Order from "../interfaces/order";
 
 export interface EditsOrderDetailsProps {
@@ -9,8 +7,7 @@ export interface EditsOrderDetailsProps {
 
 const baseURL = "http://localhost:3333/api/orders";
 
-const EditsOrderDetails: FC<Order> = (order) => {
-  const navigate = useNavigate();
+const editsOrderDetails = (order: Order) => {
   axios
     .put(baseURL, { body: order })
     .then(() => {
@@ -22,9 +19,8 @@ const EditsOrderDetails: FC<Order> = (order) => {
         err.message,
         "Error connecting to the orders server"
       );
-      navigate("*");
     });
   return null;
 };
 
-export default EditsOrderDetails;
+export default editsOrderDetails;

@@ -1,7 +1,7 @@
 import Order from "../interfaces/order";
 import { updateOrderStatus } from "../ordersSlice";
 import { useAppDispatch } from "../../../store/hooks";
-import EditsOrderStatus from "../services/EditsOrderStatus";
+// import editsOrderStatus from "../services/editsOrderStatus";
 
 const useOrder = (orders: Order[]) => {
   const dispatch = useAppDispatch();
@@ -10,6 +10,7 @@ const useOrder = (orders: Order[]) => {
     const pendingOrders = orders.filter((order) => order.status === "pending");
     pendingOrders.forEach((order) => {
       dispatch(updateOrderStatus({ orderId: order._id, newStatus: "sent" }));
+      // editsOrderStatus(order._id, "sent");
     });
 
     const sentOrders = orders.filter((order) => order.status === "sent");
@@ -17,6 +18,7 @@ const useOrder = (orders: Order[]) => {
       dispatch(
         updateOrderStatus({ orderId: order._id, newStatus: "received" })
       );
+      // editsOrderStatus(order._id, "received");
     });
   };
 

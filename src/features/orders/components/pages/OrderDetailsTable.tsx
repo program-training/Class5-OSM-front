@@ -10,7 +10,7 @@ import { useAppSelector } from "../../../../store/hooks";
 const OrderDetailsTable = () => {
   const cartItems = useAppSelector((state) => state.orders.order);
 
-  const customerNumber = cartItems.shippingDetails.userId;
+  const customerNumber = cartItems._id;
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredCartItems = cartItems.cartItems.filter(
