@@ -1,26 +1,21 @@
 import axios from "axios";
-import Order from "../interfaces/order";
 
-export interface editsOrderDetailsProps {
-  order: Order;
-}
-
-const baseURL = "http://localhost:3333/api/orders";
-
-const editsOrderDetails = (order: Order) => {
+const editsOrderDetails = (
+  orderId: string,
+  orderStatus: Record<string, unknown>
+) => {
   axios
-    .put(baseURL, { body: order })
-    .then(() => {
-      console.log("Success", "Successfully edit the order");
+    .put(`http://localhost:3000/api/orders/${orderId}`, orderStatus)
+    .then((res) => {
+      console.log("Success");
+      console.log(res.data);
     })
-    .catch((err) => {
+    .catch((error) => {
       console.error(
-        "Error:",
-        err.message,
-        "Error connecting to the orders server"
+        error.message,
+        "Error connecting to the orders status server"
       );
     });
-  return null;
 };
 
 export default editsOrderDetails;

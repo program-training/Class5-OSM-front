@@ -2,7 +2,6 @@ import { TableBody, TableCell, TableRow, Typography } from "@mui/material";
 import { FC } from "react";
 import Product from "../../interfaces/product";
 import { useAppSelector } from "../../../../store/hooks";
-// import { useLocation } from "react-router-dom";
 
 type OrderDetailsTableBodyProps = { filteredCartItems: Product[] };
 

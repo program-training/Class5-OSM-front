@@ -12,10 +12,14 @@ const usePages = () => {
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    console.log("in handleChangeRowsPerPage");
+
+    console.log(e.target.value);
+    setRowsPerPage(parseInt(e.target.value, 10));
+
+    // setPage(0);
   };
 
   return { page, handleChangePage, handleChangeRowsPerPage, rowsPerPage };

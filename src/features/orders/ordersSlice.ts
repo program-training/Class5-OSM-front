@@ -26,7 +26,7 @@ export const ordersSlice = createSlice({
     },
     cancelOrder: (state, action: PayloadAction<string>) => {
       const order = state.orders.find((o) => o._id === action.payload);
-      if (order) order.status = "canceled";
+      if (order) order.status = "cancelled";
       state.orders = [...state.orders];
     },
     receivedOrder: (state, action: PayloadAction<string>) => {
@@ -46,6 +46,27 @@ export const ordersSlice = createSlice({
         state.orders = [...state.orders];
       }
     },
+    updateOrderDetails: (
+      state,
+      action: PayloadAction<{
+        orderId: string;
+        newDetails: {
+          address: string;
+          contactNumber: string;
+          orderType: string;
+        };
+      }>
+    ) => {
+      const { orderId, newDetails } = action.payload;
+      const order = state.orders.find((o) => o._id === orderId);
+
+      if (order) {
+        order.shippingDetails.address = newDetails.address;
+        order.shippingDetails.contactNumber = newDetails.contactNumber;
+        order.shippingDetails.orderType = newDetails.orderType;
+        state.orders = [...state.orders];
+      }
+    },
     setFilteredOrders: (state, action: PayloadAction<Order[]>) => {
       state.filteredOrders = action.payload;
     },
@@ -58,6 +79,7 @@ export const {
   receivedOrder,
   setOrder,
   updateOrderStatus,
+  updateOrderDetails,
   setFilteredOrders,
 } = ordersSlice.actions;
 export default ordersSlice.reducer;

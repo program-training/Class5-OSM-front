@@ -11,16 +11,17 @@ import useTerm from "../../hooks/useTerm";
 import Rows from "../../../pages/Rows";
 
 const OrdersTable = () => {
-  const orders = useAppSelector((state) => state.orders.filteredOrders);
+  const orders = useAppSelector((state) => state.orders.orders);
   const { page, rowsPerPage } = usePages();
   const { searchTerm } = useTerm();
-  const { changeStatus } = useOrder(orders);
   const filteredOrders = filterArrayOfObjects(
     orders,
     "_id" || "shippingDetails.userId",
     searchTerm
   );
+  const { changeStatus } = useOrder(filteredOrders);
   const data = sliceRowsPerPage(filteredOrders, rowsPerPage, page);
+  console.log(data);
 
   useEffect(() => {
     const timeoutId = setTimeout(changeStatus, 10000);

@@ -12,17 +12,21 @@ import {
   MenuItem,
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
-import CancelIcon from "@mui/icons-material/Cancel"; // New import for the cancel icon
+import CancelIcon from "@mui/icons-material/Cancel";
 import { useAppSelector } from "../../../../store/hooks";
 import { useNavigate } from "react-router-dom";
+import editsOrderDetails from "../../services/editsOrderDetails";
+import { useDispatch } from "react-redux";
+import { updateOrderDetails } from "../../ordersSlice";
 
-interface EditOrderForm {
+interface editOrderForm {
   address: string;
   contactNumber: string;
   orderType: string;
 }
 
 const EditOrderPage: React.FC = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartItem = useAppSelector(
     (state) => state.orders.order.shippingDetails
@@ -30,30 +34,47 @@ const EditOrderPage: React.FC = () => {
   const orderId = useAppSelector((state) => state.orders.order._id);
   const orderTime = useAppSelector((state) => state.orders.order.orderTime);
 
-  const [formValues, setFormValues] = useState<EditOrderForm>({
+  const [formValues, setFormValues] = useState<editOrderForm>({
     address: cartItem.address,
     contactNumber: cartItem.contactNumber,
     orderType: cartItem.orderType,
   });
 
   const handleSave = () => {
-    console.log(formValues);
+    formValues.orderType;
+    dispatch(
+      updateOrderDetails({
+        orderId: orderId,
+        newDetails: {
+          address: formValues.address,
+          contactNumber: formValues.contactNumber,
+          orderType: formValues.orderType,
+        },
+      })
+    );
+    editsOrderDetails(orderId, {
+      shippingDetails: {
+        address: formValues.address,
+        userId: cartItem.userId,
+        contactNumber: formValues.contactNumber,
+        orderType: formValues.orderType,
+      },
+    });
+    navigate("/orders");
   };
   const handleCancel = () => {
-    navigate("/");
+    navigate("/orders");
   };
 
   const handleDeliveryMethodChange = (newMethod: string) => {
     const currentMethod = formValues.orderType;
 
-    // הודעה קופצת
     if (newMethod !== currentMethod) {
       const confirmChange = window.confirm(
         "Dear customer, changing the type of delivery may affect the price of the order. Do you want to continue?"
       );
 
       if (!confirmChange) {
-        // אם הלקוח אישר את ההודעה את כאן הוא משנה את המשלוח
         setFormValues({
           ...formValues,
           orderType: currentMethod,
@@ -62,7 +83,6 @@ const EditOrderPage: React.FC = () => {
       }
     }
 
-    // עדכון המשלוח
     setFormValues({
       ...formValues,
       orderType: newMethod,

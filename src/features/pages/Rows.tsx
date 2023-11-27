@@ -14,7 +14,11 @@ const Rows = () => {
       page={page}
       onPageChange={handleChangePage}
       rowsPerPage={rowsPerPage}
-      onRowsPerPageChange={handleChangeRowsPerPage}
+      onRowsPerPageChange={(e) => {
+        console.log("in bla");
+
+        handleChangeRowsPerPage(e);
+      }}
     />
   );
 };
