@@ -6,9 +6,8 @@ const editsOrderDetails = (
 ) => {
   axios
     .put(`http://localhost:3000/api/orders/${orderId}`, orderStatus)
-    .then((res) => {
+    .then(() => {
       console.log("Success");
-      console.log(res.data);
     })
     .catch((error) => {
       console.error(

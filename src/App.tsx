@@ -1,21 +1,35 @@
 import Header from "./features/layout/Header/Header";
 import RouterDOM from "./features/router/RouterDOM";
-// import Footer from "./features/layout/Footer";
 import { ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
 import { CssBaseline } from "@mui/material";
-import GetAllOrders from "./features/orders/services/GetAllOrders";
+
 import "./App.css";
-import { setFilteredOrders } from "./features/orders/ordersSlice";
+import { useEffect } from "react";
+import getAllOrders from "./features/orders/services/GetAllOrders";
+import { setFilteredOrders, setOrders } from "./features/orders/ordersSlice";
 
 const App = () => {
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
-
-  GetAllOrders();
-  const orders = useAppSelector((store) => store.orders.orders);
   const dispatch = useAppDispatch();
-  dispatch(setFilteredOrders(orders));
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getAllOrders();
+        if (data) {
+          dispatch(setOrders(data));
+          dispatch(setFilteredOrders(data));
+        }
+      } catch (error) {
+        console.error("Error connecting to the orders server");
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <ThemeProvider theme={themeMode ? themeLight : themeDark}>

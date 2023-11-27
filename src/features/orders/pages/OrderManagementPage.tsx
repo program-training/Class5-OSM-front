@@ -1,6 +1,5 @@
 import OrdersTable from "../components/pages/OrdersTable";
 import { useAppSelector } from "../../../store/hooks";
-// import { cancelOrder, receivedOrder } from "../ordersSlice";
 import { Container } from "@mui/material";
 
 const OrderManagementPage = () => {

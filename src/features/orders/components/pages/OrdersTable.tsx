@@ -12,6 +12,7 @@ import Rows from "../../../pages/Rows";
 
 const OrdersTable = () => {
   const orders = useAppSelector((state) => state.orders.orders);
+
   const { page, rowsPerPage } = usePages();
   const { searchTerm } = useTerm();
   const filteredOrders = filterArrayOfObjects(
@@ -21,7 +22,6 @@ const OrdersTable = () => {
   );
   const { changeStatus } = useOrder(filteredOrders);
   const data = sliceRowsPerPage(filteredOrders, rowsPerPage, page);
-  console.log(data);
 
   useEffect(() => {
     const timeoutId = setTimeout(changeStatus, 10000);
