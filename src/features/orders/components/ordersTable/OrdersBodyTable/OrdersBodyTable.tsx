@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
 import { setPrice } from "../../../ordersSlice";
 import OrdersTableProps from "../../../interfaces/ordersTableProps";
-import OrdersButtonTable from "./OrdersButtonTable";
 import OrdersCancelReceive from "./OrdersCancelReceive";
+import OrdersButtonTable from "./OrdersButtonTable";
 
 const OrdersBodyTable: React.FC<OrdersTableProps> = ({ currentOrders }) => {
   const navigate = useNavigate();

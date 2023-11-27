@@ -73,7 +73,7 @@ export const SignUp = () => {
               watch={watch}
             />
           </Grid>
-          <SignUpButton text="Sign Up" isValid={isValid} />
+          <SignUpButton text="Sign Up" isValid={isValid} watch={watch} />
           {/* <SignUpLink text="signIn" /> */}
         </Box>
       </Box>
