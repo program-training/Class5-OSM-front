@@ -12,7 +12,9 @@ import {
   MenuItem,
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
+import CancelIcon from "@mui/icons-material/Cancel"; // New import for the cancel icon
 import { useAppSelector } from "../../../../store/hooks";
+import { useNavigate } from "react-router-dom";
 
 interface EditOrderForm {
   address: string;
@@ -21,6 +23,7 @@ interface EditOrderForm {
 }
 
 const EditOrderPage: React.FC = () => {
+  const navigate = useNavigate();
   const cartItem = useAppSelector(
     (state) => state.orders.order.shippingDetails
   );
@@ -33,7 +36,12 @@ const EditOrderPage: React.FC = () => {
     orderType: cartItem.orderType,
   });
 
-  const handleSave = () => {};
+  const handleSave = () => {
+    console.log(formValues);
+  };
+  const handleCancel = () => {
+    navigate("/");
+  };
 
   const handleDeliveryMethodChange = (newMethod: string) => {
     const currentMethod = formValues.orderType;
@@ -77,6 +85,7 @@ const EditOrderPage: React.FC = () => {
       <Grid container spacing={2} sx={{ mt: 3 }}>
         <Grid item xs={12}>
           <TextField
+            disabled
             label="Order Time"
             fullWidth
             value={orderTime}
@@ -130,8 +139,24 @@ const EditOrderPage: React.FC = () => {
         </Grid>
       </Grid>
 
-      <Box sx={{ mt: 3 }}>
+      <Box
+        sx={{
+          mt: 3,
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <Button
+          sx={{ margin: "2px" }}
+          variant="contained"
+          color="secondary"
+          startIcon={<CancelIcon />}
+          onClick={handleCancel}
+        >
+          Cancel
+        </Button>
+        <Button
+          sx={{ m: "2px" }}
           variant="contained"
           color="primary"
           startIcon={<SaveIcon />}
