@@ -12,24 +12,31 @@ import {
   MenuItem,
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
+import { useAppSelector } from "../../../../store/hooks";
 
 interface EditOrderForm {
   address: string;
   contactNumber: string;
-  deliveryMethod: string;
+  orderType: string;
 }
 
 const EditOrderPage: React.FC = () => {
+  const cartItem = useAppSelector(
+    (state) => state.orders.order.shippingDetails
+  );
+  const orderId = useAppSelector((state) => state.orders.order._id);
+  const orderTime = useAppSelector((state) => state.orders.order.orderTime);
+
   const [formValues, setFormValues] = useState<EditOrderForm>({
-    address: "",
-    contactNumber: "",
-    deliveryMethod: "standard", // לדאוג שיקבל את סוג המשלוח שיהיה ללקוח
+    address: cartItem.address,
+    contactNumber: cartItem.contactNumber,
+    orderType: cartItem.orderType, // לדאוג שיקבל את סוג המשלוח שיהיה ללקוח
   });
 
   const handleSave = () => {};
 
   const handleDeliveryMethodChange = (newMethod: string) => {
-    const currentMethod = formValues.deliveryMethod;
+    const currentMethod = formValues.orderType;
 
     // הודעה קופצת
     if (newMethod !== currentMethod) {
@@ -41,7 +48,7 @@ const EditOrderPage: React.FC = () => {
         // אם הלקוח אישר את ההודעה את כאן הוא משנה את המשלוח
         setFormValues({
           ...formValues,
-          deliveryMethod: currentMethod,
+          orderType: currentMethod,
         });
         return;
       }
@@ -50,7 +57,7 @@ const EditOrderPage: React.FC = () => {
     // עדכון המשלוח
     setFormValues({
       ...formValues,
-      deliveryMethod: newMethod,
+      orderType: newMethod,
     });
   };
 
@@ -63,7 +70,7 @@ const EditOrderPage: React.FC = () => {
           Edit Order
         </Typography>
         <Typography variant="h6" gutterBottom>
-          Order ID: {}
+          Order ID: {orderId}
         </Typography>
       </Box>
 
@@ -72,7 +79,7 @@ const EditOrderPage: React.FC = () => {
           <TextField
             label="Order Time"
             fullWidth
-            value="שעה ותאריך (לא ניתן לשינוי)"
+            value={orderTime}
             InputProps={{
               readOnly: true,
             }}
@@ -110,7 +117,7 @@ const EditOrderPage: React.FC = () => {
             <InputLabel id="deliveryMethodLabel">Delivery Method</InputLabel>
             <Select
               labelId="deliveryMethodLabel"
-              value={formValues.deliveryMethod}
+              value={formValues.orderType}
               onChange={(e) =>
                 handleDeliveryMethodChange(e.target.value as string)
               }
