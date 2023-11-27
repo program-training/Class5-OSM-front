@@ -30,7 +30,7 @@ const EditOrderPage: React.FC = () => {
   const [formValues, setFormValues] = useState<EditOrderForm>({
     address: cartItem.address,
     contactNumber: cartItem.contactNumber,
-    orderType: cartItem.orderType, // לדאוג שיקבל את סוג המשלוח שיהיה ללקוח
+    orderType: cartItem.orderType,
   });
 
   const handleSave = () => {};
