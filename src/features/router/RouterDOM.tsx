@@ -5,7 +5,7 @@ import HomePage from "../pages/HomePage";
 import NotFoundPage from "../layout/NotFoundPage/NotFoundPage";
 import OrderManagementPage from "../orders/pages/OrderManagementPage";
 import OrderDetailsPage from "../orders/pages/OrderDetailsPage";
-import EditOrderPage from "../orders/components/EditOrderPage";
+import EditOrderPage from "../orders/components/pages/EditOrderPage";
 // import ProductCarousel from "../orders/components/ProductCarousel";
 const RouterDom = () => {
   return (

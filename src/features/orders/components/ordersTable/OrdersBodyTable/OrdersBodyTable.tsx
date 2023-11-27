@@ -3,10 +3,11 @@ import { TableCell, TableRow, TableBody } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
-import { setPrice } from "../../../ordersSlice";
+// import { setPrice } from "../../../ordersSlice";
 import OrdersTableProps from "../../../interfaces/ordersTableProps";
 import OrdersButtonTable from "./OrdersButtonTable";
 import OrdersCancelReceive from "./OrdersCancelReceive";
+import { setOrder } from "../../../ordersSlice";
 
 const OrdersBodyTable: React.FC<OrdersTableProps> = ({ currentOrders }) => {
   const navigate = useNavigate();
@@ -33,13 +34,9 @@ const OrdersBodyTable: React.FC<OrdersTableProps> = ({ currentOrders }) => {
             }}
             key={order._id}
             onClick={() => {
-              dispatch(setPrice(order.price));
-              navigate("/orderDetails", {
-                state: {
-                  cartItems: order.cartItems,
-                  userId: order._id,
-                },
-              });
+              // dispatch(setPrice(order.price));
+              dispatch(setOrder(order));
+              navigate("/orderDetails", {});
             }}
           >
             <TableCell sx={{ textAlign: "center" }}>

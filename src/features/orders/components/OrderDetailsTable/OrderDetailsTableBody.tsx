@@ -2,7 +2,7 @@ import { TableBody, TableCell, TableRow, Typography } from "@mui/material";
 import { FC } from "react";
 import Product from "../../interfaces/product";
 import { useAppSelector } from "../../../../store/hooks";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 type OrderDetailsTableBodyProps = { filteredCartItems: Product[] };
 
@@ -10,9 +10,10 @@ const OrderDetailsTableBody: FC<OrderDetailsTableBodyProps> = ({
   filteredCartItems,
 }) => {
   const themeMode = useAppSelector((state) => state.themeMode.themeMode);
-  const price = useAppSelector((state) => state.orders.price);
-  const { state } = useLocation();
-  const cartItems = state.cartItems;
+  const price = useAppSelector((state) => state.orders.order.price);
+  const cartItems = useAppSelector((state) => state.orders.order.cartItems);
+  // const { state } = useLocation();
+  // const cartItems = state.cartItems;
   const totalQuantity = cartItems.reduce(
     (acc: number, product: { quantity: number }) => acc + product.quantity,
     0
