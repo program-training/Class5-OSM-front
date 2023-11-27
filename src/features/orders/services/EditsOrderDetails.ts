@@ -1,7 +1,7 @@
 import axios from "axios";
 import Order from "../interfaces/order";
 
-export interface EditsOrderDetailsProps {
+export interface editsOrderDetailsProps {
   order: Order;
 }
 
