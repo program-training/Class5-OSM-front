@@ -1,12 +1,5 @@
 import { useEffect } from "react";
-import {
-  Table,
-  TableContainer,
-  Paper,
-  Container,
-  Box,
-  TablePagination,
-} from "@mui/material";
+import { Table, TableContainer, Paper, Container, Box } from "@mui/material";
 import SearchField from "../ordersTable/SearchField";
 import { useAppSelector } from "../../../../store/hooks";
 import OrdersTableHead from "../ordersTable/OrdersTableHead";
@@ -15,11 +8,11 @@ import useOrder from "../../hooks/useOrder";
 import usePages from "../../hooks/usePages";
 import { filterArrayOfObjects, sliceRowsPerPage } from "../../../utils/utils";
 import useTerm from "../../hooks/useTerm";
+import Rows from "../../../pages/Rows";
 
 const OrdersTable = () => {
   const orders = useAppSelector((state) => state.orders.filteredOrders);
-  const { page, handleChangePage, handleChangeRowsPerPage, rowsPerPage } =
-    usePages();
+  const { page, rowsPerPage } = usePages();
   const { searchTerm } = useTerm();
   const { changeStatus, handleCancel, handleReceive } = useOrder(orders);
   const filteredOrders = filterArrayOfObjects(
@@ -56,14 +49,7 @@ const OrdersTable = () => {
           </Table>
         </TableContainer>
         <Box>
-          <TablePagination
-            component="div"
-            count={orders.length}
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+          <Rows />
         </Box>
       </Box>
     </Container>
