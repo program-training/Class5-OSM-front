@@ -14,7 +14,7 @@ const OrdersTable = () => {
   const orders = useAppSelector((state) => state.orders.filteredOrders);
   const { page, rowsPerPage } = usePages();
   const { searchTerm } = useTerm();
-  const { changeStatus, handleCancel, handleReceive } = useOrder(orders);
+  const { changeStatus } = useOrder(orders);
   const filteredOrders = filterArrayOfObjects(
     orders,
     "_id" || "shippingDetails.userId",
