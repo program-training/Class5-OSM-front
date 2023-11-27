@@ -1,6 +1,7 @@
 import Order from "../interfaces/order";
 import { updateOrderStatus } from "../ordersSlice";
 import { useAppDispatch } from "../../../store/hooks";
+import EditsOrderStatus from "../services/EditsOrderStatus";
 
 const useOrder = (orders: Order[]) => {
   const dispatch = useAppDispatch();

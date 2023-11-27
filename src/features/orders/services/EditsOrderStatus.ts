@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const EditsOrderStatus = (orderStatus: string) => {
+const EditsOrderStatus = (
+  orderId: string,
+  orderStatus: Record<string, unknown>
+) => {
   const navigate = useNavigate();
 
   axios
-    .put("", orderStatus)
+    .put(`http://localhost:3000/api/orders/${orderId}`, orderStatus)
     .then((res) => {
       console.log("Success");
       console.log(res.data);
