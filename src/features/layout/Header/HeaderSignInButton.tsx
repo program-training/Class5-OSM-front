@@ -6,6 +6,7 @@ const HeaderSignInButton = () => {
 
   return (
     <Button
+      title="SignInButton"
       color="inherit"
       onClick={() => {
         navigate("/signIn");
