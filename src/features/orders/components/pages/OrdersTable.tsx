@@ -3,12 +3,12 @@ import { Table, TableContainer, Paper, Container, Box } from "@mui/material";
 import SearchField from "../ordersTable/SearchField";
 import { useAppSelector } from "../../../../store/hooks";
 import OrdersTableHead from "../ordersTable/OrdersTableHead";
-import OrdersBodyTable from "../ordersTable/ordersBodyTable/OrdersBodyTable";
 import useOrder from "../../hooks/useOrder";
 import usePages from "../../hooks/usePages";
 import { filterArrayOfObjects, sliceRowsPerPage } from "../../../utils/utils";
 import useTerm from "../../hooks/useTerm";
 import Rows from "../../../pages/Rows";
+import OrdersBodyTable from "../ordersTable/OrdersBodyTable/OrdersBodyTable";
 
 const OrdersTable = () => {
   const orders = useAppSelector((state) => state.orders.orders);

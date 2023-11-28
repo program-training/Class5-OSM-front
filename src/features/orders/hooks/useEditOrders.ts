@@ -1,9 +1,9 @@
 import { updateOrderDetails } from "../ordersSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import editsOrderDetails from "../services/editsOrderDetails";
 import { useAppSelector } from "../../../store/hooks";
 import { editOrderForm } from "../interfaces/editOrderForm";
+import editsOrderDetails from "../services/EditsOrderDetails";
 
 interface useEditOrdersProps {
   formValues: editOrderForm;

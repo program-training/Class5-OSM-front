@@ -19,7 +19,7 @@ const usePages = () => {
     console.log(e.target.value);
     setRowsPerPage(parseInt(e.target.value, 10));
 
-    // setPage(0);
+    setPage(0);
   };
 
   return { page, handleChangePage, handleChangeRowsPerPage, rowsPerPage };

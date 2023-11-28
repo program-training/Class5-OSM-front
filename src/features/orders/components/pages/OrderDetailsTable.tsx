@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Table, TableContainer, Paper, Box, Container } from "@mui/material";
-import OrderDetailsTableHead from "../orderDetailsTable/OrderDetailsTableHead";
-import OrderDetailsTableTop from "../orderDetailsTable/OrderDetailsTableTop";
-import OrderDetailsTableBottom from "../orderDetailsTable/OrderDetailsTableBottom";
-import OrderDetailsTableBody from "../orderDetailsTable/OrderDetailsTableBody";
 import { useAppSelector } from "../../../../store/hooks";
+import OrderDetailsTableTop from "../OrderDetailsTable/OrderDetailsTableTop";
+import OrderDetailsTableHead from "../OrderDetailsTable/OrderDetailsTableHead";
+import OrderDetailsTableBody from "../OrderDetailsTable/OrderDetailsTableBody";
+import OrderDetailsTableBottom from "../OrderDetailsTable/OrderDetailsTableBottom";
 
 const OrderDetailsTable = () => {
   const cartItems = useAppSelector((state) => state.orders.order);
