@@ -14,22 +14,26 @@ const SignUpButton: FC<SignInUpButtonInterface> = ({
   watch,
 }) => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const signUpObject = useAppSelector((store) => store.users.signUpObject);
   return (
     <>
       <Button
         type="submit"
         onClick={() => {
           navigate("/signIn");
-          dispatch(
-            setSignUpObject({
-              email: watch("email"),
-              password: watch("password"),
-              isAdmin: true,
-            })
-          );
-          axios.post(URL, signUpObject).then((res) => console.log(res.data));
+          const object = {
+            email: watch("email"),
+            password: watch("password"),
+            isAdmin: true,
+          };
+
+          console.log(object);
+
+          axios
+            .post(
+              "https://project-team1-oms-back.onrender.com/api/users/signup/",
+              object
+            )
+            .then((res) => console.log(res.data));
         }}
         fullWidth
         variant="contained"
