@@ -33,11 +33,12 @@ const Header = () => {
               }}
             />
             <Typography
+              title="Team 1 OMS"
               variant="h6"
               noWrap
               component="a"
               onClick={() => {
-                navigate("/home");
+                navigate("/");
               }}
               sx={{
                 mr: 2,

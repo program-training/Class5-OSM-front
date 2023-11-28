@@ -7,7 +7,7 @@ import { CssBaseline } from "@mui/material";
 import "./App.css";
 import { useEffect } from "react";
 import { setFilteredOrders, setOrders } from "./features/orders/ordersSlice";
-import getAllOrders from "./features/orders/services/getAllOrders";
+import getAllOrders from "./features/orders/services/GetAllOrders";
 
 const App = () => {
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
