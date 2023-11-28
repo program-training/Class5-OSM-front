@@ -5,15 +5,15 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import { emailValidet, passwordValidet } from "../../helpers/validation";
 import { FieldValues, useForm } from "react-hook-form";
-import { Copyright } from "../../../layout/Copyright";
-// import SignUpLink from "./SignUpLink";
 import SignUpButton from "./SignUpButton";
 import PasswordInput from "./PasswordInput";
 import EmailInput from "./EmailInput";
 import ConfirmPasswordInputIn from "./ConfirmPasswordInput";
-// import { useState } from "react";
+import { useState } from "react";
 
 export const SignUp = () => {
   const {
@@ -22,15 +22,17 @@ export const SignUp = () => {
     watch,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
-  const onSubmit = (event: FieldValues) => {
-    event.preventDefault();
+
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsAdmin(event.target.checked);
   };
 
-  // const [email, setEmail] = useState<string>();
-
-  // const handleEmailChange = (email: string) => {
-  //   setEmail(email);
-  // };
+  const onSubmit = (data: FieldValues) => {
+    // אפשר לגשת לערך isAdmin באמצעות data.isAdmin
+    console.log(data);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -60,7 +62,6 @@ export const SignUp = () => {
               register={register}
               errors={errors}
               emailValidet={emailValidet}
-              // onEmailChange={handleEmailChange}
             />
             <PasswordInput
               register={register}
@@ -72,12 +73,28 @@ export const SignUp = () => {
               errors={errors}
               watch={watch}
             />
+            {/* Styled Checkbox for Administrator */}
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    {...register("isAdmin")}
+                    checked={isAdmin}
+                    onChange={handleCheckboxChange}
+                    color="primary"
+                  />
+                }
+                label={
+                  <Typography variant="body2">
+                    Sign up as an Administrator
+                  </Typography>
+                }
+              />
+            </Grid>
           </Grid>
           <SignUpButton text="Sign Up" isValid={isValid} />
-          {/* <SignUpLink text="signIn" /> */}
         </Box>
       </Box>
-      <Copyright />
     </Container>
   );
 };
