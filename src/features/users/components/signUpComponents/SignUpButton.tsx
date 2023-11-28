@@ -6,6 +6,8 @@ import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { setSignUpObject } from "../../usersSlice";
 
+const URL = `${import.meta.env.VITE_BASE_URL}/api/users`;
+
 const SignUpButton: FC<SignInUpButtonInterface> = ({
   text,
   isValid,
@@ -27,12 +29,7 @@ const SignUpButton: FC<SignInUpButtonInterface> = ({
               isAdmin: true,
             })
           );
-          axios
-            .post(
-              "https://project-team1-oms-back.onrender.com/api/users/signup/",
-              signUpObject
-            )
-            .then((res) => console.log(res.data));
+          axios.post(URL, signUpObject).then((res) => console.log(res.data));
         }}
         fullWidth
         variant="contained"
