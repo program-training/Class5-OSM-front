@@ -10,7 +10,7 @@ import {
 import SearchField from "../ordersTable/SearchField";
 import { useAppSelector } from "../../../../store/hooks";
 import OrdersTableHead from "../ordersTable/OrdersTableHead";
-import OrdersBodyTable from "../../components/ordersTable/OrdersBodyTable/OrdersBodyTable";
+import OrdersBodyTable from "../ordersTable/ordersBodyTable/OrdersBodyTable";
 import useOrder from "../../hooks/useOrder";
 import { filteredOrdersUtils } from "../../../utils/utils";
 
