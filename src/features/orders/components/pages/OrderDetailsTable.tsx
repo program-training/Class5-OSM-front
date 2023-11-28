@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Table, TableContainer, Paper, Box, Container } from "@mui/material";
-// import { useLocation } from "react-router-dom";
 import OrderDetailsTableHead from "../orderDetailsTable/OrderDetailsTableHead";
 import OrderDetailsTableTop from "../orderDetailsTable/OrderDetailsTableTop";
 import OrderDetailsTableBottom from "../orderDetailsTable/OrderDetailsTableBottom";

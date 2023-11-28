@@ -4,11 +4,10 @@ import { ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
 import { CssBaseline } from "@mui/material";
-
 import "./App.css";
 import { useEffect } from "react";
-import getAllOrders from "./features/orders/services/GetAllOrders";
 import { setFilteredOrders, setOrders } from "./features/orders/ordersSlice";
+import getAllOrders from "./features/orders/services/getAllOrders";
 
 const App = () => {
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
