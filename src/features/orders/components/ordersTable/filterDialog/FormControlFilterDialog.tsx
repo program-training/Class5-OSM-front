@@ -22,7 +22,7 @@ const FormControlFilterDialog: FC<FormControlFilterDialogProps> = ({
         >
           <MenuItem value="">All</MenuItem>
           <MenuItem value="pending">Pending</MenuItem>
-          <MenuItem value="canceled">Canceled</MenuItem>
+          <MenuItem value="cancelled">Cancelled</MenuItem>
           <MenuItem value="sent">Sent</MenuItem>
           <MenuItem value="received">Received</MenuItem>
         </Select>
