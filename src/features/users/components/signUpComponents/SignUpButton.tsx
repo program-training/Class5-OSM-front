@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import SignUpAlert from "../alert/SignUpAlert";
 import { useAlerts } from "../../hooks/useAlerts";
+
+const URL = `${import.meta.env.VITE_BASE_URL}/api/users`;
 const SignUpButton: FC<SignInUpButtonInterface> = ({
   text,
   isValid,
@@ -26,10 +28,7 @@ const SignUpButton: FC<SignInUpButtonInterface> = ({
           console.log(object);
 
           axios
-            .post(
-              "https://project-team1-oms-back.onrender.com/api/users/signup/",
-              object
-            )
+            .post(`${URL}/signup/`, object)
             .then((res) => {
               console.log(res.data.email, object.email);
 
