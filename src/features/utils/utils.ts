@@ -1,20 +1,47 @@
-export const filterArrayOfObjects = <T extends object>(
-  array: T[],
-  key: keyof T,
-  term: string
-) =>
-  array.filter((item) =>
-    String(item[key])
-      .toLocaleLowerCase()
-      .trim()
-      .includes(term.toLocaleLowerCase().trim())
-  );
+import React from "react";
+import Order from "../orders/interfaces/order";
 
-export const sliceRowsPerPage = <T>(
-  array: T[],
+export const filteredOrdersUtils = (
+  orders: Order[],
+  searchTerm: string,
+  page: number,
+  setPage: React.Dispatch<React.SetStateAction<number>>,
   rowsPerPage: number,
-  page: number
-) =>
-  rowsPerPage > 0
-    ? array.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-    : array;
+  setRowsPerPage: React.Dispatch<React.SetStateAction<number>>
+) => {
+  const filteredOrders = orders
+    ? orders.filter((order) => {
+        const searchValue = searchTerm.toLowerCase();
+        return (
+          String(order._id).toLowerCase().includes(searchValue) ||
+          String(order.shippingDetails?.userId)
+            .toLowerCase()
+            .includes(searchValue)
+        );
+      })
+    : [];
+
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const data =
+    rowsPerPage > 0
+      ? filteredOrders.slice(
+          page * rowsPerPage,
+          page * rowsPerPage + rowsPerPage
+        )
+      : filteredOrders;
+
+  return { filteredOrders, handleChangePage, handleChangeRowsPerPage, data };
+};
