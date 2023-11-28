@@ -25,25 +25,25 @@ export const ordersSlice = createSlice({
       state.order = action.payload;
     },
     cancelOrder: (state, action: PayloadAction<string>) => {
-      const order = state.orders.find((o) => o._id === action.payload);
+      const order = state.filteredOrders.find((o) => o._id === action.payload);
       if (order) order.status = "cancelled";
-      state.orders = [...state.orders];
+      state.filteredOrders = [...state.filteredOrders];
     },
     receivedOrder: (state, action: PayloadAction<string>) => {
-      const order = state.orders.find((o) => o._id === action.payload);
+      const order = state.filteredOrders.find((o) => o._id === action.payload);
       if (order) order.status = "received";
-      state.orders = [...state.orders];
+      state.filteredOrders = [...state.filteredOrders];
     },
     updateOrderStatus: (
       state,
       action: PayloadAction<{ orderId: string; newStatus: string }>
     ) => {
       const { orderId, newStatus } = action.payload;
-      const order = state.orders.find((o) => o._id === orderId);
+      const order = state.filteredOrders.find((o) => o._id === orderId);
 
       if (order) {
         order.status = newStatus;
-        state.orders = [...state.orders];
+        state.filteredOrders = [...state.filteredOrders];
       }
     },
     updateOrderDetails: (
@@ -58,13 +58,13 @@ export const ordersSlice = createSlice({
       }>
     ) => {
       const { orderId, newDetails } = action.payload;
-      const order = state.orders.find((o) => o._id === orderId);
+      const order = state.filteredOrders.find((o) => o._id === orderId);
 
       if (order) {
         order.shippingDetails.address = newDetails.address;
         order.shippingDetails.contactNumber = newDetails.contactNumber;
         order.shippingDetails.orderType = newDetails.orderType;
-        state.orders = [...state.orders];
+        state.filteredOrders = [...state.filteredOrders];
       }
     },
     setFilteredOrders: (state, action: PayloadAction<Order[]>) => {
