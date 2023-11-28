@@ -5,7 +5,10 @@ const editsOrderDetails = (
   orderStatus: Record<string, unknown>
 ) => {
   axios
-    .put(`http://localhost:3000/api/orders/${orderId}`, orderStatus)
+    .put(
+      `https://project-team1-oms-back.onrender.com/api/orders/${orderId}`,
+      orderStatus
+    )
     .then(() => {
       console.log("Success");
     })

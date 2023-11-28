@@ -2,7 +2,9 @@ import axios from "axios";
 
 const getAllOrders = async () => {
   try {
-    const response = await axios.get("http://localhost:3000/api/orders");
+    const response = await axios.get(
+      "https://project-team1-oms-back.onrender.com/api/orders"
+    );
     console.log("Success");
     const data = response.data;
     return data;
