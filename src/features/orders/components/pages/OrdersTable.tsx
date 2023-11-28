@@ -37,7 +37,14 @@ const OrdersTable = () => {
 
   return (
     <Container>
-      <Box sx={{ textAlign: "center" }}>
+      <Box
+        sx={{
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <TableContainer component={Paper}>
           <Table>
