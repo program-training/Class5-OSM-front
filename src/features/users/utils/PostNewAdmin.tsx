@@ -1,6 +1,5 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 export interface postNewAdminProps {
   email: string;
@@ -11,23 +10,15 @@ export interface postNewAdminProps {
 const baseURL = "https://jsonplaceholder.typicode.com/posts";
 
 const PostNewAdmin: FC<postNewAdminProps> = ({ email, password, isAdmin }) => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    axios
-      .post(baseURL, { body: email, password, isAdmin })
-      .then((Response) => {
-        if (Response.status === 200) {
-          navigate("/");
-        }
+  axios
+    .post(baseURL, { body: email, password, isAdmin })
+    .then((Response) => {
+      if (Response.status === 200)
         console.log("Success:", "Successfully added to the site");
-      })
-      .catch((err) => {
-        console.error("Error:", err.message);
-        navigate("*");
-      });
-  }, []);
-
-  return null;
+    })
+    .catch((err) => {
+      console.error("Error:", err.message);
+    });
 };
 
 export default PostNewAdmin;
