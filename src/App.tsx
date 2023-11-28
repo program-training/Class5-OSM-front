@@ -1,17 +1,19 @@
-import Header from "./features/layout/Header/Header";
-import RouterDOM from "./features/router/RouterDOM";
+import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
 import { CssBaseline } from "@mui/material";
 import "./App.css";
-import { useEffect } from "react";
+import Header from "./features/layout/Header/Header";
+import RouterDOM from "./features/router/RouterDOM";
 import { setFilteredOrders, setOrders } from "./features/orders/ordersSlice";
 import getAllOrders from "./features/orders/services/getAllOrders";
+import Spinner from "./Spinner";
 
 const App = () => {
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,11 +25,17 @@ const App = () => {
         }
       } catch (error) {
         console.error("Error connecting to the orders server");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
   }, [dispatch]);
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <>
