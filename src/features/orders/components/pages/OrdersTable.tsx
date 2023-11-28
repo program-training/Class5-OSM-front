@@ -26,7 +26,7 @@ const OrdersTable = () => {
   useEffect(() => {
     const timeoutId = setTimeout(changeStatus, 10000);
     return () => clearTimeout(timeoutId);
-  }, [orders]);
+  }, [changeStatus]);
 
   return (
     <Container>

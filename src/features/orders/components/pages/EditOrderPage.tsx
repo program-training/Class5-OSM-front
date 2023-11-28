@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   TextField,
+  Box,
   Container,
   Grid,
   FormControl,
@@ -8,16 +9,19 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+
 import { useAppSelector } from "../../../../store/hooks";
 import useEditOrders from "../../hooks/useEditOrders";
 import { editOrderForm } from "../../interfaces/editOrderForm";
 import OrderDetailsButtons from "../orderDetailsTable/OrderDetailsButtons";
 import OrderDetailsOrderTime from "../orderDetailsTable/OrderDetailsOrderTime";
+import OrderDetailsOrderId from "../orderDetailsTable/OrderDetailsOrderId";
 
 const EditOrderPage: React.FC = () => {
   const cartItem = useAppSelector(
     (state) => state.orders.order.shippingDetails
   );
+
   const [formValues, setFormValues] = useState<editOrderForm>({
     address: cartItem.address,
     contactNumber: cartItem.contactNumber,
@@ -27,12 +31,20 @@ const EditOrderPage: React.FC = () => {
     formValues,
     setFormValues,
   });
+
   return (
     <Container
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
+      <Box sx={{ mt: 10, textAlign: "center" }}>
+        <OrderDetailsOrderId />
+      </Box>
+
       <Grid container spacing={2} sx={{ mt: 3 }}>
-        <OrderDetailsOrderTime />
+        <Grid item xs={12}>
+          <OrderDetailsOrderTime />
+        </Grid>
+
         <Grid item xs={12}>
           <TextField
             label="Address"

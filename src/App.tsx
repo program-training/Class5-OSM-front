@@ -28,7 +28,7 @@ const App = () => {
     };
 
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
