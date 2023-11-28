@@ -11,7 +11,7 @@ const OrdersTableHead = () => {
         }}
       >
         <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
-          Order Time
+          Order Date
         </TableCell>
         <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
           User ID
