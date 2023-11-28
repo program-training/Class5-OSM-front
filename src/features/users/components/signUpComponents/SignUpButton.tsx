@@ -3,8 +3,6 @@ import { FC } from "react";
 import { SignInUpButtonInterface } from "../../interfaces/SignInUpButtonInterface";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { setSignUpObject } from "../../usersSlice";
 
 const URL = `${import.meta.env.VITE_BASE_URL}/api/users`;
 
@@ -29,10 +27,7 @@ const SignUpButton: FC<SignInUpButtonInterface> = ({
           console.log(object);
 
           axios
-            .post(
-              "https://project-team1-oms-back.onrender.com/api/users/signup/",
-              object
-            )
+            .post(`${URL}/signup/`, object)
             .then((res) => console.log(res.data));
         }}
         fullWidth
