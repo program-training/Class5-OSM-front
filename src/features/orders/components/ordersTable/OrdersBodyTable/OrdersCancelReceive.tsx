@@ -5,7 +5,7 @@ import { OrderProps } from "../../../interfaces/orderProps";
 import { FC } from "react";
 import { cancelOrder, receivedOrder } from "../../../ordersSlice";
 import { useAppDispatch } from "../../../../../store/hooks";
-import editsOrderStatus from "../../../services/editsOrderStatus";
+import editsOrderStatus from "../../../service/editsOrderStatus";
 
 const OrdersCancelReceive: FC<OrderProps> = ({ order }) => {
   const dispatch = useAppDispatch();
