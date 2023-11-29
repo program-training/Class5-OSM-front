@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAlerts } from "../../hooks/useAlerts";
 import axios from "axios";
 import SignInUpAlert from "../alert/SignInUpAlert";
+import { getToken, setToken } from "../../../../services/localStorageService";
 const URL = `${import.meta.env.VITE_BASE_URL}/api/users/login`;
 const SignInButton: FC<SignInUpButtonInterface> = ({
   text,
@@ -28,6 +29,9 @@ const SignInButton: FC<SignInUpButtonInterface> = ({
               console.log(res.data.resInfoObj.user.email, object.email);
 
               if (res.data.resInfoObj.user.email === object.email) {
+                setToken(res.data.resInfoObj.token);
+                console.log(getToken());
+
                 showAlert(
                   "success",
                   "Sign in successful! Redirecting to orders page..."

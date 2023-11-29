@@ -37,7 +37,7 @@ const Header = () => {
               noWrap
               component="a"
               onClick={() => {
-                navigate("/home");
+                navigate("/");
               }}
               sx={{
                 mr: 2,
