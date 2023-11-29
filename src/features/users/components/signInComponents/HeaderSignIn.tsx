@@ -5,7 +5,6 @@ import Avatar from "@mui/material/Avatar";
 const HeaderSignIn = () => {
   return (
     <>
-      {" "}
       <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
         <LockOutlinedIcon />
       </Avatar>
