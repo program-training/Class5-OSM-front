@@ -12,6 +12,9 @@ import getAllOrders from "./features/orders/services/GetAllOrders";
 =======
 import getAllOrders from "./features/orders/services/getAllOrders";
 import Spinner from "./Spinner";
+<<<<<<< HEAD
+>>>>>>> e283746134f7a61d773ebcdb7a743487f8fcea1c
+=======
 >>>>>>> e283746134f7a61d773ebcdb7a743487f8fcea1c
 
 const App = () => {
