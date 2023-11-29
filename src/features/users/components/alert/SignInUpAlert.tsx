@@ -2,7 +2,10 @@
 import { Alert, AlertTitle } from "@mui/material";
 import { FC } from "react";
 import { SignUpAlertInterface } from "../../interfaces/SignUpAlertInterface";
-const SignUpAlert: FC<SignUpAlertInterface> = ({ alert, handleAlertClose }) => {
+const SignInUpAlert: FC<SignUpAlertInterface> = ({
+  alert,
+  handleAlertClose,
+}) => {
   return (
     <>
       {alert && (
@@ -17,4 +20,4 @@ const SignUpAlert: FC<SignUpAlertInterface> = ({ alert, handleAlertClose }) => {
   );
 };
 
-export default SignUpAlert;
+export default SignInUpAlert;
