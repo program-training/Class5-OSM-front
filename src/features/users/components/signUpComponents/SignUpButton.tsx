@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAlerts } from "../../hooks/useAlerts";
 import SignInUpAlert from "../alert/SignInUpAlert";
+const URL = `${import.meta.env.VITE_BASE_URL}/api/users`;
 const SignUpButton: FC<SignInUpButtonInterface> = ({
   text,
   isValid,
