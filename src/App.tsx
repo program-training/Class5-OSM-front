@@ -7,7 +7,7 @@ import "./App.css";
 import Header from "./features/layout/Header/Header";
 import RouterDOM from "./features/router/RouterDOM";
 import { setFilteredOrders, setOrders } from "./features/orders/ordersSlice";
-import getAllOrders from "./features/orders/services/getAllOrders";
+import getAllOrders from "./features/orders/services/getAllOrders.ts";
 import Spinner from "./Spinner";
 
 const App = () => {
