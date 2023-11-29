@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../store/hooks";
 import { editOrderForm } from "../interfaces/editOrderForm";
-import editsOrderDetails from "../services/EditsOrderDetails";
+import editsOrderDetails from "../services/editsOrderDetails.ts";
 
 interface useEditOrdersProps {
   formValues: editOrderForm;
