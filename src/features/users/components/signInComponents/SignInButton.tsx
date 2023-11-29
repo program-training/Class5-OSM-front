@@ -5,7 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { useAlerts } from "../../hooks/useAlerts";
 import axios from "axios";
 import SignInUpAlert from "../alert/SignInUpAlert";
-import { getToken, setToken } from "../../../../services/localStorageService";
+import {
+  getToken,
+  setLocalStorageToken,
+} from "../../../../services/localStorageService";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { setToken } from "../../../token/tokenSlice";
+import { setLoggedUser } from "../../usersSlice";
+// import { useToken } from "../../../token/hooks/useToken";
 const URL = `${import.meta.env.VITE_BASE_URL}/api/users/login`;
 const SignInButton: FC<SignInUpButtonInterface> = ({
   text,
@@ -13,23 +20,30 @@ const SignInButton: FC<SignInUpButtonInterface> = ({
   watch,
 }) => {
   const navigate = useNavigate();
+  const rememberMe = useAppSelector((store) => store.token.rememberMe);
   const { alert, handleAlertClose, showAlert } = useAlerts();
+  const dispatch = useAppDispatch();
+  const object = {
+    email: watch("email"),
+    password: watch("password"),
+  };
   return (
     <>
       <Button
         type="submit"
         onClick={() => {
-          const object = {
-            email: watch("email"),
-            password: watch("password"),
-          };
           axios
             .post(URL, object)
             .then((res) => {
               console.log(res.data.resInfoObj.user.email, object.email);
 
               if (res.data.resInfoObj.user.email === object.email) {
-                setToken(res.data.resInfoObj.token);
+                dispatch(setToken("loggedin"));
+                dispatch(setLoggedUser(res.data.resInfoObj.user));
+                if (rememberMe) {
+                  setLocalStorageToken(res.data.resInfoObj.token);
+                }
+                // console.log(decodeToken(res.data.resInfoObj.token));
                 console.log(getToken());
 
                 showAlert(

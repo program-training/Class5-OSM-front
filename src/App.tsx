@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
@@ -8,16 +8,24 @@ import Header from "./features/layout/Header/Header";
 import RouterDOM from "./features/router/RouterDOM";
 import { setFilteredOrders, setOrders } from "./features/orders/ordersSlice";
 import getAllOrders from "./features/orders/service/getAllOrders";
-import Spinner from "./Spinner";
+import Spinner from "./features/spinner/Spinner";
+import HeaderLoggedIn from "./features/layout/HeaderLoggedIn/HeaderLoggedIn";
+import { getToken } from "./services/localStorageService";
+import { setToken } from "./features/token/tokenSlice";
+import { setLoading } from "./features/spinner/spinnerSlice";
 
 const App = () => {
+  const token = useAppSelector((store) => store.token.token);
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
   const dispatch = useAppDispatch();
-  const [loading, setLoading] = useState(true);
+  const loading = useAppSelector((store) => store.spinner.loading);
+  const isLogged = getToken();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        dispatch(setToken(isLogged));
+        console.log("logg:  " + isLogged, token);
         const data = await getAllOrders();
         if (data) {
           dispatch(setOrders(data));
@@ -26,7 +34,7 @@ const App = () => {
       } catch (error) {
         console.error("Error connecting to the orders server");
       } finally {
-        setLoading(false);
+        dispatch(setLoading(false));
       }
     };
 
@@ -36,10 +44,7 @@ const App = () => {
   if (loading) {
     return (
       <>
-        <ThemeProvider theme={themeMode ? themeLight : themeDark}>
-          <CssBaseline />
-          <Spinner />;
-        </ThemeProvider>
+        <Spinner />;
       </>
     );
   }
@@ -48,7 +53,11 @@ const App = () => {
     <>
       <ThemeProvider theme={themeMode ? themeLight : themeDark}>
         <CssBaseline />
-        <Header />
+        {isLogged === "loggedin" || token === "loggedin" ? (
+          <HeaderLoggedIn />
+        ) : (
+          <Header />
+        )}
         <RouterDOM />
         {/* <Footer /> */}
       </ThemeProvider>

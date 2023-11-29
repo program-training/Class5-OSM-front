@@ -6,6 +6,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { deleteToken } from "../../../services/localStorageService";
+import { setToken } from "../../token/tokenSlice";
+import { setLoading } from "../../spinner/spinnerSlice";
 
 interface UserMenuProps {
   anchorElUser: HTMLElement | null;
@@ -19,12 +23,16 @@ const UserMenu: React.FC<UserMenuProps> = ({
   handleOpenUserMenu,
 }) => {
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
+  const loggedUser = useAppSelector((store) => store.users.loggedUser);
+  const dispatch = useAppDispatch();
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          <Avatar
+            alt={loggedUser ? (loggedUser.email as string) : ""}
+            src="/static/images/avatar/2.jpg"
+          />
         </IconButton>
       </Tooltip>
       <Menu
@@ -44,7 +52,24 @@ const UserMenu: React.FC<UserMenuProps> = ({
         onClose={handleCloseUserMenu}
       >
         {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
+          <MenuItem
+            key={setting}
+            onClick={() => {
+              handleCloseUserMenu();
+              if (setting === "Logout") {
+                try {
+                  dispatch(setLoading(true));
+                  setTimeout(() => {
+                    deleteToken();
+                    dispatch(setToken("loggedout"));
+                    dispatch(setLoading(false));
+                  }, 1000);
+                } catch (error) {
+                  console.log(error);
+                }
+              }
+            }}
+          >
             <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
         ))}
