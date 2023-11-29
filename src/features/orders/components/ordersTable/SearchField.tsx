@@ -6,12 +6,10 @@ import FilterDialog from "./filterDialog/FilterDialog";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { setFilteredOrders } from "../../ordersSlice";
 import TuneIcon from "@mui/icons-material/Tune";
-
 interface SearchFieldProps {
   searchTerm: string;
   setSearchTerm: Dispatch<React.SetStateAction<string>>;
 }
-
 const SearchField: FC<SearchFieldProps> = ({ searchTerm, setSearchTerm }) => {
   const orders = useAppSelector((state) => state.orders.orders);
   const [openFilterDialog, setOpenFilterDialog] = useState(false);

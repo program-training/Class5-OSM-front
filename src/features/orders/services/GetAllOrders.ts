@@ -1,8 +1,9 @@
 import axios from "axios";
+const URL = `${import.meta.env.VITE_BASE_URL}/api/orders`;
 
 const getAllOrders = async () => {
   try {
-    const response = await axios.get("http://localhost:3000/api/orders");
+    const response = await axios.get(URL);
     console.log("Success");
     const data = response.data;
     return data;

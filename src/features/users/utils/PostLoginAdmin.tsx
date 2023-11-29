@@ -8,8 +8,6 @@ export interface PostLoginAdminProps {
   token: string;
 }
 
-const baseURL = "https://jsonplaceholder.typicode.com/posts";
-
 const PostLoginAdmin: FC<PostLoginAdminProps> = ({
   email,
   password,
@@ -18,7 +16,11 @@ const PostLoginAdmin: FC<PostLoginAdminProps> = ({
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .post(baseURL, { body: email, password, token })
+      .post("http://localhost:3000/api/", {
+        body: email,
+        password,
+        token,
+      })
       .then((Response) => {
         if (Response.status === 200) {
           navigate("/");

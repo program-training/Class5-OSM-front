@@ -1,11 +1,12 @@
 import axios from "axios";
+const URL = `${import.meta.env.VITE_BASE_URL}/api/orders`;
 
 const editsOrderDetails = (
   orderId: string,
   orderStatus: Record<string, unknown>
 ) => {
   axios
-    .put(`http://localhost:3000/api/orders/${orderId}`, orderStatus)
+    .put(`${URL}/${orderId}`, orderStatus)
     .then(() => {
       console.log("Success");
     })

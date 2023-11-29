@@ -6,7 +6,7 @@ import { store } from "../../../store/store";
 import { userEvent } from "@testing-library/user-event";
 import HeaderSignInButton from "./HeaderSignInButton";
 
-test("Clicking on the HeaderSignInButton navigates to /signIn", async () => {
+test("Clicking on the HeaderSignInButton navigates to /signIn", () => {
   const user = userEvent.setup();
 
   render(
@@ -16,13 +16,15 @@ test("Clicking on the HeaderSignInButton navigates to /signIn", async () => {
       </MemoryRouter>
     </Provider>
   );
-  console.log("Before click:", window.location.pathname);
-  await user.click(screen.getByText("Sign In")).then(() => {
-    console.log("After click:", window.location.pathname);
-  });
 
+  //   console.log("Before click:", window.location.pathname);
+  user.click(screen.getByText("Sign In"));
+  const text = screen.getByText("Don't have an account? Sign Up");
+  expect(text).toBeInTheDocument();
+  //   console.log("After click:", window.location.pathname);
   // Click on the header to navigate to /home
   //   await user.click(SignInButton);
   // Check if the navigation occurred correctly
-  expect(window.location.pathname).toBe("/signIn");
+
+  //   expect(window.location.pathname).toBe("/signIn");
 });
