@@ -12,12 +12,9 @@ export const filteredOrdersUtils = (
   const filteredOrders = orders
     ? orders.filter((order) => {
         const searchValue = searchTerm.toLowerCase();
-        return (
-          String(order._id).toLowerCase().includes(searchValue) ||
-          String(order.shippingDetails?.userId)
-            .toLowerCase()
-            .includes(searchValue)
-        );
+        return String(order.shippingDetails?.userId)
+          .toLowerCase()
+          .includes(searchValue);
       })
     : [];
 

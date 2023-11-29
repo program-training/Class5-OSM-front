@@ -58,7 +58,7 @@ const SearchField: FC<SearchFieldProps> = ({ searchTerm, setSearchTerm }) => {
     <Box sx={{ padding: 3, textAlign: "center" }}>
       <TextField
         sx={{ paddingRight: 2 }}
-        label="Search by Order ID or User ID"
+        label="Search by User ID"
         variant="outlined"
         size="small"
         value={searchTerm}
