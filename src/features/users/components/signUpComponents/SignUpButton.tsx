@@ -3,8 +3,8 @@ import { FC } from "react";
 import { SignInUpButtonInterface } from "../../interfaces/SignInUpButtonInterface";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import SignUpAlert from "../alert/SignUpAlert";
 import { useAlerts } from "../../hooks/useAlerts";
+import SignInUpAlert from "../alert/SignInUpAlert";
 const SignUpButton: FC<SignInUpButtonInterface> = ({
   text,
   isValid,
@@ -41,7 +41,7 @@ const SignUpButton: FC<SignInUpButtonInterface> = ({
 
                 setTimeout(() => {
                   navigate("/signIn");
-                }, 3000);
+                }, 2000);
               } else {
                 showAlert("error", "Sign up failed. Please try again.");
               }
@@ -58,7 +58,7 @@ const SignUpButton: FC<SignInUpButtonInterface> = ({
       >
         {text}
       </Button>
-      <SignUpAlert alert={alert} handleAlertClose={handleAlertClose} />
+      <SignInUpAlert alert={alert} handleAlertClose={handleAlertClose} />
     </>
   );
 };

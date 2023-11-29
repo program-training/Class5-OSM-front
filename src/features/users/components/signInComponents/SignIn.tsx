@@ -10,11 +10,13 @@ import HeaderSignIn from "./HeaderSignIn";
 import FooterSignIn from "./FooterSignIn";
 import SignInLink from "./SignInLink";
 import Grid from "@mui/material/Grid";
+import SignInButton from "./SignInButton";
 
 export const SignIn = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
@@ -57,8 +59,13 @@ export const SignIn = () => {
               errors={errors}
             />
           </Grid>
-          <FooterSignIn isValid={isValid} />
+          <FooterSignIn />
           <SignInLink text="signUp" />
+          <SignInButton
+            text="Sign In"
+            isValid={isValid}
+            watch={watch}
+          ></SignInButton>
           {/* <SignInButton text="Sign In" isValid={isValid} /> */}
         </Box>
       </Box>
