@@ -25,6 +25,7 @@ export const filteredOrdersUtils = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
+    console.log(event);
     setPage(newPage);
   };
 
