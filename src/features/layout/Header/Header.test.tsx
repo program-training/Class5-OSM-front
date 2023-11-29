@@ -30,9 +30,6 @@ test("Clicking on the header navigates to /home", async () => {
     </Provider>
   );
   const headerButton = screen.getByText(/Team 1 OMS/i);
-  //   console.log("Before click:", window.location.pathname);
-  //   await user.click(headerButton);
-  //   console.log("After click:", window.location.pathname);
   // Click on the header to navigate to /home
   await user.click(headerButton);
   // Check if the navigation occurred correctly
