@@ -1,11 +1,13 @@
 import { TableCell, TableHead, TableRow } from "@mui/material";
+import { useAppSelector } from "../../../../store/hooks";
 
 const OrdersTableHead = () => {
+  const themeMode = useAppSelector((state) => state.themeMode.themeMode);
   return (
     <TableHead>
       <TableRow
         sx={{
-          backgroundColor: "#6DAAB5",
+          backgroundColor: themeMode ? "#edba21" : "#6DAAB5",
           fontSize: "500px",
           textAlign: "center",
         }}

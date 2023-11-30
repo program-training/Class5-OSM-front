@@ -56,7 +56,8 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ pages }) => {
               handleCloseNavMenu();
               if (page === "Categories") navigate("/home/categories");
               if (page === "Products") navigate("/home/products");
-              if (page === "Home") navigate("/home");
+              if (page === "Home") navigate("/oms");
+              if (page === "Orders") navigate("/oms/orders");
             }}
           >
             <Typography textAlign="center">{page}</Typography>
