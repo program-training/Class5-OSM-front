@@ -6,6 +6,11 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { deleteToken } from "../../../services/localStorageService";
+import { setToken } from "../../token/tokenSlice";
+import { setLoading } from "../../spinner/spinnerSlice";
+import UserIcon from "./UserIcon";
 
 interface UserMenuProps {
   anchorElUser: HTMLElement | null;
@@ -43,6 +48,10 @@ const UserMenu: React.FC<UserMenuProps> = ({
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
+        <Typography sx={{ margin: "10px", color: "lightblue" }}>
+          {loggedUser && (loggedUser.email as string)}
+        </Typography>
+        <UserIcon />
         {settings.map((setting) => (
           <MenuItem key={setting} onClick={handleCloseUserMenu}>
             <Typography textAlign="center">{setting}</Typography>

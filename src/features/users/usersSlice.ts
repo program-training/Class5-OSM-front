@@ -3,10 +3,14 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface InitialState {
   users: [];
+  loggedUser: UserInterface | Record<string, unknown>;
+  isAdmin: boolean;
 }
 
 const initialState: InitialState = {
   users: [],
+  loggedUser: {},
+  isAdmin: false,
 };
 
 export const usersSlice = createSlice({
@@ -16,8 +20,14 @@ export const usersSlice = createSlice({
     setUsers: (state, action: PayloadAction<[]>) => {
       state.users = action.payload;
     },
+    setLoggedUser: (state, action: PayloadAction<UserInterface>) => {
+      state.loggedUser = { ...state.loggedUser, ...action.payload };
+    },
+    setIsAdmin: (state, action: PayloadAction<boolean>) => {
+      state.isAdmin = action.payload;
+    },
   },
 });
 
-export const { setUsers } = usersSlice.actions;
+export const { setUsers, setLoggedUser, setIsAdmin } = usersSlice.actions;
 export default usersSlice.reducer;
