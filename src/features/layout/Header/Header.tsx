@@ -12,7 +12,7 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setThemeMode } from "../../themes/themeModeSlice";
 
-const pages = ["Orders"];
+const pages = ["Home", "Orders"];
 
 const Header = () => {
   const navigate = useNavigate();

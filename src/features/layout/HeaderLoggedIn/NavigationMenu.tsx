@@ -14,7 +14,7 @@ interface NavigationMenuProps {
 const NavigationMenu: React.FC<NavigationMenuProps> = ({
   handleOpenNavMenu,
 }) => {
-  const pages = ["Orders"];
+  const pages = ["Home", "Orders"];
   const navigate = useNavigate();
 
   return (
@@ -35,7 +35,11 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
           key={page}
           onClick={() => {
             navigate(
-              page === "Orders" ? "/oms/orders" : `/${page.toLowerCase()}`
+              page === "Orders"
+                ? "/oms/orders"
+                : page === "Home"
+                ? "/oms"
+                : `/${page.toLowerCase()}`
             );
           }}
           color="inherit"

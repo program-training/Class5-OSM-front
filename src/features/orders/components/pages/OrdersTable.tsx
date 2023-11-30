@@ -24,7 +24,7 @@ const OrdersTable = () => {
   }, []);
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const { changeStatus } = useOrder(orders);
   const { handleChangePage, handleChangeRowsPerPage, data } =
     filteredOrdersUtils(
@@ -52,12 +52,6 @@ const OrdersTable = () => {
         }}
       >
         <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <TableContainer component={Paper}>
-          <Table>
-            <OrdersTableHead />
-            <OrdersBodyTable currentOrders={data} />
-          </Table>
-        </TableContainer>
         <TablePagination
           component="div"
           count={orders.length}
@@ -67,6 +61,12 @@ const OrdersTable = () => {
           onRowsPerPageChange={handleChangeRowsPerPage}
           rowsPerPageOptions={[5, 10, 25, 50, 100]}
         />
+        <TableContainer component={Paper}>
+          <Table>
+            <OrdersTableHead />
+            <OrdersBodyTable currentOrders={data} />
+          </Table>
+        </TableContainer>
       </Box>
     </Container>
   );

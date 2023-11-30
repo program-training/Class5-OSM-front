@@ -13,7 +13,7 @@ const FooterSignIn = () => {
       <FormControlLabel
         control={<Checkbox value="remember" color="primary" />}
         label="Remember me"
-        onClick={() => {
+        onChange={() => {
           dispatch(setRememberMe(!rememberMe));
           console.log(rememberMe);
         }}
