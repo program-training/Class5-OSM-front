@@ -17,7 +17,7 @@ const SignInLink: FC<SignInUpLinkInterface> = ({ text }) => {
           <Link
             variant="body2"
             onClick={() => {
-              navigate("/" + text);
+              navigate("/oms/" + text);
             }}
           >
             {linkText}

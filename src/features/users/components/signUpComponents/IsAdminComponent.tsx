@@ -14,7 +14,7 @@ const IsAdminComponent = () => {
         control={<Checkbox value="remember" color="primary" />}
         label="Admin"
         id="admin"
-        onClick={() => {
+        onChange={() => {
           dispatch(setIsAdmin(!isAdmin));
         }}
       />

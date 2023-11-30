@@ -18,7 +18,7 @@ const OrderDetailsTableBottom = () => {
         <Button
           variant="contained"
           sx={{ margin: "20px" }}
-          onClick={() => navigate("/orders")}
+          onClick={() => navigate("/oms/orders")}
         >
           Go Back
         </Button>

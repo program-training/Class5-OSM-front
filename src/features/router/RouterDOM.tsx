@@ -13,17 +13,17 @@ const RouterDom = () => {
   return (
     <Routes>
       <Route path="/oms" element={<HomePage />} />
-      <Route path="/signIn" element={<SignInPage />} />
-      <Route path="/signUp" element={<SignUpPage />} />
+      <Route path="/oms/signIn" element={<SignInPage />} />
+      <Route path="/oms/signUp" element={<SignUpPage />} />
       <Route path="*" element={<NotFoundPage />} />
-      <Route path="/orderDetails" element={<OrderDetailsPage />} />
+      <Route path="/oms/orderDetails" element={<OrderDetailsPage />} />
       <Route
-        path="/orders"
+        path="/oms/orders"
         element={
           token === "loggedin" ? <OrderManagementPage /> : <NotLoggedInPage />
         }
       />
-      <Route path="/editOrderPage" element={<EditOrderPage />} />
+      <Route path="/oms/editOrderPage" element={<EditOrderPage />} />
     </Routes>
   );
 };
