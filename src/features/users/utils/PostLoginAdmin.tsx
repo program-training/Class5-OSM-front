@@ -16,14 +16,14 @@ const PostLoginAdmin: FC<PostLoginAdminProps> = ({
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .post("http://localhost:3000/api/", {
+      .post("http://localhost:3000", {
         body: email,
         password,
         token,
       })
       .then((Response) => {
         if (Response.status === 200) {
-          navigate("/");
+          navigate("/oms");
         }
         console.log("Success:", "Successfully added to the site");
       })

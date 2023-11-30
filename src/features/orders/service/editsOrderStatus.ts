@@ -1,5 +1,5 @@
 import axios from "axios";
-const URL = `${import.meta.env.VITE_BASE_URL}/api/orders`;
+const URL = `${import.meta.env.VITE_BASE_URL}/orders`;
 
 const editsOrderStatus = (
   orderId: string,

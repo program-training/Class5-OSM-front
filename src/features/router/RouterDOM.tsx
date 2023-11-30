@@ -13,7 +13,6 @@ const RouterDom = () => {
   return (
     <Routes>
       <Route path="/oms" element={<HomePage />} />
-      <Route path="/" element={<HomePage />} />
       <Route path="/signIn" element={<SignInPage />} />
       <Route path="/signUp" element={<SignUpPage />} />
       <Route path="*" element={<NotFoundPage />} />
