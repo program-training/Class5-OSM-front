@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { deleteToken } from "../../../services/localStorageService";
 import { setToken } from "../../token/tokenSlice";
 import { setLoading } from "../../spinner/spinnerSlice";
-import UserIcon from "./UserIcon";
+import UserIcon from "../headerLoggedIn/UserIcon";
 
 interface UserMenuProps {
   anchorElUser: HTMLElement | null;
