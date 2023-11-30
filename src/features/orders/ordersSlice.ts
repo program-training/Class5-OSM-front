@@ -1,17 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import type { PayloadAction, SerializedError } from "@reduxjs/toolkit";
 import Order from "./interfaces/order";
+import getAllOrders from "./service/getAllOrders";
 
 interface InitialState {
   orders: Order[];
   order: Order;
   filteredOrders: Order[];
+  pending: boolean;
+  error: string | SerializedError;
 }
 
 const initialState: InitialState = {
   orders: [],
   order: {} as Order,
   filteredOrders: [],
+  pending: false,
+  error: "",
 };
 
 export const ordersSlice = createSlice({
@@ -70,6 +75,24 @@ export const ordersSlice = createSlice({
     setFilteredOrders: (state, action: PayloadAction<Order[]>) => {
       state.filteredOrders = action.payload;
     },
+  },
+
+  extraReducers(builder) {
+    builder.addCase(getAllOrders.pending, (state) => {
+      state.pending = true;
+      return state;
+    });
+    builder.addCase(getAllOrders.fulfilled, (state, action) => {
+      state.pending = false;
+      state.orders = action.payload;
+      state.filteredOrders = action.payload;
+      return state;
+    });
+    builder.addCase(getAllOrders.rejected, (state, action) => {
+      state.pending = false;
+      state.error = action.error;
+      return state;
+    });
   },
 });
 

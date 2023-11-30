@@ -23,8 +23,9 @@ const UserMenu: React.FC<UserMenuProps> = ({
   handleCloseUserMenu,
   handleOpenUserMenu,
 }) => {
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
+  const settings = ["Logout"];
+  const loggedUser = useAppSelector((store) => store.users.loggedUser);
+  const dispatch = useAppDispatch();
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">

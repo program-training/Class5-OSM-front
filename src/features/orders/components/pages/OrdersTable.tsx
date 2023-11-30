@@ -8,14 +8,20 @@ import {
   TablePagination,
 } from "@mui/material";
 import SearchField from "../ordersTable/SearchField";
-import { useAppSelector } from "../../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import OrdersTableHead from "../ordersTable/OrdersTableHead";
-import OrdersBodyTable from "../ordersTable/OrdersBodyTable/OrdersBodyTable";
+import OrdersBodyTable from "../ordersTable/ordersBodyTable/OrdersBodyTable";
 import useOrder from "../../hooks/useOrder";
 import { filteredOrdersUtils } from "../../../utils/utils";
+import getAllOrders from "../../service/getAllOrders";
 
 const OrdersTable = () => {
-  const orders = useAppSelector((state) => state.orders.filteredOrders);
+  const { filteredOrders: orders } = useAppSelector((store) => store.orders);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAllOrders());
+    console.log(orders);
+  }, []);
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
