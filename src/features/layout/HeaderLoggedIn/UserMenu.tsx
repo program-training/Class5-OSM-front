@@ -30,7 +30,10 @@ const UserMenu: React.FC<UserMenuProps> = ({
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          <Avatar
+            alt={loggedUser ? (loggedUser.email as string) : ""}
+            src="/static/images/avatar/2.jpg"
+          />
         </IconButton>
       </Tooltip>
       <Menu
@@ -54,7 +57,24 @@ const UserMenu: React.FC<UserMenuProps> = ({
         </Typography>
         <UserIcon />
         {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
+          <MenuItem
+            key={setting}
+            onClick={() => {
+              handleCloseUserMenu();
+              if (setting === "Logout") {
+                try {
+                  dispatch(setLoading(true));
+                  setTimeout(() => {
+                    deleteToken();
+                    dispatch(setToken("loggedout"));
+                    dispatch(setLoading(false));
+                  }, 1000);
+                } catch (error) {
+                  console.log(error);
+                }
+              }
+            }}
+          >
             <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
         ))}

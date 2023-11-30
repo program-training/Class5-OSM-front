@@ -12,7 +12,7 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setThemeMode } from "../../themes/themeModeSlice";
 
-const pages = [""];
+const pages = ["Orders"];
 
 const Header = () => {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const Header = () => {
               noWrap
               component="a"
               onClick={() => {
-                navigate("/");
+                navigate("/oms");
               }}
               sx={{
                 mr: 2,

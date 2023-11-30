@@ -7,7 +7,7 @@ import EmailInputIn from "./EmailInputIn";
 import PasswordInputIn from "./PasswordInputIn";
 import { emailValidet, passwordValidet } from "../../helpers/validation";
 import HeaderSignIn from "./HeaderSignIn";
-import FooterSignIn from "./FooterSignIn";
+import FooterSignIn from "./RememberMeSignIn";
 import SignInLink from "./SignInLink";
 import Grid from "@mui/material/Grid";
 import SignInButton from "./SignInButton";

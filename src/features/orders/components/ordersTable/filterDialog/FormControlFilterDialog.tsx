@@ -15,7 +15,7 @@ const FormControlFilterDialog: FC<FormControlFilterDialogProps> = ({
       <FormControl className="filter-form-control">
         <InputLabel shrink={true}>Status</InputLabel>
         <Select
-          sx={{ minWidth: "100px", color: "gold" }}
+          sx={{ minWidth: "100px", color: "white" }}
           value={filterStatus || ""}
           onChange={(e) => setFilterStatus(e.target.value as string | null)}
           label="Status"

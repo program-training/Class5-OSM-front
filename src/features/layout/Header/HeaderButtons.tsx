@@ -18,6 +18,7 @@ const HeaderButtons: React.FC<HeaderButtonsProps> = ({ pages }) => {
             if (page === "Categories") navigate("/home/categories");
             if (page === "Products") navigate("/home/products");
             if (page === "Home") navigate("/home");
+            if (page === "Orders") navigate("/orders");
           }}
           sx={{ my: 2, mx: 1, color: "white", display: "inline-block" }}
         >

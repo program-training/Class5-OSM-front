@@ -38,7 +38,14 @@ const HeaderLoggedIn = () => {
   };
 
   return (
-    <AppBar position="fixed" style={{ width: "100%" }}>
+    <AppBar
+      position="fixed"
+      style={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "space-between",
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar
           disableGutters

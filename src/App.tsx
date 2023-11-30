@@ -2,14 +2,17 @@ import { ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
 import { CssBaseline } from "@mui/material";
+import "./App.css";
 import Header from "./features/layout/Header/Header";
 import RouterDOM from "./features/router/RouterDOM";
+import Spinner from "./features/spinner/Spinner";
+import HeaderLoggedIn from "./features/layout/HeaderLoggedIn/HeaderLoggedIn";
 import { getToken } from "./services/localStorageService";
 import { setToken } from "./features/token/tokenSlice";
-import Spinner from "./Spinner";
-import "./App.css";
+import { setLoading } from "./features/spinner/spinnerSlice";
 
 const App = () => {
+  const token = useAppSelector((store) => store.token.token);
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
   const loading = useAppSelector((store) => store.spinner.loading);
   const isLogged = getToken();
@@ -21,10 +24,7 @@ const App = () => {
     setTimeout(() => dispatch(setLoading(false)), 1000);
     return (
       <>
-        <ThemeProvider theme={themeMode ? themeLight : themeDark}>
-          <CssBaseline />
-          <Spinner />
-        </ThemeProvider>
+        <Spinner />;
       </>
     );
   }
@@ -33,7 +33,11 @@ const App = () => {
     <>
       <ThemeProvider theme={themeMode ? themeLight : themeDark}>
         <CssBaseline />
-        <Header />
+        {isLogged === "loggedin" || token === "loggedin" ? (
+          <HeaderLoggedIn />
+        ) : (
+          <Header />
+        )}
         <RouterDOM />
         {/* <Footer /> */}
       </ThemeProvider>
