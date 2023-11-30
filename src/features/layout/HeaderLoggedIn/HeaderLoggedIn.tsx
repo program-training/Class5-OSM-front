@@ -5,9 +5,15 @@ import Toolbar from "@mui/material/Toolbar";
 import HeaderLogo from "./HeaderLogo";
 import NavigationMenu from "./NavigationMenu";
 import UserMenu from "./UserMenu";
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { setThemeMode } from "../../themes/themeModeSlice";
 
 const HeaderLoggedIn = () => {
+  const themeMode = useAppSelector((store) => store.themeMode.themeMode);
+  const dispatch = useAppDispatch();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -53,7 +59,16 @@ const HeaderLoggedIn = () => {
               handleOpenNavMenu={handleOpenNavMenu}
             />
           </Box>
-          <Box>
+          <Box sx={{ display: "flex" }}>
+            <IconButton
+              sx={{ ml: 1, marginRight: "10px" }}
+              onClick={() => {
+                dispatch(setThemeMode(!themeMode));
+              }}
+              color="inherit"
+            >
+              {themeMode ? <Brightness4Icon /> : <Brightness7Icon />}
+            </IconButton>
             <UserMenu
               anchorElUser={anchorElUser}
               handleCloseUserMenu={handleCloseUserMenu}

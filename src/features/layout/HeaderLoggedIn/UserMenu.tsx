@@ -10,7 +10,9 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { deleteToken } from "../../../services/localStorageService";
 import { setToken } from "../../token/tokenSlice";
 import { setLoading } from "../../spinner/spinnerSlice";
-
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Icon } from "@mui/material";
 interface UserMenuProps {
   anchorElUser: HTMLElement | null;
   handleCloseUserMenu: () => void;
@@ -51,6 +53,29 @@ const UserMenu: React.FC<UserMenuProps> = ({
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
+        <Typography sx={{ margin: "10px", color: "lightblue" }}>
+          {loggedUser && (loggedUser.email as string)}
+        </Typography>
+        <Typography
+          sx={{ margin: "10px", color: "lightblue", display: "flex" }}
+        >
+          {loggedUser &&
+            (loggedUser.isadmin ? (
+              <Box sx={{ display: "flex" }}>
+                <Icon>
+                  <AdminPanelSettingsIcon />
+                </Icon>
+                ADMIN
+              </Box>
+            ) : (
+              <Box sx={{ display: "flex" }}>
+                <Icon sx={{ marginRight: "10px" }}>
+                  <AccountCircleIcon />
+                </Icon>
+                REGULAR USER
+              </Box>
+            ))}
+        </Typography>
         {settings.map((setting) => (
           <MenuItem
             key={setting}

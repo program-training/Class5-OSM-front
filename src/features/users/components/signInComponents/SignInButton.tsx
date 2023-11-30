@@ -40,12 +40,12 @@ const SignInButton: FC<SignInUpButtonInterface> = ({
               if (res.data.resInfoObj.user.email === object.email) {
                 dispatch(setToken("loggedin"));
                 dispatch(setLoggedUser(res.data.resInfoObj.user));
+                console.log(res.data.resInfoObj.user);
+
                 if (rememberMe) {
                   setLocalStorageToken(res.data.resInfoObj.token);
                 }
-                // console.log(decodeToken(res.data.resInfoObj.token));
                 console.log(getToken());
-
                 showAlert(
                   "success",
                   "Sign in successful! Redirecting to orders page..."

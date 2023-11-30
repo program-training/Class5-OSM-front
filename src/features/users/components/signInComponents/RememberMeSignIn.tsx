@@ -1,11 +1,12 @@
 // import SignUpButton from "../signUpComponents/SignUpButton";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { useAppDispatch } from "../../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { setRememberMe } from "../../../token/tokenSlice";
 
 const FooterSignIn = () => {
   const dispatch = useAppDispatch();
+  const rememberMe = useAppSelector((store) => store.token.rememberMe);
   return (
     <>
       {" "}
@@ -13,7 +14,7 @@ const FooterSignIn = () => {
         control={<Checkbox value="remember" color="primary" />}
         label="Remember me"
         onClick={() => {
-          dispatch(setRememberMe(true));
+          dispatch(setRememberMe(!rememberMe));
         }}
       />
     </>

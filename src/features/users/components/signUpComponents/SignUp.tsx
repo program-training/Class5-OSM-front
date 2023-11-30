@@ -12,6 +12,7 @@ import SignUpButton from "./SignUpButton";
 import PasswordInput from "./PasswordInput";
 import EmailInput from "./EmailInput";
 import ConfirmPasswordInputIn from "./ConfirmPasswordInput";
+import IsAdminComponent from "./IsAdminComponent";
 
 export const SignUp = () => {
   const {
@@ -64,6 +65,7 @@ export const SignUp = () => {
               watch={watch}
             />
           </Grid>
+          <IsAdminComponent />
           <SignUpButton text="Sign Up" isValid={isValid} watch={watch} />
         </Box>
       </Box>
