@@ -38,7 +38,7 @@ const App = () => {
       <>
         <ThemeProvider theme={themeMode ? themeLight : themeDark}>
           <CssBaseline />
-          <Spinner />;
+          <Spinner />
         </ThemeProvider>
       </>
     );
