@@ -38,10 +38,10 @@ const useEditOrders = ({ formValues, setFormValues }: useEditOrdersProps) => {
         orderType: formValues.orderType,
       },
     });
-    navigate("/orders");
+    navigate("/oms/orders");
   };
   const handleCancel = () => {
-    navigate("/orders");
+    navigate("/oms/orders");
   };
 
   const handleDeliveryMethodChange = (newMethod: string) => {

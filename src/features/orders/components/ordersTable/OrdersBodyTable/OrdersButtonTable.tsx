@@ -17,7 +17,7 @@ const OrdersButtonTable: FC<OrderProps> = ({ order }) => {
           onClick={(event) => {
             event.stopPropagation();
             dispatch(setOrder(order));
-            navigate("/EditOrderPage");
+            navigate("/oms/editOrderPage");
           }}
         >
           <EditIcon />

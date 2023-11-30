@@ -6,7 +6,7 @@ import axios from "axios";
 import { useAlerts } from "../../hooks/useAlerts";
 import SignInUpAlert from "../alert/SignInUpAlert";
 import { useAppSelector } from "../../../../store/hooks";
-const URL = `${import.meta.env.VITE_BASE_URL}/api/users`;
+const URL = `${import.meta.env.VITE_BASE_URL}/users`;
 const SignUpButton: FC<SignInUpButtonInterface> = ({
   text,
   isValid,
@@ -39,7 +39,7 @@ const SignUpButton: FC<SignInUpButtonInterface> = ({
                 );
 
                 setTimeout(() => {
-                  navigate("/signIn");
+                  navigate("/oms/signIn");
                 }, 2000);
               } else {
                 showAlert("error", "Sign up failed. Please try again.");

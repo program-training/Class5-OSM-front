@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { setToken } from "../../../token/tokenSlice";
 import { setLoggedUser } from "../../usersSlice";
 // import { useToken } from "../../../token/hooks/useToken";
-const URL = `${import.meta.env.VITE_BASE_URL}/api/users/login`;
+const URL = `${import.meta.env.VITE_BASE_URL}/users/login`;
 const SignInButton: FC<SignInUpButtonInterface> = ({
   text,
   isValid,
@@ -52,7 +52,7 @@ const SignInButton: FC<SignInUpButtonInterface> = ({
                 );
 
                 setTimeout(() => {
-                  navigate("/orders");
+                  navigate("/oms/orders");
                 }, 2000);
               } else {
                 showAlert(

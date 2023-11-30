@@ -34,7 +34,9 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
         <Button
           key={page}
           onClick={() => {
-            navigate(page === "Orders" ? "/orders" : `/${page.toLowerCase()}`);
+            navigate(
+              page === "Orders" ? "/oms/orders" : `/${page.toLowerCase()}`
+            );
           }}
           color="inherit"
           sx={{ mx: 2, display: { xs: "flex", md: "flex" } }}

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-const URL = `${import.meta.env.VITE_BASE_URL}/api/orders`;
+const URL = `${import.meta.env.VITE_BASE_URL}/orders`;
 
 const getAllOrders = createAsyncThunk("ordersSlice/getAllOrders", async () => {
   try {

@@ -33,7 +33,7 @@ const OrdersBodyTable: React.FC<OrdersTableProps> = ({ currentOrders }) => {
             key={order._id}
             onClick={() => {
               dispatch(setOrder(order));
-              navigate("/orderDetails");
+              navigate("/oms/orderDetails");
             }}
           >
             <TableCell sx={{ textAlign: "center" }}>
