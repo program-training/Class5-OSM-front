@@ -27,7 +27,6 @@ const OrderDetailsButtons = ({
       }}
     >
       <Button
-        title="Cancel"
         sx={{ margin: "2px" }}
         variant="contained"
         color="secondary"
@@ -37,7 +36,6 @@ const OrderDetailsButtons = ({
         Cancel
       </Button>
       <Button
-        title="Save Changes"
         sx={{ m: "2px" }}
         variant="contained"
         color="primary"
