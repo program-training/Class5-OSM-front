@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAlerts } from "../../hooks/useAlerts";
 import SignInUpAlert from "../alert/SignInUpAlert";
+import { useAppSelector } from "../../../../store/hooks";
 const URL = `${import.meta.env.VITE_BASE_URL}/api/users`;
 const SignUpButton: FC<SignInUpButtonInterface> = ({
   text,
@@ -13,6 +14,7 @@ const SignUpButton: FC<SignInUpButtonInterface> = ({
 }) => {
   const navigate = useNavigate();
   const { alert, handleAlertClose, showAlert } = useAlerts();
+  const isAdmin = useAppSelector((store) => store.users.isAdmin);
   return (
     <>
       <Button
@@ -21,9 +23,8 @@ const SignUpButton: FC<SignInUpButtonInterface> = ({
           const object = {
             email: watch("email"),
             password: watch("password"),
-            isAdmin: true,
+            isAdmin: isAdmin,
           };
-
           console.log(object);
 
           axios

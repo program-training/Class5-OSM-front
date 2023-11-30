@@ -28,6 +28,9 @@ export const tokenSlice = createSlice({
       state.rememberMe = action.payload;
     },
   },
+  // extraReducers(builder) {
+  //   builder.addCase();
+  // },
 });
 
 export const { setToken, setRememberMe } = tokenSlice.actions;

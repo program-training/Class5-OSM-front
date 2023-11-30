@@ -15,6 +15,7 @@ const FooterSignIn = () => {
         label="Remember me"
         onClick={() => {
           dispatch(setRememberMe(!rememberMe));
+          console.log(rememberMe);
         }}
       />
     </>
