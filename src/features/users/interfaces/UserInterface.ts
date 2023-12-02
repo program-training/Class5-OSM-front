@@ -3,6 +3,8 @@ interface UserInterface {
   email: string;
   password: string;
   isadmin?: boolean;
+  exp?: string;
+  iat?: string;
 }
 
 export default UserInterface;

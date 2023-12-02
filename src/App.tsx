@@ -7,20 +7,27 @@ import Header from "./features/layout/Header/Header";
 import RouterDOM from "./features/router/RouterDOM";
 import Spinner from "./features/spinner/Spinner";
 import HeaderLoggedIn from "./features/layout/HeaderLoggedIn/HeaderLoggedIn";
-import { getToken } from "./services/localStorageService";
+import { getRealToken, getToken } from "./services/localStorageService";
 import { setToken } from "./features/token/tokenSlice";
 import { setLoading } from "./features/spinner/spinnerSlice";
+import { setLoggedUser } from "./features/users/usersSlice";
+import * as jwt from "jwt-decode";
 
 const App = () => {
   const token = useAppSelector((store) => store.token.token);
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
   const loading = useAppSelector((store) => store.spinner.loading);
   const isLogged = getToken();
+  const RealToken = getRealToken();
   const dispatch = useAppDispatch();
   console.log("logg:  " + isLogged, token);
 
   if (loading) {
     dispatch(setToken(isLogged));
+    if (RealToken !== "") {
+      dispatch(setLoggedUser(jwt.jwtDecode(RealToken)));
+    }
+
     setTimeout(() => dispatch(setLoading(false)), 1000);
     return (
       <>
