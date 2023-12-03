@@ -26,6 +26,7 @@ const App = () => {
     dispatch(setToken(isLogged));
     if (RealToken !== "") {
       dispatch(setLoggedUser(jwt.jwtDecode(RealToken)));
+      console.log(jwt.jwtDecode(RealToken));
     }
 
     setTimeout(() => dispatch(setLoading(false)), 1000);
@@ -46,7 +47,6 @@ const App = () => {
           <Header />
         )}
         <RouterDOM />
-        {/* <Footer /> */}
       </ThemeProvider>
     </>
   );
