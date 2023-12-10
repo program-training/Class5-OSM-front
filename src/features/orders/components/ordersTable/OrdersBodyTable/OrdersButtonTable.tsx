@@ -5,9 +5,11 @@ import { FC } from "react";
 import { OrderProps } from "../../../interfaces/orderProps";
 import { useAppDispatch } from "../../../../../store/hooks";
 import { setOrder } from "../../../ordersSlice";
+
 const OrdersButtonTable: FC<OrderProps> = ({ order }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   return (
     <>
       {order.status === "pending" && (
@@ -24,4 +26,5 @@ const OrdersButtonTable: FC<OrderProps> = ({ order }) => {
     </>
   );
 };
+
 export default OrdersButtonTable;

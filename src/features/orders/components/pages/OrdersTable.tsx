@@ -13,20 +13,27 @@ import OrdersTableHead from "../ordersTable/OrdersTableHead";
 import OrdersBodyTable from "../ordersTable/ordersBodyTable/OrdersBodyTable";
 import useOrder from "../../hooks/useOrder";
 import { filteredOrdersUtils } from "../../../utils/utils";
-import getAllOrders from "../../service/getAllOrders";
+import { useQuery } from "@apollo/client";
+import { setFilteredOrders, setOrders } from "../../ordersSlice";
+import { GET_ORDERS } from "../../graphQl/orderQueries";
 
 const OrdersTable = () => {
   const { filteredOrders: orders } = useAppSelector((store) => store.orders);
+  const { loading, error, data } = useQuery(GET_ORDERS);
+
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getAllOrders());
-    console.log(orders);
-  }, []);
+    if (data) {
+      dispatch(setOrders(data.getAllOrdersFromMongoDB));
+      dispatch(setFilteredOrders(data.getAllOrdersFromMongoDB));
+    }
+  }, [data]);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const { changeStatus } = useOrder(orders);
-  const { handleChangePage, handleChangeRowsPerPage, data } =
+  const { handleChangePage, handleChangeRowsPerPage, ordersData } =
     filteredOrdersUtils(
       orders,
       searchTerm,
@@ -35,11 +42,12 @@ const OrdersTable = () => {
       rowsPerPage,
       setRowsPerPage
     );
-
   useEffect(() => {
-    const timeoutId = setTimeout(changeStatus, 10000);
+    const timeoutId = setTimeout(changeStatus, 100000);
     return () => clearTimeout(timeoutId);
   }, [orders]);
+  if (loading) return <p>Loading... </p>;
+  if (error) return <p>{error.message}</p>;
 
   return (
     <Container>
@@ -64,7 +72,7 @@ const OrdersTable = () => {
         <TableContainer component={Paper}>
           <Table>
             <OrdersTableHead />
-            <OrdersBodyTable currentOrders={data} />
+            {orders.length && <OrdersBodyTable currentOrders={ordersData} />}
           </Table>
         </TableContainer>
       </Box>

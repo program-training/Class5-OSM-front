@@ -8,6 +8,8 @@ import OrdersCancelReceive from "./OrdersCancelReceive";
 import OrdersButtonTable from "./OrdersButtonTable";
 
 const OrdersBodyTable: React.FC<OrdersTableProps> = ({ currentOrders }) => {
+  console.log(currentOrders);
+
   const navigate = useNavigate();
   const themeMode = useAppSelector((state) => state.themeMode.themeMode);
   const dispatch = useAppDispatch();
@@ -33,7 +35,7 @@ const OrdersBodyTable: React.FC<OrdersTableProps> = ({ currentOrders }) => {
             key={order._id}
             onClick={() => {
               dispatch(setOrder(order));
-              navigate("/oms/orderDetails");
+              navigate(`/oms/orderDetails/${order._id}`);
             }}
           >
             <TableCell sx={{ textAlign: "center" }}>

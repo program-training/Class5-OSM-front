@@ -12,9 +12,9 @@ import {
 import { useAppSelector } from "../../../../store/hooks";
 import useEditOrders from "../../hooks/useEditOrders";
 import { editOrderForm } from "../../interfaces/editOrderForm";
-import OrderDetailsOrderId from "../orderDetailsTable/OrderDetailsOrderId";
-import OrderDetailsOrderTime from "../orderDetailsTable/OrderDetailsOrderTime";
-import OrderDetailsButtons from "../orderDetailsTable/OrderDetailsButtons";
+import OrderDetailsOrderId from "../OrderDetailsTable/OrderDetailsOrderId";
+import OrderDetailsOrderTime from "../OrderDetailsTable/OrderDetailsOrderTime";
+import OrderDetailsButtons from "../OrderDetailsTable/OrderDetailsButtons";
 
 const EditOrderPage: React.FC = () => {
   const cartItem = useAppSelector(

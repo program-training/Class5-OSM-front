@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction, SerializedError } from "@reduxjs/toolkit";
-import Order from "./interfaces/order";
+import Order, { OrderStatus } from "./interfaces/order";
 import getAllOrders from "./service/getAllOrders";
 
 interface InitialState {
@@ -25,6 +25,7 @@ export const ordersSlice = createSlice({
   reducers: {
     setOrders: (state, action: PayloadAction<Order[]>) => {
       state.orders = action.payload;
+      state.filteredOrders = action.payload;
     },
     setOrder: (state, action: PayloadAction<Order>) => {
       state.order = action.payload;
@@ -41,7 +42,7 @@ export const ordersSlice = createSlice({
     },
     updateOrderStatus: (
       state,
-      action: PayloadAction<{ orderId: string; newStatus: string }>
+      action: PayloadAction<{ orderId: string; newStatus: OrderStatus }>
     ) => {
       const { orderId, newStatus } = action.payload;
       const order = state.filteredOrders.find((o) => o._id === orderId);
