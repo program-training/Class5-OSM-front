@@ -25,7 +25,6 @@ const UserMenu: React.FC<UserMenuProps> = ({
 }) => {
   const settings = ["Logout"];
   const loggedUser = useAppSelector((store) => store.users.loggedUser);
-  console.log(loggedUser);
 
   const dispatch = useAppDispatch();
   return (

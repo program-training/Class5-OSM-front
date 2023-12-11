@@ -5,6 +5,7 @@ import ordersSlice from "../features/orders/ordersSlice";
 import tokenSlice from "../features/token/tokenSlice";
 import spinnerSlice from "../features/spinner/spinnerSlice";
 import axiosInterceptors from "../services/axiosInterceptors";
+
 const rootReducer = combineReducers({
   users: usersSlice,
   themeMode: themeModeSlice,

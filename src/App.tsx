@@ -22,13 +22,11 @@ const App = () => {
   const isLogged = getToken();
   const RealToken = getRealToken();
   const dispatch = useAppDispatch();
-  console.log("log:  " + isLogged, token);
 
   if (loading) {
     dispatch(setToken(isLogged));
     if (RealToken !== "") {
       dispatch(setLoggedUser(jwt.jwtDecode(RealToken)));
-      console.log(jwt.jwtDecode(RealToken));
     }
 
     setTimeout(() => dispatch(setLoading(false)), 1000);

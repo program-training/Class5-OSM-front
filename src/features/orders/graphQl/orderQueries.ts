@@ -12,14 +12,13 @@ export const GET_ORDERS = gql`
         quantity
       }
       orderTime
-      status
       price
       shippingDetails {
         address
         userId
         contactNumber
-        orderType
       }
+      status
     }
   }
 `;

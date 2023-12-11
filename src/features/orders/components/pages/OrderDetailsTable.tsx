@@ -5,31 +5,25 @@ import OrderDetailsTableHead from "../OrderDetailsTable/OrderDetailsTableHead";
 import OrderDetailsTableBody from "../OrderDetailsTable/OrderDetailsTableBody";
 import OrderDetailsTableBottom from "../OrderDetailsTable/OrderDetailsTableBottom";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import Order from "../../interfaces/order";
 import NotFoundPage from "../../../layout/NotFoundPage/NotFoundPage";
 import Product from "../../interfaces/product";
-import { GET_ORDER_BY_ID } from "../../graphQl/orderQueries";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import getOrderByID from "../../service/getOrderById";
 
 const OrderDetailsTable = () => {
   const { orderId } = useParams();
-  console.log(orderId);
-
-  // const cartItems = useAppSelector((state) => state.orders.order);
-  const [order, setOrder] = useState<Order>();
+  const dispatch = useAppDispatch();
+  const {
+    order,
+    error,
+    pending: loading,
+  } = useAppSelector((state) => state.orders);
   const [filteredItems, setFilteredItems] = useState<Product[]>([]);
-  const { loading, error, data } = useQuery(GET_ORDER_BY_ID, {
-    variables: { getOrderByIdId: orderId },
-  });
+
   const [searchTerm, setSearchTerm] = useState("");
+
   useEffect(() => {
-    if (data) {
-      setOrder(data.getOrderById);
-      setFilteredItems(data.getOrderById.cartItems);
-      console.log(data);
-    }
-  }, [data]);
-  useEffect(() => {
+    dispatch(getOrderByID(orderId as string));
     if (order) {
       const filteredCartItems = order.cartItems.filter(
         (product: { name: string }) =>
@@ -37,11 +31,11 @@ const OrderDetailsTable = () => {
       );
       setFilteredItems(filteredCartItems);
     }
-  }, [searchTerm]);
+  }, [searchTerm, orderId]);
 
   if (loading) return <p>Loading... </p>;
-  if (error) return <p>{error.message}</p>;
-  if (!loading && !data) return <NotFoundPage />;
+  if (error) return <p>{error}</p>;
+  if (!loading && !order) return <NotFoundPage />;
   return (
     <Container>
       {order && (

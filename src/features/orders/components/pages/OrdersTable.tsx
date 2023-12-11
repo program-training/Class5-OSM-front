@@ -10,24 +10,22 @@ import {
 import SearchField from "../ordersTable/SearchField";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import OrdersTableHead from "../ordersTable/OrdersTableHead";
-import OrdersBodyTable from "../ordersTable/ordersBodyTable/OrdersBodyTable";
 import useOrder from "../../hooks/useOrder";
 import { filteredOrdersUtils } from "../../../utils/utils";
-import { useQuery } from "@apollo/client";
-import { setFilteredOrders, setOrders } from "../../ordersSlice";
-import { GET_ORDERS } from "../../graphQl/orderQueries";
+import getAllOrders from "../../service/getAllOrders";
+import OrdersBodyTable from "../ordersTable/OrdersBodyTable/OrdersBodyTable";
 
 const OrdersTable = () => {
-  const { filteredOrders: orders } = useAppSelector((store) => store.orders);
-  const { loading, error, data } = useQuery(GET_ORDERS);
+  const {
+    filteredOrders: orders,
+    error,
+    pending: loading,
+  } = useAppSelector((store) => store.orders);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (data) {
-      dispatch(setOrders(data.getAllOrdersFromMongoDB));
-      dispatch(setFilteredOrders(data.getAllOrdersFromMongoDB));
-    }
-  }, [data]);
+    dispatch(getAllOrders());
+  }, []);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
@@ -47,7 +45,7 @@ const OrdersTable = () => {
     return () => clearTimeout(timeoutId);
   }, [orders]);
   if (loading) return <p>Loading... </p>;
-  if (error) return <p>{error.message}</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <Container>
