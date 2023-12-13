@@ -2,7 +2,7 @@ name: ESLint Check
 
 on:
   pull_request:
-    branches: [devop-pipeline, main]
+    branches: [devops-pipeline, main]
     paths:
       - "**/*.ts"
       - "**/*.tsx"
