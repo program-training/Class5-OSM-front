@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { deleteToken } from "../../../services/localStorageService";
 import { setToken } from "../../token/tokenSlice";
 import { setLoading } from "../../spinner/spinnerSlice";
-import UserIcon from "../headerLoggedIn/UserIcon";
+import UserIcon from "./UserIcon";
 
 interface UserMenuProps {
   anchorElUser: HTMLElement | null;
@@ -25,6 +25,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
 }) => {
   const settings = ["Logout"];
   const loggedUser = useAppSelector((store) => store.users.loggedUser);
+
   const dispatch = useAppDispatch();
   return (
     <Box sx={{ flexGrow: 0 }}>

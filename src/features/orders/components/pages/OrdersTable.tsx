@@ -10,23 +10,28 @@ import {
 import SearchField from "../ordersTable/SearchField";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import OrdersTableHead from "../ordersTable/OrdersTableHead";
-import OrdersBodyTable from "../ordersTable/ordersBodyTable/OrdersBodyTable";
 import useOrder from "../../hooks/useOrder";
 import { filteredOrdersUtils } from "../../../utils/utils";
 import getAllOrders from "../../service/getAllOrders";
+import OrdersBodyTable from "../ordersTable/OrdersBodyTable/OrdersBodyTable";
 
 const OrdersTable = () => {
-  const { filteredOrders: orders } = useAppSelector((store) => store.orders);
+  const {
+    filteredOrders: orders,
+    error,
+    pending: loading,
+  } = useAppSelector((store) => store.orders);
+
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAllOrders());
-    console.log(orders);
   }, []);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const { changeStatus } = useOrder(orders);
-  const { handleChangePage, handleChangeRowsPerPage, data } =
+  const { handleChangePage, handleChangeRowsPerPage, ordersData } =
     filteredOrdersUtils(
       orders,
       searchTerm,
@@ -35,11 +40,12 @@ const OrdersTable = () => {
       rowsPerPage,
       setRowsPerPage
     );
-
   useEffect(() => {
-    const timeoutId = setTimeout(changeStatus, 10000);
+    const timeoutId = setTimeout(changeStatus, 100000);
     return () => clearTimeout(timeoutId);
   }, [orders]);
+  if (loading) return <p>Loading... </p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <Container>
@@ -64,7 +70,7 @@ const OrdersTable = () => {
         <TableContainer component={Paper}>
           <Table>
             <OrdersTableHead />
-            <OrdersBodyTable currentOrders={data} />
+            {orders.length && <OrdersBodyTable currentOrders={ordersData} />}
           </Table>
         </TableContainer>
       </Box>

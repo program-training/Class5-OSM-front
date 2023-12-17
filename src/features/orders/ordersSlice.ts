@@ -1,14 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction, SerializedError } from "@reduxjs/toolkit";
-import Order from "./interfaces/order";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import Order, { OrderStatus } from "./interfaces/order";
 import getAllOrders from "./service/getAllOrders";
+import getOrderByID from "./service/getOrderById";
 
 interface InitialState {
   orders: Order[];
   order: Order;
   filteredOrders: Order[];
   pending: boolean;
-  error: string | SerializedError;
+  error: string;
 }
 
 const initialState: InitialState = {
@@ -25,6 +26,7 @@ export const ordersSlice = createSlice({
   reducers: {
     setOrders: (state, action: PayloadAction<Order[]>) => {
       state.orders = action.payload;
+      state.filteredOrders = action.payload;
     },
     setOrder: (state, action: PayloadAction<Order>) => {
       state.order = action.payload;
@@ -41,7 +43,7 @@ export const ordersSlice = createSlice({
     },
     updateOrderStatus: (
       state,
-      action: PayloadAction<{ orderId: string; newStatus: string }>
+      action: PayloadAction<{ orderId: string; newStatus: OrderStatus }>
     ) => {
       const { orderId, newStatus } = action.payload;
       const order = state.filteredOrders.find((o) => o._id === orderId);
@@ -80,17 +82,35 @@ export const ordersSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(getAllOrders.pending, (state) => {
       state.pending = true;
+      state.error = "";
       return state;
     });
-    builder.addCase(getAllOrders.fulfilled, (state, action) => {
+    builder.addCase(getAllOrders.fulfilled, (state, { payload }) => {
       state.pending = false;
-      state.orders = action.payload;
-      state.filteredOrders = action.payload;
+      state.error = "";
+      state.orders = payload;
+      state.filteredOrders = payload;
       return state;
     });
-    builder.addCase(getAllOrders.rejected, (state, action) => {
+    builder.addCase(getAllOrders.rejected, (state, { error }) => {
       state.pending = false;
-      state.error = action.error;
+      state.error = error.message || "";
+      return state;
+    });
+    builder.addCase(getOrderByID.pending, (state) => {
+      state.error = "";
+      state.pending = true;
+      return state;
+    });
+    builder.addCase(getOrderByID.fulfilled, (state, { payload }) => {
+      state.pending = false;
+      state.error = "";
+      state.order = payload;
+      return state;
+    });
+    builder.addCase(getOrderByID.rejected, (state, { error }) => {
+      state.pending = false;
+      state.error = error.message || "";
       return state;
     });
   },
