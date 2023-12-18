@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Typography, Button, Grid, Box } from "@mui/material";
-import { theLines } from "../notFoundPage/Lines";
+import { theLines } from "../NotFoundPage/Lines";
 interface SquareProps {
   value: string;
   onClick: () => void;

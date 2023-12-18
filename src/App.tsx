@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
 import { CssBaseline } from "@mui/material";
 import "./App.css";
-import Header from "./features/layout/header/Header";
+import Header from "./features/layout/Header/Header";
 import RouterDOM from "./features/router/RouterDOM";
 import Spinner from "./features/spinner/Spinner";
 import HeaderLoggedIn from "./features/layout/HeaderLoggedIn/HeaderLoggedIn";
