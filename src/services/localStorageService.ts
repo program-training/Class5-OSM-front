@@ -1,8 +1,5 @@
-import * as jwt from "jwt-decode";
-
 export const setLocalStorageToken = (token: string) => {
   localStorage.setItem("token", token);
-  console.log(jwt.jwtDecode(token));
 };
 
 export const getToken = () => {

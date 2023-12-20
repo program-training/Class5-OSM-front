@@ -1,4 +1,3 @@
-import axios from "axios";
 import { editOrderForm } from "../interfaces/editOrderForm";
 import { OrderStatus } from "../interfaces/order";
 import { useMutation } from "@apollo/client";

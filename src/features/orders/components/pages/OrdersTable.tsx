@@ -14,6 +14,8 @@ import useOrder from "../../hooks/useOrder";
 import { filteredOrdersUtils } from "../../../utils/utils";
 import getAllOrders from "../../service/getAllOrders";
 import OrdersBodyTable from "../ordersTable/OrdersBodyTable/OrdersBodyTable";
+import { useSubscription } from "@apollo/client";
+import { ORDER_SUBSCRIPTION } from "../../graphQl/orderSubscriptions";
 
 const OrdersTable = () => {
   const {
@@ -21,6 +23,7 @@ const OrdersTable = () => {
     error,
     pending: loading,
   } = useAppSelector((store) => store.orders);
+  const { data } = useSubscription(ORDER_SUBSCRIPTION);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -44,6 +47,11 @@ const OrdersTable = () => {
     const timeoutId = setTimeout(changeStatus, 100000);
     return () => clearTimeout(timeoutId);
   }, [orders]);
+
+  useEffect(() => {
+    if (data) console.log(data);
+  }, [data]);
+
   if (loading) return <p>Loading... </p>;
   if (error) return <p>{error}</p>;
 
