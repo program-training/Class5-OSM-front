@@ -4,8 +4,11 @@ import { createClient } from "graphql-ws";
 import { split, HttpLink } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
 
+export const BASE_URL =
+  import.meta.env.VITE_BASE_URL || "http://localhost:5000";
+
 const httpLink = new HttpLink({
-  uri: "http://localhost:5000/graphql",
+  uri: `${BASE_URL}/graphql`,
 });
 
 const wsLink = new GraphQLWsLink(
@@ -14,7 +17,7 @@ const wsLink = new GraphQLWsLink(
   })
 );
 
-const link = split(
+const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
     return (
@@ -27,7 +30,7 @@ const link = split(
 );
 
 const client = new ApolloClient({
-  link,
+  link: splitLink,
   cache: new InMemoryCache(),
 });
 

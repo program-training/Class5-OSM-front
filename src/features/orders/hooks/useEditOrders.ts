@@ -14,7 +14,7 @@ const useEditOrders = ({ formValues, setFormValues }: useEditOrdersProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const orderId = useAppSelector((state) => state.orders.order._id);
-  const { updateOrderDetailsFunc, updateOrderStatus } = useUpdateOrder();
+  const { updateOrderDetailsFunc } = useUpdateOrder();
 
   const handleSave = () => {
     formValues.orderType;

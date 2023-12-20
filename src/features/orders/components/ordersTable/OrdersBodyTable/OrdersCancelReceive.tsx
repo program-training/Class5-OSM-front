@@ -5,7 +5,6 @@ import { OrderProps } from "../../../interfaces/orderProps";
 import { FC } from "react";
 import { cancelOrder, receivedOrder } from "../../../ordersSlice";
 import { useAppDispatch } from "../../../../../store/hooks";
-import editsOrderStatus from "../../../service/editsOrderStatus";
 import useUpdateOrder from "../../../service/editsOrderDetails";
 
 const OrdersCancelReceive: FC<OrderProps> = ({ order }) => {
@@ -13,13 +12,11 @@ const OrdersCancelReceive: FC<OrderProps> = ({ order }) => {
   const { updateOrderStatus } = useUpdateOrder();
   const handleCancel = async (orderId: string) => {
     dispatch(cancelOrder(orderId));
-    const res = await updateOrderStatus(orderId, "cancelled");
-    console.log(res);
+    await updateOrderStatus(orderId, "cancelled");
   };
   const handleReceive = async (orderId: string) => {
     dispatch(receivedOrder(orderId));
-    const res = await updateOrderStatus(orderId, "received");
-    console.log(res);
+    await updateOrderStatus(orderId, "received");
   };
   return (
     <>

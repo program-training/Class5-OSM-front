@@ -15,10 +15,7 @@ const IsAdminComponent = () => {
         label="Admin"
         id="admin"
         onSelect={() => {
-          console.log(isadmin);
-
           dispatch(setIsadmin(!isadmin));
-          console.log(isadmin);
         }}
       />
     </>
